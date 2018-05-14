@@ -1,0 +1,28 @@
+# Getting Started
+
+## Configure a default datasource in your CFML engine
+
+You can do this any way you'd like: through the web admin, in `Application.cfc`, or using [cfconfig](https://cfconfig.ortusbooks.com).
+
+Make sure to set `this.datasource` in your `Application.cfc` so Quick knows which datasource to use.
+
+## Add a mapping for `quick` in your `Application.cfc`
+
+For a default installation in a ColdBox template, the following line will do the trick.
+
+`this.mappings[ "/quick" ] = COLDBOX_APP_ROOT_PATH & "/modules/quick";`
+
+## Configure your `defaultGrammar` in `config/ColdBox.cfc`
+
+`BaseGrammar` is a module setting for Quick. Set it in your `config/ColdBox.cfc` like so:
+
+```text
+moduleSettings = {
+    quick = {
+        defaultGrammar = "MySQLGrammar"
+    }
+};
+```
+
+Valid options are any of the [qb supported grammars](https://qb.ortusbooks.com).
+
