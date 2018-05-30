@@ -42,6 +42,37 @@ component extends="quick.models.BaseEntity" {
 }
 ```
 
+Quick also assumes a key type that is auto-incrementing. If you would like a different key type, inject it as the \`keyType\` property. Quick ships with a \`UUID\` type that you can use as well.
+
+```javascript
+// User.cfc
+component extends="quick.models.BaseEntity" {
+
+    property name="keyType" inject="UUID@quick" persistent="false";
+    
+}
+```
+
+`keyType` can be any class that adheres to the `keyType` interface, so feel free to create your own and distribute them via ForgeBox.
+
+```javascript
+interface displayname="KeyType" {
+
+    /**
+    * Called to handle any tasks before inserting into the database.
+    * Recieves the entity as the only argument.
+    */
+    public void function preInsert( required entity );
+
+    /**
+    * Called to handle any tasks after inserting into the database.
+    * Recieves the entity and the queryExecute result as arguments.
+    */
+    public void function postInsert( required entity, required struct result );
+
+}
+```
+
 ## Columns
 
 Every column in the related database table is retrieved and available in your entity by default. This means that if our `users` table had the following columns \(`id`, `username`, `email`, `password`\) then we could access each of those as properties \(`getId()`, `getUsername()`, `getEmail()`, `getPassword()`\).
