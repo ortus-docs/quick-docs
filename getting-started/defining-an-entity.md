@@ -89,7 +89,7 @@ component extends="quick.models.BaseEntity" {
 }
 ```
 
-Now, only the `id`, `username`, and `password` columns will be retrieved.
+Now, only the `id`, `username`, and `email` columns will be retrieved.
 
 > Note: the primary key \(`id` by default\) will be retrieved regardless of the properties specified.
 
