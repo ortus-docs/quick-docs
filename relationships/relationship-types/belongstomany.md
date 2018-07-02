@@ -85,7 +85,7 @@ component extends="quick.models.BaseEntity" {
 
 ## attach
 
-Use the `attach` method to relate two `belongsToMany` entities together. `attach` can take a single id, a single entity, or a list of ids or entities \(even mixed and matched\) to associate.
+Use the `attach` method to relate two `belongsToMany` entities together. `attach` can take a single id, a single entity, or an array of ids or entities \(even mixed and matched\) to associate.
 
 ```javascript
 var post = getInstance( "Post" ).findOrFail( 1 );
@@ -100,7 +100,7 @@ post.tags().attach( tag );
 
 ## detach
 
-Use the `detach` method to remove an existing entity from a `belongsToMany` relationship. `detatch` can also take a single id, a single entity, or a list of ids or entities \(even mixed and matched\) to remove.
+Use the `detach` method to remove an existing entity from a `belongsToMany` relationship. `detatch` can also take a single id, a single entity, or an array of ids or entities \(even mixed and matched\) to remove.
 
 ```javascript
 var post = getInstance( "Post" ).findOrFail( 1 );
