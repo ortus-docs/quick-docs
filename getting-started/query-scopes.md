@@ -87,11 +87,34 @@ Now our query is as follows:
 ```javascript
 var subscribedUsers = getInstance( "User" )
     .subscribed()
-    .oldesetSubscribers()
+    .longestSubscribers()
     .get();
 ```
 
-Best of all, we can reuse those scopes anywhere we see fit without duplicating logic.
+Best of all, we can reuse those scopes anywhere we see fit without duplicating logic. We can even use one scope in defining a second scope. We could make `longestSubscribers` presume `subscribed()` rather than having to explicitly call both scopes:
+
+```javascript
+component extends="quick.models.BaseEntity" {
+
+    function scopeSubscribed( query ) {
+        return query.where( "subscribed", 1 );
+    }
+    
+    function scopeLongestSubscribers( query ) {
+        return this.scopeSubscribed( query ).orderBy( "subscribedDate" );
+    }
+    
+}
+```
+Then our queries become one line shorter:
+
+```javascript
+var subscribedUsers = getInstance( "User" )
+    .longestSubscribers()
+    .get();
+```
+
+Note that, when making a "sub-scope" on a Quick entity like the above example, you must reference the complete name of the parent scope function (e.g. `scopeSubscribed`) and pass in the query argument. This is an exception to ordinary `Quick` practice of using just the name of the scope, which you can continue to do when calling a scope from any location other than the entity itself.
 
 ## Usage
 
