@@ -9,9 +9,21 @@ Quick is backed by qb, a CFML Query Builder. With this in mind, think of retriev
 ```javascript
 var users = getInstance( "User" ).all();
 
-for ( var user in users ) {
+// users is a QuickCollection.  To get an array,
+// first call `get` or `toArray`
+for ( var user in users.get() ) {
     writeOutput( user.getUsername() );
 }
+```
+
+In addition to using `for` you can utilize the `each` function on `QuickCollection`. For example:
+
+```javascript
+var users = getInstance( "User" ).all();
+
+prc.users.each( function( user ) {
+    writeOutput( user.getUsername() );
+} );
 ```
 
 You can add constraints to query just the same as you would using qb directly:
