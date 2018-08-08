@@ -49,7 +49,7 @@ Quick also assumes a key type that is auto-incrementing. If you would like a dif
 component extends="quick.models.BaseEntity" {
 
     property name="keyType" inject="UUID@quick" persistent="false";
-    
+
 }
 ```
 
@@ -75,9 +75,7 @@ interface displayname="KeyType" {
 
 ## Columns
 
-Every column in the related database table is retrieved and available in your entity by default. This means that if our `users` table had the following columns \(`id`, `username`, `email`, `password`\) then we could access each of those as properties \(`getId()`, `getUsername()`, `getEmail()`, `getPassword()`\).
-
-You can customize what columns are retrieved by adding properties to your component.
+You specify what columns are retrieved by adding properties to your component.
 
 ```javascript
 // User.cfc
@@ -118,7 +116,7 @@ component extends="quick.models.BaseEntity" {
 
     property name="username" column="user_name";
     property name="countryId" column="FK_country_id";
-    
+
 }
 ```
 
