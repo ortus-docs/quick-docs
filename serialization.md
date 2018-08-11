@@ -30,10 +30,10 @@ component extends="quick.models.BaseEntity" {
 }
 ```
 
-You can modify the memento by overriding the `getMemento` function on your entity.
+You can modify the memento by overriding the `getMemento` function on your entity. You will need to set `accessors="true"` in order to gain access to the required functions.
 
 ```javascript
-component extends="quick.models.BaseEntity" {
+component extends="quick.models.BaseEntity"  accessors="true"{
 
     property name="id";
     property name="username";
