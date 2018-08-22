@@ -120,3 +120,13 @@ component extends="quick.models.BaseEntity" {
 }
 ```
 
+## Multiple datasource support
+
+Quick uses a default datasource and default grammar, as described [here](./README.md).
+If you are using multiple datasources you can override default datasource by specifying a `datasource` metadata attribute on the component. If your extra datasource has a different grammar you can override your grammar as well by specifying a `grammar` attribute.
+
+```javascript
+// User.cfc
+component datasource="myOtherDatasource" grammar="PostgresGrammar" extends="quick.models.BaseEntity" {}
+```
+At the time of writing Valid grammar options are: `MySQLGrammar`,`PostgresGrammar`, `MSSQLGrammar` and `OracleGrammar`. Please check the [qb docs](https://qb.ortusbooks.com/) for additional options.
