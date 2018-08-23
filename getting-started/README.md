@@ -26,5 +26,5 @@ moduleSettings = {
 
 Valid options are any of the [qb supported grammars](https://qb.ortusbooks.com).
 
-If you want to use a different datasource and/or grammar for individual entitities you can do so by [adding some metadata](./defining-an-entity.md#multi-datasource-support) attributes to your entities.
+If you want to use a different datasource and/or grammar for individual entitities you can do so by [adding some metadata](./defining-an-entity.md#multiple-datasource-support) attributes to your entities.
 
