@@ -87,7 +87,7 @@ Now our query is as follows:
 ```javascript
 var subscribedUsers = getInstance( "User" )
     .subscribed()
-    .oldesetSubscribers()
+    .longestSubscribers()
     .get();
 ```
 
