@@ -1,6 +1,7 @@
 # Table of contents
 
 * [Introduction](README.md)
+* [Upgrade Guide](upgrade-guide.md)
 * [Getting Started](getting-started/README.md)
   * [Defining An Entity](getting-started/defining-an-entity.md)
   * [Retrieving Entities](getting-started/retrieving-entities.md)
@@ -25,4 +26,3 @@
 * [Interception Points](interception-points.md)
 * [Debugging](debugging.md)
 * [Contributing](contributing.md)
-
