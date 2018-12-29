@@ -2,6 +2,9 @@
 
 ## 2.0.0
 
+Quick 2.0 brings with it a lot of changes to make things more flexible and more
+performant. This shouldn't take too long — maybe 2-5 minutes per entity.
+
 ### Internal properties renamed
 
 There were some common name clashes between internal Quick properties and custom
@@ -110,6 +113,11 @@ The relationship methods are still named the same but some of the arguments have
 been changed to fix bugs and support better eager loading performance. Please
 [check the relationship docs]() for more details.
 
+Additionally, the alternative syntax for defining relationships on a
+`relationships` struct has been removed. It created an unnecessary code path
+that had it's own share of bugs. All relationships should be defined as methods
+on the entity.
+
 ### Removing CFCollection
 
 CFCollection was included in Quick 1.0 as both a way to lazily eager load a
@@ -135,13 +143,14 @@ two new annotations:
 
 ### AutoDiscover Grammar
 
-The default grammar for Quick is now `AutoDiscover`.  This provides a better first
-run experience.  The grammar can still be set in the `moduleSettings`.
+The default grammar for Quick is now `AutoDiscover`. This provides a better
+first run experience. The grammar can still be set in the `moduleSettings`.
 
 ### BaseService
 
-As a new way to interact with Quick, you can use Quick Services to interact with your entities in a service-oriented fashion.
-These are equivalent to `VirutalEntityServices` in cborm.
+As a new way to interact with Quick, you can use Quick Services to interact with
+your entities in a service-oriented fashion. These are equivalent to
+`VirutalEntityServices` in cborm.
 
 The easiest way to use a Quick Service is to use the `quick:` injection dsl.
 
@@ -150,3 +159,5 @@ component {
     property name="userService" inject="quickService:User";
 }
 ```
+
+All methods available on the Quick entity are available on the service.
