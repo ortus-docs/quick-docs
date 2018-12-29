@@ -2,9 +2,12 @@
 
 ## getMemento
 
-The memento pattern is an established pattern in ColdBox apps. A `memento` in this case is a simple representation of your entity using arrays, structs, and simple values.
+The memento pattern is an established pattern in ColdBox apps. A `memento` in
+this case is a simple representation of your entity using arrays, structs, and
+simple values.
 
-For instance, the following example shows a User entity and its corresponding memento:
+For instance, the following example shows a User entity and its corresponding
+memento:
 
 ```javascript
 component extends="quick.models.BaseEntity" {
@@ -30,7 +33,8 @@ component extends="quick.models.BaseEntity" {
 }
 ```
 
-You can modify the memento by overriding the `getMemento` function on your entity.
+You can modify the memento by overriding the `getMemento` function on your
+entity.
 
 ```javascript
 component extends="quick.models.BaseEntity" {
@@ -66,9 +70,12 @@ component extends="quick.models.BaseEntity" {
 }
 ```
 
-## $renderData
+## \$renderData
 
-The `$renderData` method is a special method for ColdBox. When returning a model from a handler, this method will be called and the value returned will be used as the serialized response. This let's you simply return an entity from a handler for your API.
+The `$renderData` method is a special method for ColdBox. When returning a model
+from a handler, this method will be called and the value returned will be used
+as the serialized response. This let's you simply return an entity from a
+handler for your API. By default this will call `getMemento()`.
 
 ```javascript
 component {
@@ -91,13 +98,15 @@ component {
 }
 ```
 
-`QuickCollection` also defines a `$renderData` method, which will delegate the call to each entity in the collection and return the array of serialized entities.
+`QuickCollection` also defines a `$renderData` method, which will delegate the
+call to each entity in the collection and return the array of serialized
+entities.
 
 ```javascript
 component {
 
     function index( event, rc, prc ) {
-        return getInstance( "User" ).all();    
+        return getInstance( "User" ).all();
     }
 
 }
@@ -121,4 +130,3 @@ component {
     }
 ]
 ```
-
