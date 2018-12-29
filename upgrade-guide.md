@@ -111,7 +111,7 @@ SQL Server.
 
 The relationship methods are still named the same but some of the arguments have
 been changed to fix bugs and support better eager loading performance. Please
-[check the relationship docs]() for more details.
+[check the relationship docs](relationships/README.md) for more details.
 
 Additionally, the alternative syntax for defining relationships on a
 `relationships` struct has been removed. It created an unnecessary code path
