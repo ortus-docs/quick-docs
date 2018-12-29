@@ -23,7 +23,7 @@ foreign key. You can override this by passing a foreign key in as the second
 argument:
 
 ```javascript
-return hasMany("Post", "FK_userID");
+return belongsTo("User", "FK_userID");
 ```
 
 If your parent entity does not use `id` as its primary key, or you wish to join the
@@ -31,7 +31,7 @@ child entity to a different column, you may pass a third argument to the
 `belongsTo` method specifying your parent table's custom key.
 
 ```javascript
-return hasMany("Post", "FK_userID", "relatedPostId");
+return belongsTo("User", "FK_userID", "relatedPostId");
 ```
 
 The inverse of `belongsTo` is [`hasMany`](hasmany.md) or [`hasOne`](hasone.md).
