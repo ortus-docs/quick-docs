@@ -107,6 +107,12 @@ Used with grammars that return their primary key in the query response when
 inserting to the database. An example of this is `NEWSEQUENTIALID` in Microsoft
 SQL Server.
 
+### Scopes
+
+The way arguments are passed to scopes have been updated to allow for default arguments.
+`query` is still the first argument.  Other arguments will be passed in order after that.
+The `args` struct is no longer passed.
+
 ### Relationships
 
 The relationship methods are still named the same but some of the arguments have
