@@ -109,9 +109,9 @@ SQL Server.
 
 ### Scopes
 
-The way arguments are passed to scopes have been updated to allow for default arguments.
-`query` is still the first argument.  Other arguments will be passed in order after that.
-The `args` struct is no longer passed.
+The way arguments are passed to scopes have been updated to allow for default
+arguments. `query` is still the first argument. Other arguments will be passed
+in order after that. The `args` struct is no longer passed.
 
 ### Relationships
 
@@ -147,6 +147,17 @@ two new annotations:
 -   `nullValue` - This is the value that is equivalent to null for this
     property. Defaults to an empty string.
 
+### Returning Null instead of Unloaded Entities
+
+In an effort to avoid dealing with CFML's version of `null`, Quick originally
+returned unloaded entities. You could check if an entity was loaded using the
+`isLoaded` method. This doesn't make as much sense as `null` however and even
+made it more difficult to interact with other libraries. Now Quick will return
+null when it encounters an empty query result either from a retrieval or from a
+`belongsTo` or `hasOne` relationship. Any instances that you were checking
+`isLoaded` should be updated. `isLoaded` will continue to exist for when you are
+creating a new entity not from the database.
+
 ### AutoDiscover Grammar
 
 The default grammar for Quick is now `AutoDiscover`. This provides a better
@@ -158,7 +169,8 @@ As a new way to interact with Quick, you can use Quick Services to interact with
 your entities in a service-oriented fashion. These are equivalent to
 `VirutalEntityServices` in cborm.
 
-The easiest way to use a Quick Service is to use the `quickService:` injection dsl.
+The easiest way to use a Quick Service is to use the `quickService:` injection
+dsl.
 
 ```
 component {
