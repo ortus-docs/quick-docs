@@ -31,7 +31,7 @@ moduleSettings = {
 };
 ```
 
-Valid options are any of the [qb supported grammars](https://qb.ortusbooks.com).
+Valid options are any of the [qb supported grammars](https://qb.ortusbooks.com). At the time of writing valid grammar options are: MySQLGrammar, PostgresGrammar, MSSQLGrammar and OracleGrammar. Please check the qb docs for additional options.
 
 If you want to use a different datasource and/or grammar for individual
 entitities you can do so by
