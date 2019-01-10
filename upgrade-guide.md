@@ -167,7 +167,7 @@ first run experience. The grammar can still be set in the `moduleSettings`.
 
 As a new way to interact with Quick, you can use Quick Services to interact with
 your entities in a service-oriented fashion. These are equivalent to
-`VirutalEntityServices` in cborm.
+`VirtualEntityServices` in cborm.
 
 The easiest way to use a Quick Service is to use the `quickService:` injection
 dsl.
