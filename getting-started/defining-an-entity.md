@@ -26,7 +26,7 @@ By default, Quick assumes a primary key of `id`. The name of this key can be con
 // User.cfc
 component extends="quick.models.BaseEntity" {
 
-    variables.key = "user_id";
+    variables._key = "user_id";
 
 }
 ```

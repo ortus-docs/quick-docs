@@ -8,6 +8,16 @@ Quick 2.0 brings with it a lot of changes to make things more flexible and more 
 
 There were some common name clashes between internal Quick properties and custom attributes of your entities \(the most common being `fullName`\). All Quick internals have been obfuscated to avoid this situation. If you relied on these properties, please consult the following table below for the new property names.
 
+{% hint style="warning" %}
+If you are renaming your primary keys in your entities, you will have to change your key definition from  
+`variables.key = "user_id";`  
+to  
+**`variables._key`** `= "user_id";`  
+See [Defining an Entity](getting-started/defining-an-entity.md) for details.
+{% endhint %}
+
+
+
 | Old Property Name | New Property Name |
 | :--- | :--- |
 | `builder` | `_builder` |
