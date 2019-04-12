@@ -14,9 +14,9 @@ You keep track of when a user subscribed in a `subscribedDate` column. Your
 query might look as follows:
 
 ```javascript
-var subscribedUsers = getInstance("User")
-    .where("subscribed", 1)
-    .orderBy("subscribedDate")
+var subscribedUsers = getInstance( "User" )
+    .where( "subscribed", true )
+    .orderBy( "subscribedDate" )
     .get();
 ```
 
@@ -27,8 +27,8 @@ Later, you need to retrieve a list of subscribed users for a different part of
 the site. So, you write a query like this:
 
 ```javascript
-var subscribedUsers = getInstance("User")
-    .where("subscribed", 1)
+var subscribedUsers = getInstance( "User" )
+    .where( "subscribed", true )
     .get();
 ```
 
@@ -38,8 +38,8 @@ what if instead of keeping track of a boolean flag in the database, we just
 checked that the `subscribedDate` column wasn't null?
 
 ```javascript
-var subscribedUsers = getInstance("User")
-    .whereNotNull("subscribedDate")
+var subscribedUsers = getInstance( "User" )
+    .whereNotNull( "subscribedDate" )
     .get();
 ```
 
@@ -52,7 +52,7 @@ scope to our `User` entity for `subscribed`:
 component extends="quick.models.BaseEntity" {
 
     function scopeSubscribed( query ) {
-        return query.where( "subscribed", 1 );
+        return query.where( "subscribed", true );
     }
 
 }
@@ -61,7 +61,7 @@ component extends="quick.models.BaseEntity" {
 Now, we can use this scope in our query:
 
 ```javascript
-var subscribedUsers = getInstance("User")
+var subscribedUsers = getInstance( "User" )
     .subscribed()
     .get();
 ```
@@ -69,9 +69,9 @@ var subscribedUsers = getInstance("User")
 We can use this on our first example as well, for our report.
 
 ```javascript
-var subscribedUsers = getInstance("User")
+var subscribedUsers = getInstance( "User" )
     .subscribed()
-    .orderBy("subscribedDate")
+    .orderBy( "subscribedDate" )
     .get();
 ```
 
@@ -87,7 +87,7 @@ component extends="quick.models.BaseEntity" {
     }
 
     function scopeSubscribed( query ) {
-        return query.where( "subscribed", 1 );
+        return query.where( "subscribed", true );
     }
 
 }
@@ -96,7 +96,7 @@ component extends="quick.models.BaseEntity" {
 Now our query is as follows:
 
 ```javascript
-var subscribedUsers = getInstance("User")
+var subscribedUsers = getInstance( "User" )
     .subscribed()
     .oldesetSubscribers()
     .get();
@@ -113,3 +113,19 @@ You call these functions without the `scope` keyword \(as shown above\).
 Each scope is passed the `query`, a reference to the current `QueryBuilder`
 instance, as the first argument. Any other arguments passed to the scope will be
 passed in order after that.
+
+```javascript
+component extends="quick.models.BaseEntity" {
+
+    function scopeOfType( query, type ) {
+        return query.where( "type", type );
+    }
+
+}
+```
+
+```javascript
+var subscribedUsers = getInstance( "User" )
+    .ofType( "admin" )
+    .get();
+```

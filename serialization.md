@@ -22,7 +22,7 @@ component extends="quick.models.BaseEntity" {
 }
 ```
 
-```javascript
+```json
 {
     "id" = 1,
     "username" = "JaneDoe",
@@ -53,14 +53,14 @@ component extends="quick.models.BaseEntity" {
             email = getEmail(),
             createdDate = dateFormat( getCreatedDate(), "MM/DD/YYYY" ),
             // can also use getAttribute if you want to bypass a custom getter
-            modifiedDate = dateFormat( getAttribute( "modifiedDate" ), "MM/DD/YYYY" )
+            modifiedDate = dateFormat( retrieveAttribute( "modifiedDate" ), "MM/DD/YYYY" )
         };
     }
 
 }
 ```
 
-```javascript
+```json
 {
     "id" = 1,
     "username" = "JaneDoe",
@@ -88,7 +88,7 @@ component {
 }
 ```
 
-```javascript
+```json
 {
     "id" = 1,
     "username" = "JaneDoe",

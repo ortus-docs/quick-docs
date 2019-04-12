@@ -7,10 +7,10 @@ new entity instance, setting the attributes on the entity, and then calling the
 `save` method.
 
 ```javascript
-var user = getInstance("User");
-user.setUsername("JaneDoe");
-user.setEmail("jane@example.com");
-user.setPassword("mypass1234");
+var user = getInstance( "User" );
+user.setUsername( "JaneDoe" );
+user.setEmail( "jane@example.com" );
+user.setPassword( "mypass1234" );
 user.save();
 ```
 

@@ -17,6 +17,6 @@ the relationship.
 ```javascript
 var newestPosts = user
     .posts()
-    .orderBy("publishedDate", "desc")
+    .orderBy( "publishedDate", "desc" )
     .get();
 ```

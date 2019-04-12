@@ -4,6 +4,17 @@ Quick allows you to hook in to multiple points in the entity lifecycle. If the
 event is on the component, you do not need to prefix it with `quick`. If you are
 listening to an interception point, include `quick` at the beginning.
 
+## quickInstanceReady
+
+Fired after dependency injection has been performed on the entity
+and the metadata has been inspected.
+
+`interceptData` structure
+
+| Key    | Description       |
+| :----- | :---------------- |
+| entity | The entity loaded |
+
 ## quickPreLoad
 
 Fired before attempting to load an entity from the database.

@@ -26,20 +26,20 @@ component table="my_users" extends="quick.models.BaseEntity" {}
 ## Primary Key
 
 By default, Quick assumes a primary key of `id`. The name of this key can be
-configured by setting `variables.key` in your component.
+configured by setting `variables._key` in your component.
 
 ```javascript
 // User.cfc
 component extends="quick.models.BaseEntity" {
 
-    variables.key = "user_id";
+    variables._key = "user_id";
 
 }
 ```
 
 Quick also assumes a key type that is auto-incrementing. If you would like a
 different key type, define a function called \`keyType\` and return the key type
-from that function. Quick ships with a \`UUIDKeyType\` that you can use as well.
+from that function.
 
 ```javascript
 // User.cfc
@@ -51,6 +51,13 @@ component extends="quick.models.BaseEntity" {
 
 }
 ```
+
+Quick ships with the following key types:
+
++ `AutoIncrementingKeyType`
++ `NullKeyType`
++ `ReturningKeyType`
++ `UUIDKeyType`
 
 `keyType` can be any component that adheres to the `keyType` interface, so feel
 free to create your own and distribute them via ForgeBox.
@@ -81,6 +88,7 @@ You specify what columns are retrieved by adding properties to your component.
 // User.cfc
 component extends="quick.models.BaseEntity" {
 
+    property name="id";
     property name="username";
     property name="email";
 
@@ -89,8 +97,7 @@ component extends="quick.models.BaseEntity" {
 
 Now, only the `id`, `username`, and `email` columns will be retrieved.
 
-> Note: the primary key \(`id` by default\) will be retrieved regardless of the
-> properties specified.
+> Note: Make sure to include the primary key \(`id` by default\) as a property.
 
 To prevent Quick from mapping a property to the database add the
 `persistent="false"` attribute to the property.
@@ -105,6 +112,7 @@ component extends="quick.models.BaseEntity" {
 
     property name="bcrypt" inject="@BCrypt" persistent="false";
 
+    property name="id";
     property name="username";
     property name="email";
 
@@ -117,6 +125,7 @@ quick, you can alias it using the `column` metadata attribute.
 ```javascript
 component extends="quick.models.BaseEntity" {
 
+    property name="id";
     property name="username" column="user_name";
     property name="countryId" column="FK_country_id";
 

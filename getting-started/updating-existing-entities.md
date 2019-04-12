@@ -7,8 +7,8 @@ only difference is that instead of starting with a new entity, we start with an
 existing entity.
 
 ```javascript
-var user = getInstance("User").find(1);
-user.setPassword("newpassword");
+var user = getInstance( "User" ).find( 1 );
+user.setPassword( "newpassword" );
 user.save();
 ```
 

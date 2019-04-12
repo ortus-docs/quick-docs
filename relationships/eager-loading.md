@@ -46,9 +46,9 @@ Quick you can do this with one method call.
 You can eager load a relationship with the `with` method call.
 
 ```javascript
-prc.posts = getInstance("Post")
-    .with("user")
-    .limit(25)
+prc.posts = getInstance( "Post" )
+    .with( "author" )
+    .limit( 25 )
     .get();
 ```
 
@@ -70,7 +70,7 @@ To eager load the User in the snippet above you would call pass `author` to the
 `with` method.
 
 ```javascript
-getInstance("Post").with("author");
+getInstance( "Post" ).with( "author" ).get();
 ```
 
 For this operation, only two queries will be executed:
@@ -85,8 +85,30 @@ Quick will then stitch these relationships together so when you call
 `post.getAuthor()` it will use the fetched relationship value instead of going
 to the database.
 
+You can eager load nested relationships using dot notation.  Each segment must be
+a valid relationship name.
+
+```javascript
+// User.cfc
+component extends="quick.models.BaseEntity" {
+
+    function country() {
+        return belongsTo( "User" );
+    }
+
+}
+```
+
+```javascript
+getInstance( "Post" ).with( "author.country" );
+```
+
 You can eager load multiple relationships by passing an array of relation names
 to `with` or by calling `with` multiple times.
+
+```javascript
+getInstance( "Post" ).with( [ "author.country", "tags" ] );
+```
 
 ### load
 
