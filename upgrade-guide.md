@@ -147,6 +147,7 @@ All methods available on the Quick entity are available on the service.
 ### Eager Loading
 
 Eager loading is now supported for nested relationships using a dot-separated syntax.
+Additionally, constraints can be added to an eager loaded relationship.
 See the [docs on eager loading](relationships/eager-loading.md) for more information.
 
 ### Column Aliases in Queries

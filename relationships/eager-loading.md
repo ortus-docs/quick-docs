@@ -71,6 +71,8 @@ SELECT * FROM `users` WHERE `id` IN (1, 2, 3, 4, 5, 6, ...)
 
 Quick will then stitch these relationships together so when you call `post.getAuthor()` it will use the fetched relationship value instead of going to the database.
 
+### Nested Relationships
+
 You can eager load nested relationships using dot notation.  Each segment must be
 a valid relationship name.
 
@@ -96,7 +98,58 @@ to `with` or by calling `with` multiple times.
 getInstance( "Post" ).with( [ "author.country", "tags" ] );
 ```
 
+### Constraining Eager Loaded Relationships
+
+In most cases when you want to constrain an eager loaded relationship, the
+better approach is to create a new relationship.
+
+```javascript
+// User.cfc
+component {
+
+    function posts() {
+        return hasMany( "Post" );
+    }
+
+    function publishedPosts() {
+        return hasMany( "Post" ).published(); // published is a query scope on Post
+    }
+
+}
+```
+
+You can eager load either option.
+
+```javascript
+getInstance( "User" ).with( "posts" ).get();
+getInstance( "User" ).with( "publishedPosts" ).get();
+```
+
+Occassionally that decision needs to be dynamic. For example, maybe you only want to eager
+load the posts created within a timeframe defined by a user.  To do this, pass a struct instead
+of a string to the `with` function.  The key should be the name of the relationship and the value
+should be a function. This function will accept the related entity as its only argument.
+Here is an example:
+
+```javascript
+getInstance( "User" ).with( { "posts" = function( query ) {
+
+} } ).latest().get();
+```
+
+If you need to load nested relationships with constraints you can call `with` in your
+constraint callback to continue eager loading relationships.
+
+```javascript
+getInstance( "User" ).with( { "posts" = function( q1 ) {
+    return query
+        .whereBetween( "published_date", rc.startDate, rc.endDate )
+        .with( { "comments" = function( q2 ) {
+            return q2.where( "body", "like", rc.search );
+        } } );
+} } ).latest().get();
+```
+
 ### load
 
 Finally, you can postpone eager loading until needed by using the `load` method on `QuickCollection`. `load` has the same function signature as `with`. `QuickCollection` is the object returned for all Quick queries that return more than one record. Read more about it in [Collections](../collections.md).
-
