@@ -9,13 +9,11 @@ var user = getInstance( "User" ).find( 1 );
 user.delete();
 ```
 
-> **Note:** The entity will still exist in any variables you have stored it in,
-> even though it has been deleted from the database.
+> **Note:** The entity will still exist in any variables you have stored it in, even though it has been deleted from the database.
 
 ## deleteAll
 
-Just like `updateAll`, you can delete many records from the database by
-specifying a query with constraints and then calling the `deleteAll` method.
+Just like `updateAll`, you can delete many records from the database by specifying a query with constraints and then calling the `deleteAll` method.
 
 ```javascript
 getInstance( "User" )
@@ -23,9 +21,9 @@ getInstance( "User" )
     .deleteAll();
 ```
 
-Additionally, you can pass in an array of ids to `deleteAll` to delete only
-those ids.
+Additionally, you can pass in an array of ids to `deleteAll` to delete only those ids.
 
 ```javascript
 getInstance( "User" ).deleteAll( [ 4, 10, 22 ] );
 ```
+

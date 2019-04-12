@@ -1,17 +1,12 @@
 # Custom Getters & Setters
 
-Sometimes you want to use a different value in your code than is stored in your
-database. Perhaps you want to enforce that setting a password always is hashed
-with BCrypt. Maybe you have a Date value object that you want wrapping each of
-your dates. You can accomplish this using custom getters and setters.
+Sometimes you want to use a different value in your code than is stored in your database. Perhaps you want to enforce that setting a password always is hashed with BCrypt. Maybe you have a Date value object that you want wrapping each of your dates. You can accomplish this using custom getters and setters.
 
 A custom getter or setter is simply a function in your entity.
 
-To retrieve the attribute value fetched from the database, call
-`retrieveAttribute` passing in the name of the attribute.
+To retrieve the attribute value fetched from the database, call `retrieveAttribute` passing in the name of the attribute.
 
-To set an attribute for saving to the database, call `assignAttribute` passing
-in the name and the value.
+To set an attribute for saving to the database, call `assignAttribute` passing in the name and the value.
 
 ```javascript
 component extends="quick.models.BaseEntity" {
@@ -29,5 +24,5 @@ component extends="quick.models.BaseEntity" {
 }
 ```
 
-> **Note:** Custom getters and setters with **not** be called when hydrating a
-> model from the database.
+> **Note:** Custom getters and setters with **not** be called when hydrating a model from the database.
+

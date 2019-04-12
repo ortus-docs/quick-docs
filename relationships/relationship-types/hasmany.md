@@ -2,8 +2,7 @@
 
 ## Defining
 
-A `hasMany` relationship is a `one-to-many` relationship. For instance, a `User`
-may have multiple `Posts`.
+A `hasMany` relationship is a `one-to-many` relationship. For instance, a `User` may have multiple `Posts`.
 
 ```javascript
 // User.cfc
@@ -18,18 +17,13 @@ component extends="quick.models.BaseEntity" {
 
 The first value passed to `hasMany` is a WireBox mapping to the related entity.
 
-Quick determines the foreign key of the relationship based on the entity name
-and key values. In this case, the `Post` entity is assumed to have a `userId`
-foreign key. You can override this by passing a foreign key in as the second
-argument:
+Quick determines the foreign key of the relationship based on the entity name and key values. In this case, the `Post` entity is assumed to have a `userId` foreign key. You can override this by passing a foreign key in as the second argument:
 
 ```javascript
 return hasMany("Post", "FK_userID");
 ```
 
-If your parent entity does not use `id` as its primary key, or you wish to join the
-child entity to a different column, you may pass a third argument to the
-`belongsTo` method specifying your parent table's custom key.
+If your parent entity does not use `id` as its primary key, or you wish to join the child entity to a different column, you may pass a third argument to the `belongsTo` method specifying your parent table's custom key.
 
 ```javascript
 return hasMany("Post", "FK_userID", "relatedPostId");
@@ -50,13 +44,11 @@ component extends="quick.models.BaseEntity" {
 
 ## Inserting & Updating
 
-There are two ways to add an entity to a `hasMany` relationship. Both mirror the
-[insert API](../../getting-started/creating-new-entities.md) for entities.
+There are two ways to add an entity to a `hasMany` relationship. Both mirror the [insert API](../../getting-started/creating-new-entities.md) for entities.
 
 ### save
 
-You can call the `save` method on the relationship passing in an entity to
-relate.
+You can call the `save` method on the relationship passing in an entity to relate.
 
 ```javascript
 var post = getInstance( "Post" ).fill( {
@@ -69,16 +61,13 @@ var user = getInstance( "User" ).findOrFail( 1 );
 user.posts().save( post );
 ```
 
-This will add the `User` entity's id as a foreign key in the `Post` and save the
-`Post` to the database.
+This will add the `User` entity's id as a foreign key in the `Post` and save the `Post` to the database.
 
-> **Note:** the `save` method is called on the `posts` relationship, not the
-> `getPosts` collection.
+> **Note:** the `save` method is called on the `posts` relationship, not the `getPosts` collection.
 
 ### create
 
-Use the `create` method to create and save a related entity directly through the
-relationship.
+Use the `create` method to create and save a related entity directly through the relationship.
 
 ```javascript
 var user = getInstance( "User" ).findOrFail( 1 );
@@ -93,6 +82,5 @@ This example will have the same effect as the previous example.
 
 ## Removing
 
-Removing a `hasMany` relationship is handled in two ways: either by using the
-`dissociate` method on the [`belongsTo`](belongsto.md) side of the relationship
-or by deleting the [`belongsTo`](belongsto.md) side of the relationship.
+Removing a `hasMany` relationship is handled in two ways: either by using the `dissociate` method on the [`belongsTo`](belongsto.md) side of the relationship or by deleting the [`belongsTo`](belongsto.md) side of the relationship.
+

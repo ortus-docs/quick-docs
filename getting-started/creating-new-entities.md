@@ -2,9 +2,7 @@
 
 ## save
 
-New Quick entities can be created and persisted to the database by creating a
-new entity instance, setting the attributes on the entity, and then calling the
-`save` method.
+New Quick entities can be created and persisted to the database by creating a new entity instance, setting the attributes on the entity, and then calling the `save` method.
 
 ```javascript
 var user = getInstance( "User" );
@@ -14,13 +12,11 @@ user.setPassword( "mypass1234" );
 user.save();
 ```
 
-When we call `save`, the record is persisted from the database and the primary
-key is set to the auto-generated value \(if any\).
+When we call `save`, the record is persisted from the database and the primary key is set to the auto-generated value \(if any\).
 
 ## create
 
-Another option is to use the `create` method. This method accepts a struct of
-data and creates a new instance with the data specified.
+Another option is to use the `create` method. This method accepts a struct of data and creates a new instance with the data specified.
 
 ```javascript
 var user = getInstance( "User" ).create( {
@@ -29,3 +25,4 @@ var user = getInstance( "User" ).create( {
     "password" = "mypass1234"
 } );
 ```
+

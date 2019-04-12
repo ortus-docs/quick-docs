@@ -1,22 +1,17 @@
 # Defining An Entity
 
-To get started with Quick, you need an entity. You start by extending
-`quick.models.BaseEntity`.
+To get started with Quick, you need an entity. You start by extending `quick.models.BaseEntity`.
 
 ```javascript
 // User.cfc
 component extends="quick.models.BaseEntity" {}
 ```
 
-That's all that is needed to get started with Quick. There are a few defaults of
-Quick worth mentioning here.
+That's all that is needed to get started with Quick. There are a few defaults of Quick worth mentioning here.
 
 ## Tables
 
-We don't need to tell Quick what table name to use for our entity. By default,
-Quick uses the pluralized name of the component for the table name. That means
-for our `User` entity Quick will assume the table name is `users`. You can
-override this by specifying a `table` metadata attribute on the component.
+We don't need to tell Quick what table name to use for our entity. By default, Quick uses the pluralized name of the component for the table name. That means for our `User` entity Quick will assume the table name is `users`. You can override this by specifying a `table` metadata attribute on the component.
 
 ```javascript
 // User.cfc
@@ -99,8 +94,7 @@ Now, only the `id`, `username`, and `email` columns will be retrieved.
 
 > Note: Make sure to include the primary key \(`id` by default\) as a property.
 
-To prevent Quick from mapping a property to the database add the
-`persistent="false"` attribute to the property.
+To prevent Quick from mapping a property to the database add the `persistent="false"` attribute to the property.
 
 ```text
 // User.cfc
@@ -119,8 +113,7 @@ component extends="quick.models.BaseEntity" {
 }
 ```
 
-If the column name in your table is not the column name you wish to use in
-quick, you can alias it using the `column` metadata attribute.
+If the column name in your table is not the column name you wish to use in quick, you can alias it using the `column` metadata attribute.
 
 ```javascript
 component extends="quick.models.BaseEntity" {
@@ -134,17 +127,12 @@ component extends="quick.models.BaseEntity" {
 
 ## Multiple datasource support
 
-Quick uses a default datasource and default grammar, as described
-[here](./README.md). If you are using multiple datasources you can override
-default datasource by specifying a `datasource` metadata attribute on the
-component. If your extra datasource has a different grammar you can override
-your grammar as well by specifying a `grammar` attribute.
+Quick uses a default datasource and default grammar, as described [here](./). If you are using multiple datasources you can override default datasource by specifying a `datasource` metadata attribute on the component. If your extra datasource has a different grammar you can override your grammar as well by specifying a `grammar` attribute.
 
 ```javascript
 // User.cfc
 component datasource="myOtherDatasource" grammar="PostgresGrammar" extends="quick.models.BaseEntity" {}
 ```
 
-At the time of writing Valid grammar options are: `MySQLGrammar`,
-`PostgresGrammar`, `MSSQLGrammar` and `OracleGrammar`. Please check the
-[qb docs](https://qb.ortusbooks.com/) for additional options.
+At the time of writing Valid grammar options are: `MySQLGrammar`, `PostgresGrammar`, `MSSQLGrammar` and `OracleGrammar`. Please check the [qb docs](https://qb.ortusbooks.com/) for additional options.
+

@@ -20,7 +20,7 @@
         -   [polymorphicHasMany](relationships/relationship-types/polymorphichasmany.md)
     -   [Retrieving Relationships](relationships/retrieving-relationships.md)
     -   [Eager Loading](relationships/eager-loading.md)
--   [Collections](cborm-compatibility-shim.md)
+-   [CBORM Compatibility Shim](cborm-compatibility-shim.md)
 -   [Collections](collections.md)
 -   [Custom Getters & Setters](custom-getters-and-setters.md)
 -   [Serialization](serialization.md)
