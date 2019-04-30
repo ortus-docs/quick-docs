@@ -14,6 +14,8 @@ For a default installation in a ColdBox template, the following line will do the
 
 ## Configure your `defaultGrammar` in `config/ColdBox.cfc`
 
+Quick will auto discover your grammar by default on startup. To avoid this check, set a `BaseGrammar`.
+
 `BaseGrammar` is a module setting for Quick. Set it in your `config/ColdBox.cfc` like so:
 
 ```text
@@ -24,7 +26,7 @@ moduleSettings = {
 };
 ```
 
-Valid options are any of the [qb supported grammars](https://qb.ortusbooks.com).
+Valid options are any of the [qb supported grammars](https://qb.ortusbooks.com). At the time of writing valid grammar options are: MySQLGrammar, PostgresGrammar, MSSQLGrammar and OracleGrammar. Please check the qb docs for additional options.
 
 If you want to use a different datasource and/or grammar for individual entitities you can do so by [adding some metadata](defining-an-entity.md#multiple-datasource-support) attributes to your entities.
 

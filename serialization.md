@@ -19,7 +19,7 @@ component extends="quick.models.BaseEntity" {
 }
 ```
 
-```javascript
+```json
 {
     "id" = 1,
     "username" = "JaneDoe",
@@ -49,14 +49,14 @@ component extends="quick.models.BaseEntity" {
             email = getEmail(),
             createdDate = dateFormat( getCreatedDate(), "MM/DD/YYYY" ),
             // can also use getAttribute if you want to bypass a custom getter
-            modifiedDate = dateFormat( getAttribute( "modifiedDate" ), "MM/DD/YYYY" )
+            modifiedDate = dateFormat( retrieveAttribute( "modifiedDate" ), "MM/DD/YYYY" )
         };
     }
 
 }
 ```
 
-```javascript
+```json
 {
     "id" = 1,
     "username" = "JaneDoe",
@@ -68,7 +68,7 @@ component extends="quick.models.BaseEntity" {
 
 ## $renderData
 
-The `$renderData` method is a special method for ColdBox. When returning a model from a handler, this method will be called and the value returned will be used as the serialized response. This let's you simply return an entity from a handler for your API.
+The `$renderData` method is a special method for ColdBox. When returning a model from a handler, this method will be called and the value returned will be used as the serialized response. This let's you simply return an entity from a handler for your API. By default this will call `getMemento()`.
 
 ```javascript
 component {
@@ -81,7 +81,7 @@ component {
 }
 ```
 
-```javascript
+```json
 {
     "id" = 1,
     "username" = "JaneDoe",
@@ -97,7 +97,7 @@ component {
 component {
 
     function index( event, rc, prc ) {
-        return getInstance( "User" ).all();    
+        return getInstance( "User" ).all();
     }
 
 }

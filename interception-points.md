@@ -1,6 +1,21 @@
 # Interception Points
 
-Quick allows you to hook in to multiple points in the entity lifecycle.
+Quick allows you to hook in to multiple points in the entity lifecycle. If the event is on the component, you do not need to prefix it with `quick`. If you are listening to an interception point, include `quick` at the beginning.
+
+{% hint style="warning" %}
+If you create your own Interceptors, they will not fire if you define them in your Main application. `quick` will be loaded AFTER your interceptors, so the `quick` interception points will **not** be registered with your interceptor. This can be solved by moving your interceptors to a module with a dependency on `quick`, of by also registering the `quick` custom interception points in your main coldbox configuration.
+{% endhint %}
+
+## quickInstanceReady
+
+Fired after dependency injection has been performed on the entity
+and the metadata has been inspected.
+
+`interceptData` structure
+
+| Key    | Description       |
+| :----- | :---------------- |
+| entity | The entity loaded |
 
 ## quickPreLoad
 

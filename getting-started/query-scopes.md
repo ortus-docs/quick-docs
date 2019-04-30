@@ -10,7 +10,7 @@ For instance, let's say that you need to write a report for subscribers to your 
 
 ```javascript
 var subscribedUsers = getInstance( "User" )
-    .where( "subscribed", 1 )
+    .where( "subscribed", true )
     .orderBy( "subscribedDate" )
     .get();
 ```
@@ -21,7 +21,7 @@ Later, you need to retrieve a list of subscribed users for a different part of t
 
 ```javascript
 var subscribedUsers = getInstance( "User" )
-    .where( "subscribed", 1 )
+    .where( "subscribed", true )
     .get();
 ```
 
@@ -30,7 +30,7 @@ We've duplicated the logic for how to retrieve active users now. If the database
 ```javascript
 var subscribedUsers = getInstance( "User" )
     .whereNotNull( "subscribedDate" )
-    .get()
+    .get();
 ```
 
 Now we see the problem. Let's look at the solution.
@@ -41,7 +41,7 @@ The key here is that we are trying to retrieve subscribed users. Let's add a sco
 component extends="quick.models.BaseEntity" {
 
     function scopeSubscribed( query ) {
-        return query.where( "subscribed", 1 );
+        return query.where( "subscribed", true );
     }
 
 }
@@ -76,7 +76,7 @@ component extends="quick.models.BaseEntity" {
     }
 
     function scopeSubscribed( query ) {
-        return query.where( "subscribed", 1 );
+        return query.where( "subscribed", true );
     }
 
 }
@@ -95,7 +95,25 @@ Best of all, we can reuse those scopes anywhere we see fit without duplicating l
 
 ## Usage
 
-All query scopes are methods on an entity that begin with the `scope` keyword. You call these functions without the `scope` keyword \(as shown above\).
+All query scopes are methods on an entity that begin with the `scope` keyword.
+You call these functions without the `scope` keyword \(as shown above\).
 
-Each scope is passed two arguments: `query`, a reference to the current `QueryBuilder` instance; and `args`, any arguments passed to the scope call.
+Each scope is passed the `query`, a reference to the current `QueryBuilder`
+instance, as the first argument. Any other arguments passed to the scope will be
+passed in order after that.
 
+```javascript
+component extends="quick.models.BaseEntity" {
+
+    function scopeOfType( query, type ) {
+        return query.where( "type", type );
+    }
+
+}
+```
+
+```javascript
+var subscribedUsers = getInstance( "User" )
+    .ofType( "admin" )
+    .get();
+```

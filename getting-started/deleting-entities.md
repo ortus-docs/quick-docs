@@ -5,7 +5,7 @@
 You can delete an entity by calling the `delete` method on it.
 
 ```javascript
-var user = getInstance( "User" ).find( 1 )
+var user = getInstance( "User" ).find( 1 );
 user.delete();
 ```
 

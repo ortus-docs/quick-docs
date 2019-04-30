@@ -6,11 +6,31 @@
 
 Quick was built out of lessons learned and persistent challenges in developing complex RDBMS applications using built-in Hibernate ORM in CFML.
 
-* Hibernate ORM error messages often obfuscate the actual cause of the error because they are provided directly by the Java classes.
-* Complex CFML Hibernate ORM applications can consume significant memory and processing resources, making them cost-prohibitive and inefficient when used in microservices architecture.
-* Hibernate ORM is tied to the engine releases. This means that updates come infrequently and may be costly for non-OSS engine users.
-* Hibernate ORM is built in Java. This limits contributions from CFML developers who don't know Java or don't feel comfortable contributing to a Java project.
-* Hibernate ORM doesn't take advantage of a lot of dynamic- and meta-programming available in CFML. \(Tools like CBORM have helped to bridge this gap.\)
+* Hibernate ORM error messages often obfuscate the actual cause of the error
+
+  because they are provided directly by the Java classes.
+
+* Complex CFML Hibernate ORM applications can consume significant memory and
+
+  processing resources, making them cost-prohibitive and inefficient when used
+
+  in microservices architecture.
+
+* Hibernate ORM is tied to the engine releases. This means that updates come
+
+  infrequently and may be costly for non-OSS engine users.
+
+* Hibernate ORM is built in Java. This limits contributions from CFML
+
+  developers who don't know Java or don't feel comfortable contributing to a
+
+  Java project.
+
+* Hibernate ORM doesn't take advantage of a lot of dynamic- and
+
+  meta-programming available in CFML. \(Tools like CBORM have helped to bridge
+
+  this gap.\)
 
 We can do better.
 
@@ -51,7 +71,7 @@ component {
             table.string( "password" );
             table.timestamp( "createdDate" );
             table.timestamp( "updatedDate" );
-        } );    
+        } );
     }
 
 }

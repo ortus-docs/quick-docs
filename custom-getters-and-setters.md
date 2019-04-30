@@ -4,9 +4,9 @@ Sometimes you want to use a different value in your code than is stored in your 
 
 A custom getter or setter is simply a function in your entity.
 
-To retrieve the attribute value fetched from the database, call `getAttribute` passing in the name of the attribute.
+To retrieve the attribute value fetched from the database, call `retrieveAttribute` passing in the name of the attribute.
 
-To set an attribute for saving to the database, call `setAttribute` passing in the name and the value.
+To set an attribute for saving to the database, call `assignAttribute` passing in the name and the value.
 
 ```javascript
 component extends="quick.models.BaseEntity" {
@@ -14,12 +14,12 @@ component extends="quick.models.BaseEntity" {
     property name="bcrypt" inject="@BCrypt";
 
     function setPassword( value ) {
-        return setAttribute( "password", bcrypt.value );
+        return assignAttribute( "password", bcrypt.value );
     }
 
     function getCreatedDate( value ) {
-        return dateFormat( getAttribute( "createdDate" ), "DD MMM YYYY" );
-    } 
+        return dateFormat( retrieveAttribute( "createdDate" ), "DD MMM YYYY" );
+    }
 
 }
 ```
