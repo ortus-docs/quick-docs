@@ -193,7 +193,7 @@ In this example, we are using the `addSubselect` helper method.  Here is that fu
 | Argument | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
 | name | string | `true` |  | The name for the subselect. This will be available as an attribute. |
-| subselect | QueryBuilder | Closure | `true` |  | Either a QueryBuilder object or a closure can be provided.  If a closure is provided it will be passed a query object as its only parameter.  The resulting query object will be used to computed the subselect. |
+| subselect | QueryBuilder OR Closure | `true` |  | Either a QueryBuilder object or a closure can be provided.  If a closure is provided it will be passed a query object as its only parameter.  The resulting query object will be used to computed the subselect. |
 
 
 You might be wondering why not use the `logins` relationship?  Or even `logins().latest().limit( 1 ).get()`?
