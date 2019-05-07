@@ -7,7 +7,13 @@ To get started with Quick, you need an entity. You start by extending `quick.mod
 component extends="quick.models.BaseEntity" {}
 ```
 
-That's all that is needed to get started with Quick. There are a few defaults of Quick worth mentioning here.
+Alternatively, you can use the `quick` virtual inheritance mapping in ColdBox 5.2+.
+
+```javascript
+component quick {}
+```
+
+Both are equivalent, so use the one you prefer. That's all that is needed to get started with Quick. There are a few defaults of Quick worth mentioning here.
 
 ## Tables
 
