@@ -8,3 +8,4 @@
 + Mapping foreign keys for relationships is now optional
 + Either entities or primary key values can be passed to relationship persistance methods
 + Relationships can also be saved by calling `"set" & relationshipName`
++ [Virtual Inheritance](getting-started/defining-an-entity.md) works on ColdBox 5.2+
