@@ -188,6 +188,20 @@ var user = getInstance( "User" ).withLastLoginDate().first();
 user.getLastLoginDate(); // {ts 2019-05-02 08:24:51}
 ```
 
+We can even constrain our `User` entity based on the value of the subselect, so long as we've called the scope adding the subselect first (or made it a global scope).
+
+```js
+var user = getInstance( "User" ).withLastLoginDate().where( "lastLoginDate", ">", "2019-05-10" ).all();
+```
+
+Or add a new scope to `User` based on the subselect:
+
+```js
+    function scopeLoggedInAfter( query, required date afterDate ) {
+        return query.where( "lastLoginDate", ">", afterDate );
+    }
+```
+
 In this example, we are using the `addSubselect` helper method.  Here is that function signature:
 
 | Argument | Type | Required | Default | Description |
