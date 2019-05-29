@@ -1,5 +1,9 @@
 # What's New?
 
+## 2.2.0
+
+* [Relationship Fetch Methods](relationships/retrieving-relationships.md) \(`first` and `find` methods\)
+
 ## 2.1.0
 
 * [Subselect Helper](getting-started/query-scopes.md#subselects)
