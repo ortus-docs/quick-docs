@@ -7,7 +7,13 @@ To get started with Quick, you need an entity. You start by extending `quick.mod
 component extends="quick.models.BaseEntity" {}
 ```
 
-That's all that is needed to get started with Quick. There are a few defaults of Quick worth mentioning here.
+Alternatively, you can use the `quick` virtual inheritance mapping in ColdBox 5.2+.
+
+```javascript
+component quick {}
+```
+
+Both are equivalent, so use the one you prefer. That's all that is needed to get started with Quick. There are a few defaults of Quick worth mentioning here.
 
 ## Tables
 
@@ -20,8 +26,7 @@ component table="my_users" extends="quick.models.BaseEntity" {}
 
 ## Primary Key
 
-By default, Quick assumes a primary key of `id`. The name of this key can be
-configured by setting `variables._key` in your component.
+By default, Quick assumes a primary key of `id`. The name of this key can be configured by setting `variables._key` in your component.
 
 ```javascript
 // User.cfc
@@ -32,9 +37,7 @@ component extends="quick.models.BaseEntity" {
 }
 ```
 
-Quick also assumes a key type that is auto-incrementing. If you would like a
-different key type, define a function called \`keyType\` and return the key type
-from that function.
+Quick also assumes a key type that is auto-incrementing. If you would like a different key type, define a function called \`keyType\` and return the key type from that function.
 
 ```javascript
 // User.cfc
@@ -49,13 +52,12 @@ component extends="quick.models.BaseEntity" {
 
 Quick ships with the following key types:
 
-+ `AutoIncrementingKeyType`
-+ `NullKeyType`
-+ `ReturningKeyType`
-+ `UUIDKeyType`
+* `AutoIncrementingKeyType`
+* `NullKeyType`
+* `ReturningKeyType`
+* `UUIDKeyType`
 
-`keyType` can be any component that adheres to the `keyType` interface, so feel
-free to create your own and distribute them via ForgeBox.
+`keyType` can be any component that adheres to the `keyType` interface, so feel free to create your own and distribute them via ForgeBox.
 
 ```javascript
 interface displayname="KeyType" {
@@ -125,6 +127,10 @@ component extends="quick.models.BaseEntity" {
 }
 ```
 
+## Formula, Computed, or Subselect properties
+
+Quick handles formula, computed, or subselect properties using query scopes and the `addSubselect` helper method. [Check out the docs in query scopes to learn more.](https://github.com/ortus-docs/quick-docs/tree/04a0fdffcaa09e5e91a0b4a15bcf69828b5e5a34/getting-started/getting-started/query-scopes.md#subselects)
+
 ## Multiple datasource support
 
 Quick uses a default datasource and default grammar, as described [here](./). If you are using multiple datasources you can override default datasource by specifying a `datasource` metadata attribute on the component. If your extra datasource has a different grammar you can override your grammar as well by specifying a `grammar` attribute.
@@ -135,3 +141,4 @@ component datasource="myOtherDatasource" grammar="PostgresGrammar" extends="quic
 ```
 
 At the time of writing Valid grammar options are: `MySQLGrammar`, `PostgresGrammar`, `MSSQLGrammar` and `OracleGrammar`. Please check the [qb docs](https://qb.ortusbooks.com/) for additional options.
+
