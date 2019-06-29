@@ -134,7 +134,7 @@ If you need to load nested relationships with constraints you can call `with` in
 
 ```javascript
 getInstance( "User" ).with( { "posts" = function( q1 ) {
-    return query
+    return q1
         .whereBetween( "published_date", rc.startDate, rc.endDate )
         .with( { "comments" = function( q2 ) {
             return q2.where( "body", "like", rc.search );
