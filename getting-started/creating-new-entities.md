@@ -26,3 +26,8 @@ var user = getInstance( "User" ).create( {
 } );
 ```
 
+By default, if you have a key in the struct that doesn't match a property in the entity the `create` method will fail. If you add the optional argument `ignoreNonExistentAttributes` set to `true`, those missing keys are ignored. Now you can pass the `rc` scope from your submitted form directly into the `create` method and not worry about any other keys in the `rc` like `event` that would cause the method to fail.
+
+```javascript
+var user = getInstance( "User" ).create( rc, true );
+```
