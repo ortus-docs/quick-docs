@@ -17,3 +17,10 @@ var newestPosts = user
     .get();
 ```
 
+You can also call the other Quick fetch methods: `first`, `firstOrFail`, `find`, and `findOrFail` are all supported.  This is especially useful to constrain the entities available to a user by using the user's relationships:
+
+```javascript
+// This will only find posts the user has written.
+var post = user.posts().findOrFail( rc.id );
+```
+
