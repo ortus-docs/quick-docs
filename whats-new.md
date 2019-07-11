@@ -2,7 +2,7 @@
 
 ## 2.3.0
 
-* Option to ignore non-existent attributes
+* [Option to ignore non-existent attributes](getting-started/updating-existing-entities.md#update)
 
 ## 2.2.0
 
