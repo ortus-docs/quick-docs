@@ -17,7 +17,7 @@ The only value passed to `polymorphicBelongsTo` is a `prefix` for the polymorphi
 
 When retrieving a `polymorphicBelongsTo` relationship the `_id` is used to retrieve a `_type` from the database.
 
-The inverse of `polymorphicBelongsTo` is also `polymorphicHasMany`. It is important to choose the right relationship for your database structure. `hasOne` assumes that the related model has the foreign key for the relationship.
+The inverse of `polymorphicHasMany` is also `polymorphicHasMany`. It is important to choose the right relationship for your database structure. `hasOne` assumes that the related model has the foreign key for the relationship.
 
 ```javascript
 // Post.cfc
