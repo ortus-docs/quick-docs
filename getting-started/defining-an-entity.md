@@ -129,7 +129,7 @@ component extends="quick.models.BaseEntity" {
 
 ## Formula, Computed, or Subselect properties
 
-Quick handles formula, computed, or subselect properties using query scopes and the `addSubselect` helper method. [Check out the docs in query scopes to learn more.](https://github.com/ortus-docs/quick-docs/tree/04a0fdffcaa09e5e91a0b4a15bcf69828b5e5a34/getting-started/getting-started/query-scopes.md#subselects)
+Quick handles formula, computed, or subselect properties using query scopes and the `addSubselect` helper method. [Check out the docs in query scopes to learn more.](./query-scopes.md#subselects)
 
 ## Multiple datasource support
 
