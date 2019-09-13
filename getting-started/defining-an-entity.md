@@ -98,10 +98,6 @@ Now, only the `id`, `username`, and `email` columns will be retrieved.
 
 To prevent Quick from mapping a property to the database add the `persistent="false"` attribute to the property.
 
-```text
-// User.cfc
-```
-
 ```javascript
 // User.cfc
 component extends="quick.models.BaseEntity" {
