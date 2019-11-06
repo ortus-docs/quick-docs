@@ -6,6 +6,12 @@ You can do this any way you'd like: through the web admin, in `Application.cfc`,
 
 Make sure to set `this.datasource` in your `Application.cfc` so Quick knows which datasource to use.
 
+## Download Quick
+
+The easiest way to download quick is to use forgebox with commandbox. Just run the following from the root of your application:
+
+`box install quick`
+
 ## Add a mapping for `quick` in your `Application.cfc`
 
 For a default installation in a ColdBox template, the following line will do the trick.
@@ -18,7 +24,7 @@ Quick will auto discover your grammar by default on startup. To avoid this check
 
 `BaseGrammar` is a module setting for Quick. Set it in your `config/ColdBox.cfc` like so:
 
-```text
+```
 moduleSettings = {
     quick = {
         defaultGrammar = "MySQLGrammar"
