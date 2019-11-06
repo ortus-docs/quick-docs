@@ -2,7 +2,7 @@
 
 A `polymorphicHasMany` relationship is a `one-to-many` relationship. This relationship is used when an entity can belong to multiple types of entities. The classic example for this type of relationship is `Posts`, `Videos`, and `Comments`.
 
-```javascript
+```
 // Post.cfc
 component extends="quick.models.BaseEntity" {
 
@@ -13,7 +13,7 @@ component extends="quick.models.BaseEntity" {
 }
 ```
 
-```javascript
+```
 // Video.cfc
 component extends="quick.models.BaseEntity" {
 
@@ -30,7 +30,7 @@ The second value is a `prefix` for the polymorphic type. A common convention whe
 
 The inverse of `polymophicHasMany` is `polymorphicBelongsTo`.
 
-```javascript
+```
 // Comment.cfc
 component extends="quick.models.BaseEntity" {
 

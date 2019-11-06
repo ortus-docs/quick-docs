@@ -77,7 +77,7 @@ interface displayname="KeyType" {
 }
 ```
 
-## Columns
+## Properties
 
 You specify what columns are retrieved by adding properties to your component.
 
@@ -96,6 +96,8 @@ Now, only the `id`, `username`, and `email` columns will be retrieved.
 
 > Note: Make sure to include the primary key \(`id` by default\) as a property.
 
+### Persistent
+
 To prevent Quick from mapping a property to the database add the `persistent="false"` attribute to the property.
 
 ```javascript
@@ -111,6 +113,8 @@ component extends="quick.models.BaseEntity" {
 }
 ```
 
+### Column
+
 If the column name in your table is not the column name you wish to use in quick, you can alias it using the `column` metadata attribute.
 
 ```javascript
@@ -123,15 +127,87 @@ component extends="quick.models.BaseEntity" {
 }
 ```
 
+### Null Values
+
+To work around CFML's lack of `null`, you can use the `nullValue` and `convertToNull` attributes.
+
+`nullValue` defines the value that is considered `null` for a property.  By default it is an empty string. \(`""`\)
+
+`convertToNull` is a flag that, when false, will not try to insert `null` in to the database.  By default this flag is `true`.
+
+```javascript
+component extends="quick.models.BaseEntity" {
+
+    property name="id";
+    property name="number" convertToNull="false";
+    property name="title" nullValue="REALLY_NULL";
+
+}
+```
+
+### Read Only
+
+The `readOnly` attribute will prevent setters, updates, and inserts to a property when set to `true`.
+
+```javascript
+component extends="quick.models.BaseEntity" {
+
+    property name="id";
+    property name="createdDate" readonly="true";
+
+}
+```
+
+### SQL Type
+
+In some cases you will need to specify an exact SQL type for your property.  Any value set for the `sqltype` attribute will be used when inserting or updating the property in the database.
+
+```javascript
+component extends="quick.models.BaseEntity" {
+
+    property name="id";
+    property name="number" sqltype="cf_sql_varchar";
+
+}
+```
+
+### Casts
+
+The `casts` attribute allows you to use a value in your CFML code as a certain type while being a different type in the database.  A common example of this is a `boolean` which is usually represented as a `BIT` in the database.
+
+```javascript
+component extends="quick.models.BaseEntity" {
+
+    property name="id";
+    property name="active" casts="boolean";
+
+}
+```
+
+Currently, only `boolean` is supported as a cast type.
+
+### Insert & Update
+
+You can prevent inserting and updating a property by setting the `insert` or `update` attribute to `false`.
+
+```javascript
+component extends="quick.models.BaseEntity" {
+
+    property name="id";
+    property name="email" column="email" update="false" insert="true";
+
+}
+```
+
 ## Formula, Computed, or Subselect properties
 
-Quick handles formula, computed, or subselect properties using query scopes and the `addSubselect` helper method. [Check out the docs in query scopes to learn more.](./query-scopes.md#subselects)
+Quick handles formula, computed, or subselect properties using query scopes and the `addSubselect` helper method. [Check out the docs in query scopes to learn more.](query-scopes.md#subselects)
 
 ## Multiple datasource support
 
 Quick uses a default datasource and default grammar, as described [here](./). If you are using multiple datasources you can override default datasource by specifying a `datasource` metadata attribute on the component. If your extra datasource has a different grammar you can override your grammar as well by specifying a `grammar` attribute.
 
-```javascript
+```
 // User.cfc
 component datasource="myOtherDatasource" grammar="PostgresGrammar" extends="quick.models.BaseEntity" {}
 ```

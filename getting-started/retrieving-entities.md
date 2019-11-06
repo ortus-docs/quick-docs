@@ -8,7 +8,7 @@ You start every interaction with Quick with an instance of an entity. The easies
 
 Quick is backed by qb, a CFML Query Builder. With this in mind, think of retrieving records for your entities like interacting with qb. For example:
 
-```javascript
+```
 var users = getInstance("User").all();
 
 for (var user in users) {
@@ -18,7 +18,7 @@ for (var user in users) {
 
 In addition to using `for` you can utilize the `each` function on arrays. For example:
 
-```javascript
+```
 var users = getInstance("User").all();
 
 prc.users.each(function(user) {
@@ -28,7 +28,7 @@ prc.users.each(function(user) {
 
 You can add constraints to the query just the same as you would using qb directly:
 
-```javascript
+```
 var users = getInstance("User")
     .where("active", 1)
     .orderBy("username", "desc")
@@ -44,7 +44,7 @@ A second way to retrieve results is to use a Quick Service. It is similar to a `
 
 The easiest way to create a Quick Service is to inject it using the `quickService:` dsl:
 
-```javascript
+```
 component {
     property name="userService" inject="quickService:User"
 }
@@ -52,7 +52,7 @@ component {
 
 Any method you can call on an entity can be called on the service:
 
-```javascript
+```
 var users = userService
     .where("active", 1)
     .orderBy("username", "desc")
