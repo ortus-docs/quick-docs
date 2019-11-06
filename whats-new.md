@@ -5,6 +5,7 @@
 * Apply custom setters when hydrating from the database.
 * [Query scopes can return any value.](getting-started/query-scopes.md#scopes-that-return-values)  This allows you to use scopes to perform query functions and return values.  \(If you do not want to return a custom value, return the `QueryBuilder` instance or nothing.\)
 * Improve error messages for not loaded entities.
+* Return the correct memento with accessors on.
 
 ## 2.3.0
 
