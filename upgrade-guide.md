@@ -68,7 +68,7 @@ Lastly, the following properties and methods have been removed:
 
 Key Types are the way to define setting and retrieving a primary key in Quick. In Quick 1.0 these were injected in to the component. This made reusability hard for simple things like sequence names. In order to allow for more flexible key types, key types are no longer injected. Instead, they should be returned from a `keyType` method.
 
-```
+```text
 function keyType() {
     return variables._wirebox.getInstance( "Sequence@quick" )
         .setSequenceName( "seq_users" );
@@ -130,7 +130,7 @@ As a new way to interact with Quick, you can use Quick Services to interact with
 
 The easiest way to use a Quick Service is to use the `quickService:` injection dsl.
 
-```
+```text
 component {
     property name="userService" inject="quickService:User";
 }

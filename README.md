@@ -59,7 +59,7 @@ Here's a "quick" example to whet your appetite.
 
 We'll show the database structure using a [migrations file](https://forgebox.io/view/commandbox-migrations). This isn't required to use `quick`, but it is highly recommended.
 
-```
+```javascript
 // 2017_11_10_122835_create_users_table.cfc
 component {
 
@@ -77,7 +77,7 @@ component {
 }
 ```
 
-```
+```javascript
 // User
 component extends="quick.models.BaseEntity" {
 
@@ -88,7 +88,7 @@ component extends="quick.models.BaseEntity" {
 }
 ```
 
-```
+```javascript
 // handlers/Users.cfc
 component {
 
@@ -102,7 +102,7 @@ component {
 }
 ```
 
-```
+```markup
 <!-- views/users/show.cfm -->
 <cfoutput>
     <h1>Hi, #prc.user.getUsername()#!</h1>

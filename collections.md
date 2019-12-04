@@ -6,7 +6,7 @@ Collections are an optional add on to Quick. To use collections you need to inst
 
 Collections are more powerful than plain arrays. There are many methods that can make your work easier. For instance, let's say you needed to group each active user by the first letter of their username in a list.
 
-```
+```javascript
 var users = getInstance("User").all();
 
 users
@@ -25,7 +25,7 @@ So powerful! We think you'll love it.
 
 Additionally, `QuickCollection` includes a `load` method. `load` lets you eager load a relationship after executing the initial query.
 
-```
+```javascript
 var posts = getInstance("Post").all();
 
 if (someCondition) {
@@ -35,7 +35,7 @@ if (someCondition) {
 
 This is the same as if you had initially executed:
 
-```
+```javascript
 getInstance("Post")
     .with("user")
     .all();
