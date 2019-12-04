@@ -95,12 +95,9 @@ Best of all, we can reuse those scopes anywhere we see fit without duplicating l
 
 ## Usage
 
-All query scopes are methods on an entity that begin with the `scope` keyword.
-You call these functions without the `scope` keyword \(as shown above\).
+All query scopes are methods on an entity that begin with the `scope` keyword. You call these functions without the `scope` keyword \(as shown above\).
 
-Each scope is passed the `query`, a reference to the current `QueryBuilder`
-instance, as the first argument. Any other arguments passed to the scope will be
-passed in order after that.
+Each scope is passed the `query`, a reference to the current `QueryBuilder` instance, as the first argument. Any other arguments passed to the scope will be passed in order after that.
 
 ```javascript
 component extends="quick.models.BaseEntity" {
@@ -117,3 +114,155 @@ var subscribedUsers = getInstance( "User" )
     .ofType( "admin" )
     .get();
 ```
+
+## Scopes that Return Values
+
+All of the examples so far either returned the `query` object or nothing.  Doing so lets you continue to chain methods on your Quick entity.  If you instead return a value, Quick will pass on that value to your code.  This lets you use scopes as shortcut methods that work on a query.
+
+For example, maybe you have a domain method to reset passwords for a group of users, and you want the count of users updated returned.
+
+```javascript
+component quick {
+
+    property name="id";
+    property name="username";
+    property name="password";
+    property name="type";
+
+    function scopeOfType( query, type = "limited" ) {
+        return query.where( "type", type );
+    }
+
+    function scopeResetPasswords( query ) {
+        return query.updateAll( { "password" = "" } ).result.recordcount;
+    }
+
+}
+```
+
+```javascript
+getInstance( "User" ).ofType( "admin" ).resetPasswords(); // 1
+```
+
+## Global Scopes
+
+Occasionally, you want to apply a scope to each retrieval of an entity. An example of this is an Admin entity which is just a User entity with a type of admin. Global Scopes can be registered in the `applyGlobalScopes` method on an entity. Inside this entity you can call any number of scopes:
+
+```javascript
+component extends="User" table="users" {
+
+    function applyGlobalScopes() {
+        this.ofType( "admin" );
+    }
+
+}
+```
+
+These scopes will be applied to the query without needing to call the scope again.
+
+```javascript
+var admins = getInstance( "Admin" ).all();
+// SELECT * FROM users WHERE type = 'admin'
+```
+
+If you have a global scope applied to an entity that you need to temporarily disable, you can disable them individually using the `withoutGlobalScope` method:
+
+```javascript
+var admins = getInstance( "Admin" ).withoutGlobalScope( [ "ofType" ] ).all();
+// SELECT * FROM users
+```
+
+## Subselects
+
+Subselects are a useful way to grab data from related tables without having to execute the full relationship. Sometimes you just want a small piece of information like the `last_login_date` of a user, not the entire `Login` relationship. Subselects are perfect for this use case. You can even use subselects to provide the correct key for subselect relationships. We'll show how both work here.
+
+Quick handles subselect properties \(or computed or formula properties\) through query scopes. This allows you to dynamically include a subselect. If you would like to always include a subselect, add it to your entity's [list of global scopes.](https://github.com/ortus-docs/quick-docs/tree/882521bd668671a1228bfffa5dbec7dcb78d0059/getting-started/getting-started/query-scopes.md#global-scopes)
+
+Here's an example of grabbing the `last_login_date` for a User:
+
+```javascript
+component extends="quick.models.BaseEntity" {
+
+    /* properties */
+
+    function logins() {
+        return hasMany( "Login" );
+    }
+
+    function scopeWithLastLoginDate( query ) {
+        addSubselect( "lastLoginDate", newEntity( "Login" )
+            .select( "timestamp" )
+            .whereColumn( "users.id", "user_id" )
+            .latest()
+        );
+    }
+
+}
+```
+
+We'd add this subselect by calling our scope:
+
+```javascript
+var user = getInstance( "User" ).withLastLoginDate().first();
+user.getLastLoginDate(); // {ts 2019-05-02 08:24:51}
+```
+
+We can even constrain our `User` entity based on the value of the subselect, so long as we've called the scope adding the subselect first \(or made it a global scope\).
+
+```javascript
+ var user = getInstance( "User" )
+     .withLastLoginDate()
+     .where( "lastLoginDate", ">", "2019-05-10" )
+     .all();
+```
+
+Or add a new scope to `User` based on the subselect:
+
+```javascript
+function scopeLoggedInAfter( query, required date afterDate ) {
+    return query.where( "lastLoginDate", ">", afterDate );
+}
+```
+
+In this example, we are using the `addSubselect` helper method. Here is that function signature:
+
+| Argument | Type | Required | Default | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| name | string | `true` |  | The name for the subselect. This will be available as an attribute. |
+| subselect | QueryBuilder OR Closure | `true` |  | Either a QueryBuilder object or a closure can be provided.  If a closure is provided it will be passed a query object as its only parameter.  The resulting query object will be used to computed the subselect. |
+
+You might be wondering why not use the `logins` relationship? Or even `logins().latest().limit( 1 ).get()`? Because that executes a second query. Using a subselect we get all the information we need in one query, no matter how many entities we are pulling back.
+
+Subselects can be used in conjunction with relationships to provide a dynamic, constrained relationship. In this example we will pull the latest post for a user.
+
+```javascript
+component extends="BaseEntity" {
+
+    /* properties */
+
+    function scopeWithLatestPost( query ) {
+        return addSubselect( "latestPostId", newEntity( "Post" )
+            .select( "id" )
+            .whereColumn( "user_id", "users.id" )
+            .orderBy( "created_date", "desc" )
+        ).with( "latestPost" );
+    }
+
+    function latestPost() {
+        return belongsTo( "Post", "latestPostId" );
+    }
+
+}
+```
+
+This can be executed as follows:
+
+```javascript
+var users = getInstance( "User" ).withLatestPost().all();
+for ( var user in users ) {
+    user.getLatestPost().getTitle(); // My awesome post, etc.
+}
+```
+
+As you can see, we are loading the id of the latest post in a subquery and then using that value to eager load the `latestPost` relationship. This sequence will only execute two queries, no matter how many records are loaded.
+
