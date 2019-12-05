@@ -1,5 +1,9 @@
 # What's New?
 
+## 2.5.0
+
+* Define [custom collections](collections.md) per entity.
+
 ## 2.4.0
 
 * Apply custom setters when hydrating from the database.
