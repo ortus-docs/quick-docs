@@ -6,7 +6,7 @@
 
 ## 2.4.0
 
-* Apply custom setters when hydrating from the database.
+* ~~Apply custom setters when hydrating from the database.~~ \(Reverted in `2.5.3` for unintended consequences with things like password hashing.\)
 * [Query scopes can return any value.](getting-started/query-scopes.md#scopes-that-return-values)  This allows you to use scopes to perform query functions and return values.  \(If you do not want to return a custom value, return the `QueryBuilder` instance or nothing.\)
 * Improve error messages for not loaded entities.
 * Return the correct memento with accessors on.
