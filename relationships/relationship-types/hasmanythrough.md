@@ -65,7 +65,7 @@ Lastly, the `localKey` and `secondLocalKey` are the primary keys of the entity a
 ```text
 return hasManyThrough(
     relationName = "Permission",
-    intermeediateName = "UserPermission",
+    intermediate = "UserPermission",
     firstKey = "FK_permissionID", // foreign key on the UserPermission table
     secondKey = "FK_userID", // foreign key on the Permission table
     localKey = "userID", // local key on the owning entity table

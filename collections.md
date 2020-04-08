@@ -1,8 +1,27 @@
 # Collections
 
-Collections are an optional add on to Quick. To use collections you need to install `cfcollection` and configure it as your `returnFormat`.
+Collections are what are returned when calling `get` or `all` on an entity.  By default, it returns an array.  Every entity can override its `newCollection` method and return a custom collection.  This method accepts an array of entities and should return your custom collection.  
 
-`QuickCollection` is a specialized version of [`CFCollection`](https://www.forgebox.io/view/cfcollection). It is a component that smooths over the various CFML engines to provide an extendible, reliable array wrapper with functional programming methods. You may be familiar with methods like `map` \(`ArrayMap`\), `filter` \(`ArrayFilter`\), or `reduce` \(`ArrayReduce`\). These methods work in every CFML engine with `CFCollection`.
+`QuickCollection` is a custom collection included in Quick as an extra component.  It is a specialized version of [`CFCollection`](https://www.forgebox.io/view/cfcollection). It smooths over the various CFML engines to provide an extendible, reliable array wrapper with functional programming methods. You may be familiar with methods like `map` \(`ArrayMap`\), `filter` \(`ArrayFilter`\), or `reduce` \(`ArrayReduce`\). These methods work in every CFML engine with `CFCollection`.
+
+To use collections you need to install `cfcollection` and configure it as your as your `newCollection`.
+
+Here's how you would configure an entity to return a `QuickCollection`.
+
+```javascript
+component name="User" {
+
+    function newCollection( array entities = [] ) {
+        return variables._wirebox.getInstance(
+            name = "quick.extras.QuickCollection",
+            initArguments = {
+                "collection" = arguments.entities
+            }
+        );
+    }
+
+}
+```
 
 Collections are more powerful than plain arrays. There are many methods that can make your work easier. For instance, let's say you needed to group each active user by the first letter of their username in a list.
 
