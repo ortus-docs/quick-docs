@@ -1,5 +1,56 @@
 # What's New?
 
+## 3.0.0
+
+#### **BREAKING CHANGES** <a id="breaking-changes"></a>
+
+_Please see the_ [_Upgrade Guide_](upgrade-guide.md#3-0-0) _for more information on these changes._
+
+* Drop support for Lucee 4.5 and Adobe ColdFusion 11.
+* The `defaultGrammar` mapping needs to be the full WireBox mapping, including the `@qb`, if needed.
+  * For instance, `MSSQLGrammar` would become `MSSQLGrammar@qb`.
+  * This will allow for other grammars to be more easily contributed via third party modules.
+* `HasManyThrough` relationships now only accept a `relationships` parameter of relationship methods to walk to get to the intended entity.
+* Some method and parameter names have been changed to support composite keys.  **The majority of changes will only affect you if you have extended base Quick components.** The full list can be found in the Upgrade Guide.
+
+####  **Other Changes** <a id="other-changes"></a>
+
+* Mementifier
+* Use asMemento to automatically convert queries to mementos
+* Run tests against `coldbox@be`
+* Generate API docs
+* Add error message for defaulting key values
+* Update to qb 7.0.0
+* Add a belongsToThrough relationship
+* Add a HasOneThrough relationship
+* Custom Casts
+* Order by nested relationships
+* addSubselect improvements
+* Add a new QuickBuilder to better handle interop with qb
+* Add an optional id check to exists and existsOrFail \(also add exists or existsOrFail in general\)
+* Allow custom error messages for \*orFail methods
+* Ensure loadRelationship doesn't reload existing relationships
+* Add multiple retrieve or new/create methods
+* Add pagination to Quick
+* Add is and isNot to compare entities
+* Allow hydrating entities from serialized data
+* Allow returning default entities for null relations
+* Query relations using has, doesntHave, whereHas, and whereDoesntHave
+* Split reset into reset and resetToNew methods
+* Store the original attributes for later resetting
+* Use parameterLimits to eager load
+* Use a newEntity each time on BaseService
+* Apply sql types for columns to `wheres`
+* Apply global scopes more consistently - Apply global scopes when paginating
+* Correctly ignore key column when updating
+* Fix hasRelationship method to only return true for exact matches
+* Better handling of constrained relationships when eager loading
+* Convert aliases when qualifying columns
+* Add a better error message if onMissingMethod fails
+* Only retrieve columns for defined attributes
+* Cache entity metadata in CacheBox
+* Use attribute hash for checking isDirty
+
 ## 2.5.0
 
 * Define [custom collections](collections.md) per entity.
