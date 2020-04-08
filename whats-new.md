@@ -15,12 +15,11 @@ _Please see the_ [_Upgrade Guide_](upgrade-guide.md#3-0-0) _for more information
 
 ####  **Other Changes** <a id="other-changes"></a>
 
-* Mementifier
-* Use asMemento to automatically convert queries to mementos
-* Run tests against `coldbox@be`
-* Generate API docs
+* [Bundle Mementifier](serialization.md) for memento transformations
+* Use [asMemento](serialization.md#asmemento) to automatically convert queries to mementos
+* Automatically-generated [API docs](https://apidocs.ortussolutions.com/#/coldbox-modules/quick/)
 * Add error message for defaulting key values
-* Update to qb 7.0.0
+* Update to [qb 7.0.0](https://qb.ortusbooks.com/)
 * Add a belongsToThrough relationship
 * Add a HasOneThrough relationship
 * Custom Casts

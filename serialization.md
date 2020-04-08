@@ -30,7 +30,44 @@ component extends="quick.models.BaseEntity" {
 }
 ```
 
-You can modify the memento by overriding the `getMemento` function on your entity.
+Quick bundles in the excellent [Mementifier](https://www.forgebox.io/view/mementifier) library to handle converting entities to mementos.  This gives you excellent control over serialization using a `this.memento` struct on the entity and passing in arguments to the `getMemento` function.
+
+### this.memento
+
+By default, Quick includes all defined attributes as `includes`.   You can change this or add other Mementifier options by defining your own `this.memento` struct on your entity.  Your custom `this.memento` struct will be merged with Quick's default, so you can only define what changes you need.
+
+Here is the default Quick memento struct:
+
+```javascript
+this.memento = {
+    "defaultIncludes" : retrieveAttributeNames(),
+	  "defaultExcludes" : [],
+	  "neverInclude"    : [],
+	  "defaults"        : {},
+	  "mappers"         : {},
+	  "trustedGetters"  : true,
+	  "ormAutoIncludes" : false
+};
+```
+
+### getMemento Arguments
+
+You can also control the serialization of a memento at call time using Mementifier's `getMemento` arguments.
+
+```javascript
+struct function getMemento(
+    includes = "", // or []
+    excludes = "", // or []
+    struct mappers = {},
+    struct defaults = {},
+    boolean ignoreDefaults = false,
+    boolean trustedGetters
+)
+```
+
+### Custom getMemento
+
+If this does not give you the control you need, you can further modify the memento by overriding the `getMemento` function on your entity.  In this case, a `$getMemento` function will be available which is the Mementifier function.
 
 ```javascript
 component extends="quick.models.BaseEntity" {
@@ -65,6 +102,10 @@ component extends="quick.models.BaseEntity" {
     "modifiedDate" = "03/12/2018"
 }
 ```
+
+## asMemento
+
+Sometimes when retrieving entities or executing a Quick query, you already know you want mementos back.  You can skip the step of calling `getMemento` yourself or mapping over the array of results returned by calling `asMemento` before executing the query.  `asMemento` takes the same arguments that `getMemento` does.  It will pass those arguments on and convert your entities to mementos after executing the query.  This works for all the query execution methods - `find`, `first`, `get`, `paginate`, etc.
 
 ## $renderData
 
