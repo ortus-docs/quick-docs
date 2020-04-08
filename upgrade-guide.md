@@ -8,7 +8,7 @@ Please migrate to a supported engine.
 
 ### AssignedKey removed
 
-Use NullKeyType instead.
+Use `NullKeyType` instead.
 
 ### defaultGrammar updated to be the full WireBox mapping <a id="defaultgrammar-updated-to-be-the-full-wirebox-mapping"></a>
 
