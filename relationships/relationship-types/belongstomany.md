@@ -145,16 +145,13 @@ Now, no matter what relationships existed before, this `Post` will only have thr
 
 ## Relationship Setter
 
-You can also influence the associated entities by calling `"set" & relationshipName` and
-passing in an entity or key value.
+You can also influence the associated entities by calling `"set" & relationshipName` and passing in an entity or key value.
 
-```js
+```javascript
 var someTag = getInstance( "Tag" ).findOrFail( 2 );
 var post = getInstance( "Post" ).first();
 post.setTags( [ 4, 12, someTag );
 ```
 
-This code calls `sync` on the relationship. After executing this code, the post would be updated
-in the database to be associated with the tags passed in (`4`, `12`, and `2`).
-Any tags that were previously associated with this post would no longer be and only the tags passed
-in would be associated now.
+This code calls `sync` on the relationship. After executing this code, the post would be updated in the database to be associated with the tags passed in \(`4`, `12`, and `2`\). Any tags that were previously associated with this post would no longer be and only the tags passed in would be associated now.
+
