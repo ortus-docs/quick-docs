@@ -11,6 +11,7 @@ _Please see the_ [_Upgrade Guide_](upgrade-guide.md#3-0-0) _for more information
   * For instance, `MSSQLGrammar` would become `MSSQLGrammar@qb`.
   * This will allow for other grammars to be more easily contributed via third party modules.
 * \`\`[`HasManyThrough` relationships](relationships/relationship-types/hasmanythrough.md) now only accept a `relationships` parameter of relationship methods to walk to get to the intended entity.
+* Attributes using `casts="boolean"` need to be updated to `casts="BooleanCast@quick"`.
 * Some method and parameter names have been changed to support composite keys.  **The majority of changes will only affect you if you have extended base Quick components.** The full list can be found in the Upgrade Guide.
 
 ####  **Other Changes** <a id="other-changes"></a>
@@ -26,7 +27,7 @@ _Please see the_ [_Upgrade Guide_](upgrade-guide.md#3-0-0) _for more information
 * Order by nested relationships
 * addSubselect improvements
 * Add a new QuickBuilder to better handle interop with qb
-* Add an optional id check to exists and existsOrFail \(also add exists or existsOrFail in general\)
+* Add `exists` and `existsOrFail` methods
 * Allow custom error messages for \*orFail methods
 * Ensure loadRelationship doesn't reload existing relationships
 * Add multiple retrieve or new/create methods

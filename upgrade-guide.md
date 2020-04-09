@@ -10,6 +10,10 @@ Please migrate to a supported engine.
 
 Use `NullKeyType` instead.
 
+### Boolean casts updates to hook in to new Cast system
+
+Previously, the only valid cast type was `casts="boolean"`.  In introducing the new Casts system, the boolean cast was refactored to use the same system.  For this reason, any `casts="boolean"` needs to be changed to `casts="BooleanCast@quick"`
+
 ### defaultGrammar updated to be the full WireBox mapping <a id="defaultgrammar-updated-to-be-the-full-wirebox-mapping"></a>
 
 In previous versions, the value passed to `defaultGrammar` was used to look up a mapping in the `@qb` namespace. This made it difficult to add or use grammars that weren't part of qb. \(You could get around this be registering your custom grammar in the `@qb` namespace, but doing so seemed strange.\)
