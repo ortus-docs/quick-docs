@@ -24,7 +24,7 @@ Quick will auto discover your grammar by default on startup. To avoid this check
 
 `BaseGrammar` is a module setting for Quick. Set it in your `config/ColdBox.cfc` like so:
 
-```
+```text
 moduleSettings = {
     quick = {
         defaultGrammar = "MySQLGrammar"
