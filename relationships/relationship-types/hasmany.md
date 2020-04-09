@@ -69,7 +69,8 @@ This will add the `User` entity's id as a foreign key in the `Post` and save the
 
 ### saveMany
 
-You can also add many entities in a `hasMany` relationship by calling `saveMany`. This method takes an array of key values or entities and will associate each of them with the base entity.
+You can also add many entities in a `hasMany` relationship by calling `saveMany`.  This method takes an
+array of key values or entities and will associate each of them with the base entity.
 
 ### create
 
@@ -92,12 +93,15 @@ Removing a `hasMany` relationship is handled in two ways: either by using the `d
 
 ## Relationship Setter
 
-You can also influence the associated entities by calling `"set" & relationshipName` and passing in an array of entities or key values.
+You can also influence the associated entities by calling `"set" & relationshipName` and
+passing in an array of entities or key values.
 
-```text
+```
 var postA = getInstance( "Post" ).findOrFail( 2 );
 user.setPosts( [ postA, 4 ] );
 ```
 
-After running this code, this user would only have two posts, the posts with ids `2` and `4`. Any other posts would now be disassociated with this user. Likely your database will be guarding against creating these orphan records. Admittedly, this method is not as likely to be used as the others, but it does exist if it solves your use case.
-
+After running this code, this user would only have two posts, the posts with ids `2` and `4`.
+Any other posts would now be disassociated with this user.  Likely your database will be
+guarding against creating these orphan records.  Admittedly, this method is not as likely
+to be used as the others, but it does exist if it solves your use case.
