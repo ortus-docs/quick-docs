@@ -20,8 +20,7 @@ component table="my_users" extends="quick.models.BaseEntity" {}
 
 ## Primary Key
 
-By default, Quick assumes a primary key of `id`. The name of this key can be
-configured by setting `variables._key` in your component.
+By default, Quick assumes a primary key of `id`. The name of this key can be configured by setting `variables._key` in your component.
 
 ```javascript
 // User.cfc
@@ -32,9 +31,7 @@ component extends="quick.models.BaseEntity" {
 }
 ```
 
-Quick also assumes a key type that is auto-incrementing. If you would like a
-different key type, define a function called \`keyType\` and return the key type
-from that function.
+Quick also assumes a key type that is auto-incrementing. If you would like a different key type, define a function called \`keyType\` and return the key type from that function.
 
 ```javascript
 // User.cfc
@@ -49,13 +46,12 @@ component extends="quick.models.BaseEntity" {
 
 Quick ships with the following key types:
 
-+ `AutoIncrementingKeyType`
-+ `NullKeyType`
-+ `ReturningKeyType`
-+ `UUIDKeyType`
+* `AutoIncrementingKeyType`
+* `NullKeyType`
+* `ReturningKeyType`
+* `UUIDKeyType`
 
-`keyType` can be any component that adheres to the `keyType` interface, so feel
-free to create your own and distribute them via ForgeBox.
+`keyType` can be any component that adheres to the `keyType` interface, so feel free to create your own and distribute them via ForgeBox.
 
 ```javascript
 interface displayname="KeyType" {
@@ -135,3 +131,4 @@ component datasource="myOtherDatasource" grammar="PostgresGrammar" extends="quic
 ```
 
 At the time of writing Valid grammar options are: `MySQLGrammar`, `PostgresGrammar`, `MSSQLGrammar` and `OracleGrammar`. Please check the [qb docs](https://qb.ortusbooks.com/) for additional options.
+
