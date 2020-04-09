@@ -8,7 +8,7 @@ Query scopes are a way to encapsulate query constraints in your entities while g
 
 For instance, let's say that you need to write a report for subscribers to your site. Maybe you track subscribers in a `users` table with a boolean flag in a `subscribed` column. Additionally, you want to see the oldest subscribers first. You keep track of when a user subscribed in a `subscribedDate` column. Your query might look as follows:
 
-```javascript
+```
 var subscribedUsers = getInstance( "User" )
     .where( "subscribed", true )
     .orderBy( "subscribedDate" )
@@ -19,7 +19,7 @@ Now nothing is wrong with this query. It retrieves the data correctly and you co
 
 Later, you need to retrieve a list of subscribed users for a different part of the site. So, you write a query like this:
 
-```javascript
+```
 var subscribedUsers = getInstance( "User" )
     .where( "subscribed", true )
     .get();
@@ -27,7 +27,7 @@ var subscribedUsers = getInstance( "User" )
 
 We've duplicated the logic for how to retrieve active users now. If the database representation changed, we'd have to change it in multiple places. For instance, what if instead of keeping track of a boolean flag in the database, we just checked that the `subscribedDate` column wasn't null?
 
-```javascript
+```
 var subscribedUsers = getInstance( "User" )
     .whereNotNull( "subscribedDate" )
     .get();
@@ -37,7 +37,7 @@ Now we see the problem. Let's look at the solution.
 
 The key here is that we are trying to retrieve subscribed users. Let's add a scope to our `User` entity for `subscribed`:
 
-```javascript
+```
 component extends="quick.models.BaseEntity" {
 
     function scopeSubscribed( query ) {
@@ -49,7 +49,7 @@ component extends="quick.models.BaseEntity" {
 
 Now, we can use this scope in our query:
 
-```javascript
+```
 var subscribedUsers = getInstance( "User" )
     .subscribed()
     .get();
@@ -57,7 +57,7 @@ var subscribedUsers = getInstance( "User" )
 
 We can use this on our first example as well, for our report.
 
-```javascript
+```
 var subscribedUsers = getInstance( "User" )
     .subscribed()
     .orderBy( "subscribedDate" )
@@ -68,7 +68,7 @@ We've successfully encapsulated our concept of a subscribed user!
 
 We can add as many scopes as we'd like. Let's add one for `longestSubscribers`.
 
-```javascript
+```
 component extends="quick.models.BaseEntity" {
 
     function scopeLongestSubscribers( query ) {
@@ -84,7 +84,7 @@ component extends="quick.models.BaseEntity" {
 
 Now our query is as follows:
 
-```javascript
+```
 var subscribedUsers = getInstance( "User" )
     .subscribed()
     .longestSubscribers()
@@ -99,7 +99,7 @@ All query scopes are methods on an entity that begin with the `scope` keyword. Y
 
 Each scope is passed the `query`, a reference to the current `QueryBuilder` instance, as the first argument. Any other arguments passed to the scope will be passed in order after that.
 
-```javascript
+```
 component extends="quick.models.BaseEntity" {
 
     function scopeOfType( query, type ) {
@@ -109,7 +109,7 @@ component extends="quick.models.BaseEntity" {
 }
 ```
 
-```javascript
+```
 var subscribedUsers = getInstance( "User" )
     .ofType( "admin" )
     .get();
@@ -119,7 +119,7 @@ var subscribedUsers = getInstance( "User" )
 
 Occasionally, you want to apply a scope to each retrieval of an entity. An example of this is an Admin entity which is just a User entity with a type of admin. Global Scopes can be registered in the `applyGlobalScopes` method on an entity. Inside this entity you can call any number of scopes:
 
-```javascript
+```
 component extends="User" table="users" {
 
     function applyGlobalScopes() {
@@ -131,14 +131,14 @@ component extends="User" table="users" {
 
 These scopes will be applied to the query without needing to call the scope again.
 
-```javascript
+```
 var admins = getInstance( "Admin" ).all();
 // SELECT * FROM users WHERE type = 'admin'
 ```
 
 If you have a global scope applied to an entity that you need to temporarily disable, you can disable them individually using the `withoutGlobalScope` method:
 
-```javascript
+```
 var admins = getInstance( "Admin" ).withoutGlobalScope( [ "ofType" ] ).all();
 // SELECT * FROM users
 ```
@@ -151,7 +151,7 @@ Quick handles subselect properties \(or computed or formula properties\) through
 
 Here's an example of grabbing the `last_login_date` for a User:
 
-```javascript
+```
 component extends="quick.models.BaseEntity" {
 
     /* properties */
@@ -173,14 +173,14 @@ component extends="quick.models.BaseEntity" {
 
 We'd add this subselect by calling our scope:
 
-```javascript
+```
 var user = getInstance( "User" ).withLastLoginDate().first();
 user.getLastLoginDate(); // {ts 2019-05-02 08:24:51}
 ```
 
 We can even constrain our `User` entity based on the value of the subselect, so long as we've called the scope adding the subselect first \(or made it a global scope\).
 
-```javascript
+```
  var user = getInstance( "User" )
      .withLastLoginDate()
      .where( "lastLoginDate", ">", "2019-05-10" )
@@ -189,7 +189,7 @@ We can even constrain our `User` entity based on the value of the subselect, so 
 
 Or add a new scope to `User` based on the subselect:
 
-```javascript
+```
 function scopeLoggedInAfter( query, required date afterDate ) {
     return query.where( "lastLoginDate", ">", afterDate );
 }
@@ -206,7 +206,7 @@ You might be wondering why not use the `logins` relationship? Or even `logins().
 
 Subselects can be used in conjunction with relationships to provide a dynamic, constrained relationship. In this example we will pull the latest post for a user.
 
-```javascript
+```
 component extends="BaseEntity" {
 
     /* properties */
@@ -228,7 +228,7 @@ component extends="BaseEntity" {
 
 This can be executed as follows:
 
-```javascript
+```
 var users = getInstance( "User" ).withLatestPost().all();
 for ( var user in users ) {
     user.getLatestPost().getTitle(); // My awesome post, etc.

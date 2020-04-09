@@ -2,7 +2,7 @@
 
 A `polymorphicBelongsTo` relationship is a `many-to-one` relationship. This relationship is used when an entity can belong to multiple types of entities. The classic example for this type of relationship is `Posts`, `Videos`, and `Comments`. For instance, a `Comment` may belong to a `Post` or a `Video`.
 
-```javascript
+```
 // Comment.cfc
 component extends="quick.models.BaseEntity" {
 
@@ -19,7 +19,7 @@ When retrieving a `polymorphicBelongsTo` relationship the `_id` is used to retri
 
 The inverse of `polymorphicBelongsTo` is also `polymorphicHasMany`. It is important to choose the right relationship for your database structure. `hasOne` assumes that the related model has the foreign key for the relationship.
 
-```javascript
+```
 // Post.cfc
 component extends="quick.models.BaseEntity" {
 
@@ -30,7 +30,7 @@ component extends="quick.models.BaseEntity" {
 }
 ```
 
-```javascript
+```
 // Video.cfc
 component extends="quick.models.BaseEntity" {
 
