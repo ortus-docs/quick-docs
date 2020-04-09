@@ -17,6 +17,8 @@
     * [belongsTo](relationships/relationship-types/belongsto.md)
     * [belongsToMany](relationships/relationship-types/belongstomany.md)
     * [hasManyThrough](relationships/relationship-types/hasmanythrough.md)
+    * [hasOneThrough](relationships/relationship-types/hasonethrough.md)
+    * [belongsToThrough](relationships/relationship-types/belongstothrough.md)
     * [polymorphicBelongsTo](relationships/relationship-types/polymorphicbelongsto.md)
     * [polymorphicHasMany](relationships/relationship-types/polymorphichasmany.md)
   * [Retrieving Relationships](relationships/retrieving-relationships.md)

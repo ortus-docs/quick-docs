@@ -10,7 +10,7 @@ _Please see the_ [_Upgrade Guide_](upgrade-guide.md#3-0-0) _for more information
 * The `defaultGrammar` mapping needs to be the full WireBox mapping, including the `@qb`, if needed.
   * For instance, `MSSQLGrammar` would become `MSSQLGrammar@qb`.
   * This will allow for other grammars to be more easily contributed via third party modules.
-* `HasManyThrough` relationships now only accept a `relationships` parameter of relationship methods to walk to get to the intended entity.
+* \`\`[`HasManyThrough` relationships](relationships/relationship-types/hasmanythrough.md) now only accept a `relationships` parameter of relationship methods to walk to get to the intended entity.
 * Some method and parameter names have been changed to support composite keys.  **The majority of changes will only affect you if you have extended base Quick components.** The full list can be found in the Upgrade Guide.
 
 ####  **Other Changes** <a id="other-changes"></a>
@@ -20,8 +20,8 @@ _Please see the_ [_Upgrade Guide_](upgrade-guide.md#3-0-0) _for more information
 * Automatically-generated [API docs](https://apidocs.ortussolutions.com/#/coldbox-modules/quick/)
 * Add error message for defaulting key values
 * Update to [qb 7.0.0](https://qb.ortusbooks.com/)
-* Add a belongsToThrough relationship
-* Add a HasOneThrough relationship
+* Add a [belongsToThrough relationship](relationships/relationship-types/belongstothrough.md)
+* Add a [HasOneThrough relationship](relationships/relationship-types/hasonethrough.md)
 * Custom Casts
 * Order by nested relationships
 * addSubselect improvements
