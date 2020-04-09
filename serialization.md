@@ -19,7 +19,7 @@ component extends="quick.models.BaseEntity" {
 }
 ```
 
-```javascript
+```json
 {
     "id" = 1,
     "username" = "JaneDoe",
@@ -56,7 +56,7 @@ component extends="quick.models.BaseEntity" {
 }
 ```
 
-```javascript
+```json
 {
     "id" = 1,
     "username" = "JaneDoe",
@@ -81,7 +81,7 @@ component {
 }
 ```
 
-```javascript
+```json
 {
     "id" = 1,
     "username" = "JaneDoe",

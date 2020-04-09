@@ -9,8 +9,14 @@ Quick 2.0 brings with it a lot of changes to make things more flexible and more 
 There were some common name clashes between internal Quick properties and custom attributes of your entities \(the most common being `fullName`\). All Quick internals have been obfuscated to avoid this situation. If you relied on these properties, please consult the following table below for the new property names.
 
 {% hint style="warning" %}
-If you are renaming your primary keys in your entities, you will have to change your key definition from `variables.key = "user_id";` to `variables._key` `= "user_id";` See [Defining an Entity](getting-started/defining-an-entity.md) for details.
+If you are renaming your primary keys in your entities, you will have to change your key definition from
+`variables.key = "user_id";`
+to
+**`variables._key`** `= "user_id";`
+See [Defining an Entity](getting-started/defining-an-entity.md) for details.
 {% endhint %}
+
+
 
 | Old Property Name | New Property Name |
 | :--- | :--- |
@@ -140,11 +146,14 @@ All methods available on the Quick entity are available on the service.
 
 ### Eager Loading
 
-Eager loading is now supported for nested relationships using a dot-separated syntax. Additionally, constraints can be added to an eager loaded relationship. See the [docs on eager loading](relationships/eager-loading.md) for more information.
+Eager loading is now supported for nested relationships using a dot-separated syntax.
+Additionally, constraints can be added to an eager loaded relationship.
+See the [docs on eager loading](relationships/eager-loading.md) for more information.
 
 ### Column Aliases in Queries
 
-Column aliases can now be used in queries. They will be transformed to columns before executing the query.
+Column aliases can now be used in queries.  They will be transformed to columns
+before executing the query.
 
 ### Quick entities in Setters
 
@@ -152,17 +161,25 @@ If you pass a Quick entity to a setter method the entity's `keyValue` value will
 
 ### Update and Insert Guards
 
-Columns can be prevented from being inserted or updated using property attributes — `insert="false"` and `update="false"`.
+Columns can be prevented from being inserted or updated using
+property attributes — `insert="false"` and `update="false"`.
 
 ### cbvalidation removed as a default dependency
 
-Quick no longer automatically validates entities before saving them. Having cbvalidation baked in made it hard to extend it. If desired, validation can be added back in using Quick's lifecycle hooks.
+Quick no longer automatically validates entities before saving them.
+Having cbvalidation baked in made it hard to extend it. If desired,
+validation can be added back in using Quick's lifecycle hooks.
 
 ### `instanceReady` Lifecycle Method
 
-Quick now announces an `instanceReady` event after the entity has gone through dependency injected and had its metadata inspected. This can be used to hook in other libraries, like `cbvalidation` and `mementifier`.
+Quick now announces an `instanceReady` event after the entity
+has gone through dependency injected and had its metadata inspected.
+This can be used to hook in other libraries, like `cbvalidation`
+and `mementifier`.
 
 ### Automatic Attribute Casting
 
-You can automatically cast a property to a boolean value while retrieving it from the database and back to a bit value when serializing to the database by setting `casts="boolean"` on the property.
-
+You can automatically cast a property to a boolean value
+while retrieving it from the database and back to a bit
+value when serializing to the database by setting
+`casts="boolean"` on the property.

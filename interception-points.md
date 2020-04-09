@@ -8,12 +8,13 @@ If you create your own Interceptors, they will not fire if you define them in yo
 
 ## quickInstanceReady
 
-Fired after dependency injection has been performed on the entity and the metadata has been inspected.
+Fired after dependency injection has been performed on the entity
+and the metadata has been inspected.
 
 `interceptData` structure
 
-| Key | Description |
-| :--- | :--- |
+| Key    | Description       |
+| :----- | :---------------- |
 | entity | The entity loaded |
 
 ## quickPreLoad

@@ -95,9 +95,12 @@ Best of all, we can reuse those scopes anywhere we see fit without duplicating l
 
 ## Usage
 
-All query scopes are methods on an entity that begin with the `scope` keyword. You call these functions without the `scope` keyword \(as shown above\).
+All query scopes are methods on an entity that begin with the `scope` keyword.
+You call these functions without the `scope` keyword \(as shown above\).
 
-Each scope is passed the `query`, a reference to the current `QueryBuilder` instance, as the first argument. Any other arguments passed to the scope will be passed in order after that.
+Each scope is passed the `query`, a reference to the current `QueryBuilder`
+instance, as the first argument. Any other arguments passed to the scope will be
+passed in order after that.
 
 ```javascript
 component extends="quick.models.BaseEntity" {
@@ -114,4 +117,3 @@ var subscribedUsers = getInstance( "User" )
     .ofType( "admin" )
     .get();
 ```
-
