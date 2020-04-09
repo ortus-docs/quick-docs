@@ -22,6 +22,7 @@
     * [polymorphicBelongsTo](relationships/relationship-types/polymorphicbelongsto.md)
     * [polymorphicHasMany](relationships/relationship-types/polymorphichasmany.md)
   * [Retrieving Relationships](relationships/retrieving-relationships.md)
+  * [Ordering By Relationship Attributes](relationships/ordering-by-relationship-attributes.md)
   * [Eager Loading](relationships/eager-loading.md)
 * [CBORM Compatibility Shim](cborm-compatibility-shim.md)
 * [Collections](collections.md)

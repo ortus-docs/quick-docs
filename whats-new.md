@@ -11,45 +11,45 @@ _Please see the_ [_Upgrade Guide_](upgrade-guide.md#3-0-0) _for more information
   * For instance, `MSSQLGrammar` would become `MSSQLGrammar@qb`.
   * This will allow for other grammars to be more easily contributed via third party modules.
 * \`\`[`HasManyThrough` relationships](relationships/relationship-types/hasmanythrough.md) now only accept a `relationships` parameter of relationship methods to walk to get to the intended entity.
-* Attributes using `casts="boolean"` need to be updated to `casts="BooleanCast@quick"`.
+* Attributes using `casts="boolean"` need to be updated to [`casts="BooleanCast@quick"`](getting-started/defining-an-entity.md#casts).
 * Some method and parameter names have been changed to support composite keys.  **The majority of changes will only affect you if you have extended base Quick components.** The full list can be found in the Upgrade Guide.
 
 ####  **Other Changes** <a id="other-changes"></a>
 
-* [Bundle Mementifier](serialization.md) for memento transformations
-* Use [asMemento](serialization.md#asmemento) to automatically convert queries to mementos
-* Automatically-generated [API docs](https://apidocs.ortussolutions.com/#/coldbox-modules/quick/)
-* Add error message for defaulting key values
-* Update to [qb 7.0.0](https://qb.ortusbooks.com/)
-* Add a [belongsToThrough relationship](relationships/relationship-types/belongstothrough.md)
-* Add a [HasOneThrough relationship](relationships/relationship-types/hasonethrough.md)
-* Custom Casts
-* Order by nested relationships
-* addSubselect improvements
-* Add a new QuickBuilder to better handle interop with qb
-* Add `exists` and `existsOrFail` methods
-* Allow custom error messages for \*orFail methods
-* Ensure loadRelationship doesn't reload existing relationships
-* Add multiple retrieve or new/create methods
-* Add pagination to Quick
-* Add is and isNot to compare entities
-* Allow hydrating entities from serialized data
-* Allow returning default entities for null relations
-* Query relations using has, doesntHave, whereHas, and whereDoesntHave
-* Split reset into reset and resetToNew methods
-* Store the original attributes for later resetting
-* Use parameterLimits to eager load
-* Use a newEntity each time on BaseService
-* Apply sql types for columns to `wheres`
-* Apply global scopes more consistently - Apply global scopes when paginating
-* Correctly ignore key column when updating
-* Fix hasRelationship method to only return true for exact matches
-* Better handling of constrained relationships when eager loading
-* Convert aliases when qualifying columns
-* Add a better error message if onMissingMethod fails
-* Only retrieve columns for defined attributes
-* Cache entity metadata in CacheBox
-* Use attribute hash for checking isDirty
+* [Bundle Mementifier](serialization.md) for memento transformations.
+* Use [asMemento](serialization.md#asmemento) to automatically convert queries to mementos.
+* Automatically-generated [API docs](https://apidocs.ortussolutions.com/#/coldbox-modules/quick/).
+* Add error message for defaulting key values.
+* Update to [qb 7.0.0](https://qb.ortusbooks.com/).
+* Add a [belongsToThrough relationship](relationships/relationship-types/belongstothrough.md).
+* Add a [HasOneThrough relationship](relationships/relationship-types/hasonethrough.md).
+* [Custom Casts](getting-started/defining-an-entity.md#casts) - using custom components to represent one or more attributes.
+* [Ordering by relationship attributes](relationships/ordering-by-relationship-attributes.md).
+* addSubselect improvements.
+* Add a new QuickBuilder to better handle interop with qb.
+* Add `exists` and `existsOrFail` methods.
+* Allow custom error messages for \*orFail methods.
+* Ensure `loadRelationship` doesn't reload existing relationships.
+* Add multiple retrieve or new/create methods.
+* Add `paginate` to Quick.
+* Add `is` and `isNot` to compare entities.
+* Allow hydrating entities from serialized data.
+* Allow returning default entities for null relations.
+* Query relations using `has`, `doesntHave`, `whereHas`, and `whereDoesntHave`.
+* Split `reset` into `reset` and `resetToNew` methods.
+* Store the original attributes for later resetting.
+* Use `parameterLimits` to eager load.
+* Use a new entity each time on BaseService.
+* Apply sql types for columns to `wheres`.
+* Apply global scopes more consistently - Apply global scopes when paginating.
+* Correctly ignore key column when updating.
+* Fix `hasRelationship` method to only return true for exact matches.
+* Better handling of constrained relationships when eager loading.
+* Convert aliases when qualifying columns.
+* Add a better error message if `onMissingMethod` fails.
+* Only retrieve columns for defined attributes.
+* Cache entity metadata in CacheBox.
+* Use attribute hash for checking `isDirty`.
 
 ## 2.5.0
 
