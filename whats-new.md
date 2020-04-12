@@ -32,7 +32,7 @@ _Please see the_ [_Upgrade Guide_](upgrade-guide.md#3-0-0) _for more information
 * Ensure `loadRelationship` doesn't reload existing relationships.
 * Add multiple retrieve or new/create methods - [`firstWhere`](getting-started/retrieving-entities.md#firstwhere), [`firstOrNew`](getting-started/retrieving-entities.md#firstornew), [`firstOrCreate`](getting-started/retrieving-entities.md#firstorcreate), [`findOrNew`](getting-started/retrieving-entities.md#findornew), and [`findOrCreate`](getting-started/retrieving-entities.md#findorcreate).
 * Add [`paginate`](getting-started/retrieving-entities.md#paginate) to Quick.
-* Add `is` and `isNot` to compare entities.
+* Add [`is` and `isNot`](getting-started/defining-an-entity.md#comparing-entities) to compare entities.
 * Allow hydrating entities from serialized data.
 * Allow returning default entities for null relations.
 * Query relations using `has`, `doesntHave`, `whereHas`, and `whereDoesntHave`.
