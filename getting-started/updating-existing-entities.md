@@ -43,3 +43,29 @@ getInstance( "User" )
     } );
 ```
 
+## fresh
+
+| Name | Type | Required | Default | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| No arguments |  | \`\` |  |  |
+
+Retrieves a new entity from the database with the same key value as the current entity. Useful for seeing any changes made to the record in the database.  This function executes a query.
+
+```javascript
+var user = getInstance( "User" ).findOrFail( rc.userID );
+var sameUser = user.fresh();
+```
+
+## refresh
+
+| Name | Type | Required | Default | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| No arguments |  | \`\` |  |  |
+
+Refreshes the attributes data for the entity with data from the database.  This differs from `fresh` in that it operates on the current entity instead of returning a new one. This function executes a query.
+
+```javascript
+var user = getInstance( "User" ).findOrFail( rc.userID );
+user.fresh(); // user now has updated data from the database
+```
+

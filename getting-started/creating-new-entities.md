@@ -26,3 +26,38 @@ var user = getInstance( "User" ).create( {
 } );
 ```
 
+## firstOrCreate
+
+| Name | Type | Required | Default | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| attrs | struct | `false` | `{}` | A struct of attributes to restrict the query. If no entity is found the attrs are filled on the new entity created. |
+| newAttrs | struct | `false` | `{}` | A struct of attributes to fill on the created entity if no entity is found. These attributes are combined with `attrs`. |
+
+Finds the first matching record or creates a new entity.
+
+```javascript
+var user = getInstance( "User" )
+    .firstOrNew( { "username": rc.username } );
+```
+
+## findOrCreate
+
+| Name | Type | Required | Default | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| id | any | `true` |  | The id value to find. |
+| attrs | struct | `false` | `{}` | A struct of attributes to use when creating the new entity if no entity is found. |
+
+Returns the entity with the id value as the primary key. If no record is found, it returns a newly created entity.
+
+```javascript
+var user = getInstance( "User" ).findOrCreate(
+    9999,
+	  {
+        "username"  : "doesntexist",
+			  "firstName" : "doesnt",
+			  "lastName"  : "exist",
+			  "password"  : "secret"
+	  }
+);
+```
+

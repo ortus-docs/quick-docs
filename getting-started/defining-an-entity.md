@@ -175,62 +175,16 @@ component extends="quick.models.BaseEntity" {
 
 The `casts` attribute allows you to use a value in your CFML code as a certain type while being a different type in the database.  A common example of this is a `boolean` which is usually represented as a `BIT` in the database.
 
-The `casts` attribute must point to a WireBox mapping that resolves to a component that implements the `quick.models.Casts.CastsAttribute` interface. \(The `implements` keyword is optional.\)  This component defines how to `get` a value from the database in to the casted value and how to `set` a casted value back to the database.  Below is an example of the built-in `BooleanCast`, which comes bundled with Quick.
-
 ```javascript
-// User.cfc
 component extends="quick.models.BaseEntity" {
 
     property name="id";
-    property name="active" casts="BooleanCast@quick";
+    property name="active" casts="boolean";
 
 }
 ```
 
-```javascript
-// BooleanCast.cfc
-component implements="CastsAttribute" {
-
-	/**
-	 * Casts the given value from the database to the target cast type.
-	 *
-	 * @entity      The entity with the attribute being casted.
-	 * @key         The attribute alias name.
-	 * @value       The value of the attribute.
-	 *
-	 * @return      The casted attribute.
-	 */
-	public any function get(
-		required any entity,
-		required string key,
-		any value
-	) {
-		return isNull( arguments.value ) ? false : booleanFormat( arguments.value );
-	}
-
-	/**
-	 * Returns the value to assign to the key before saving to the database.
-	 *
-	 * @entity      The entity with the attribute being casted.
-	 * @key         The attribute alias name.
-	 * @value       The value of the attribute.
-	 *
-	 * @return      The value to save to the database. A struct of values
-	 *              can be returned if the cast value affects multiple attributes.
-	 */
-	public any function set(
-		required any entity,
-		required string key,
-		any value
-	) {
-		return arguments.value ? 1 : 0;
-	}
-
-}
-
-```
-
-Casted values are lazily loaded and cached for the lifecycle of the component.  Only cast values that have been loaded will have `set` called on them when persisting to the database.
+Currently, only `boolean` is supported as a cast type.
 
 ### Insert & Update
 
