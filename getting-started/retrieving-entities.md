@@ -303,5 +303,29 @@ var user = getInstance( "User" ).findOrCreate(
 
 ## Custom Collections
 
+If you would like collections of entities to be returned as something besides an array, you can override the `newCollection` method.  It receives the array of entities.  You can return any custom collection you desire.
 
+### newCollection
+
+| Name | Type | Required | Default | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| entities | array | `false` | `[]` | The array of entities returned by the query. |
+
+Returns a new collection of the given entities. It is expected to override this method in your entity if you need to specify a different collection to return. You can also call this method with no arguments to get an empty collection.
+
+```javascript
+// Post.cfc
+component extends="quick.models.BaseEntity" {
+
+    function newCollection( array entities = [] ) {
+        return variables._wirebox.getInstance(
+            name = "extras.QuickCollection",
+            initArguments = {
+                "collection" = arguments.entities
+            }
+        );
+    }
+
+}
+```
 
