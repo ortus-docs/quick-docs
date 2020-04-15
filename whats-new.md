@@ -25,7 +25,7 @@ _Please see the_ [_Upgrade Guide_](upgrade-guide.md#3-0-0) _for more information
 * Add a [HasOneThrough relationship](relationships/relationship-types/hasonethrough.md).
 * [Custom Casts](getting-started/defining-an-entity.md#casts) - using custom components to represent one or more attributes.
 * [Ordering by relationship attributes](relationships/ordering-by-relationship-attributes.md).
-* addSubselect improvements.
+* [addSubselect](getting-started/query-scopes-and-subselects.md#subselects) [improvements](getting-started/query-scopes-and-subselects.md#using-relationships-in-subselects).
 * Add a new QuickBuilder to better handle interop with qb.
 * [Add `exists` and `existsOrFail` methods](getting-started/retrieving-entities.md#existsorfail).
 * Allow [custom](getting-started/retrieving-entities.md#existsorfail) [error](getting-started/retrieving-entities.md#firstorfail) [messages](getting-started/retrieving-entities.md#findorfail) for `orFail` methods.
@@ -58,7 +58,7 @@ _Please see the_ [_Upgrade Guide_](upgrade-guide.md#3-0-0) _for more information
 ## 2.4.0
 
 * ~~Apply custom setters when hydrating from the database.~~ \(Reverted in `2.5.3` for unintended consequences with things like password hashing.\)
-* [Query scopes can return any value.](getting-started/query-scopes.md#scopes-that-return-values)  This allows you to use scopes to perform query functions and return values.  \(If you do not want to return a custom value, return the `QueryBuilder` instance or nothing.\)
+* [Query scopes can return any value.](getting-started/query-scopes-and-subselects.md#scopes-that-return-values)  This allows you to use scopes to perform query functions and return values.  \(If you do not want to return a custom value, return the `QueryBuilder` instance or nothing.\)
 * Improve error messages for not loaded entities.
 * Return the correct memento with accessors on.
 
@@ -72,8 +72,8 @@ _Please see the_ [_Upgrade Guide_](upgrade-guide.md#3-0-0) _for more information
 
 ## 2.1.0
 
-* [Subselect Helper](getting-started/query-scopes.md#subselects)
-* [Global Scopes](getting-started/query-scopes.md#global-scopes)
+* [Subselect Helper](getting-started/query-scopes-and-subselects.md#subselects)
+* [Global Scopes](getting-started/query-scopes-and-subselects.md#global-scopes)
 * [saveMany](relationships/relationship-types/hasmany.md#saveMany)
 * Mapping foreign keys for relationships is now optional
 * Either entities or primary key values can be passed to relationship persistance methods

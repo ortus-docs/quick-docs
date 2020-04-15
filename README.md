@@ -36,14 +36,14 @@ We can do better.
 
 ### What?
 
-Quick is an ORM \(Object Relational Mapper\) written in CFML for CFML. It provides an [ActiveRecord](https://en.wikipedia.org/wiki/Active_record_pattern) implementation for working with your database. With it you can map database tables to components, create relationships between components, query and manipulate data, and persist all your changes to your database.
+Quick is an ORM \(Object Relational Mapper\) written in CFML for CFML. It provides an [ActiveRecord](https://en.wikipedia.org/wiki/Active_record_pattern) and Service-based implementation for working with your database. With it you can map database tables to components, create relationships between components, query and manipulate data, and persist all your changes to your database.
 
 ### Prerequisites
 
 You need the following configured before using Quick:
 
 * Configure a default datasource in your CFML engine
-* ColdBox 4.3+
+* ColdBox 5+
 * Add a mapping for `quick` in your `Application.cfc`
 * Configure your `BaseGrammar` in `config/ColdBox.cfc`
 
@@ -82,7 +82,11 @@ component {
 component extends="quick.models.BaseEntity" {
 
     // the name of the table is the pluralized version of the model
-    // all fields in a table are mapped by default
+    // this would be `users`
+    
+    // fields in a table should be mapped as properties
+    property name="username";
+    
     // both of these points can be configured on a per-entity basis
 
 }

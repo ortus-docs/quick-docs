@@ -37,7 +37,7 @@ component extends="quick.models.BaseEntity" {
 }
 ```
 
-Quick also assumes a key type that is auto-incrementing. If you would like a different key type, define a function called \`keyType\` and return the key type from that function.
+Quick also assumes a key type that is auto-incrementing. If you would like a different key type, override the`keyType` function and return the desired key type from that function.
 
 ```javascript
 // User.cfc
@@ -77,9 +77,9 @@ interface displayname="KeyType" {
 }
 ```
 
-## Properties
+## Attributes
 
-You specify what columns are retrieved by adding properties to your component.
+You specify what attributes are retrieved by adding properties to your component.
 
 ```javascript
 // User.cfc
@@ -92,13 +92,15 @@ component extends="quick.models.BaseEntity" {
 }
 ```
 
-Now, only the `id`, `username`, and `email` columns will be retrieved.
+Now, only the `id`, `username`, and `email` attributes will be retrieved.
 
-> Note: Make sure to include the primary key \(`id` by default\) as a property.
+{% hint style="warning" %}
+Make sure to include the primary key \(`id` by default\) as a property.
+{% endhint %}
 
 ### Persistent
 
-To prevent Quick from mapping a property to the database add the `persistent="false"` attribute to the property.
+To prevent Quick from mapping a property to a database column add the `persistent="false"` attribute to the property.  This is needed mostly when using dependency injection.
 
 ```javascript
 // User.cfc
@@ -115,7 +117,7 @@ component extends="quick.models.BaseEntity" {
 
 ### Column
 
-If the column name in your table is not the column name you wish to use in quick, you can alias it using the `column` metadata attribute.
+If the column name in your table is not the column name you wish to use in Quick, you can specify the column name using the `column` metadata attribute.  The attribute will be available using the `name` of the attribute.
 
 ```javascript
 component extends="quick.models.BaseEntity" {
@@ -131,7 +133,7 @@ component extends="quick.models.BaseEntity" {
 
 To work around CFML's lack of `null`, you can use the `nullValue` and `convertToNull` attributes.
 
-`nullValue` defines the value that is considered `null` for a property.  By default it is an empty string. \(`""`\)
+`nullValue` defines the value that is considered `null` for a attribute.  By default it is an empty string. \(`""`\)
 
 `convertToNull` is a flag that, when false, will not try to insert `null` in to the database.  By default this flag is `true`.
 
@@ -147,7 +149,7 @@ component extends="quick.models.BaseEntity" {
 
 ### Read Only
 
-The `readOnly` attribute will prevent setters, updates, and inserts to a property when set to `true`.
+The `readOnly` attribute will prevent setters, updates, and inserts to a attribute when set to `true`.
 
 ```javascript
 component extends="quick.models.BaseEntity" {
@@ -160,7 +162,7 @@ component extends="quick.models.BaseEntity" {
 
 ### SQL Type
 
-In some cases you will need to specify an exact SQL type for your property.  Any value set for the `sqltype` attribute will be used when inserting or updating the property in the database.
+In some cases you will need to specify an exact SQL type for your attribute.  Any value set for the `sqltype` attribute will be used when inserting or updating the attribute in the database.  It will also be used when you use the attribute in a `where` constraint.
 
 ```javascript
 component extends="quick.models.BaseEntity" {
@@ -247,7 +249,7 @@ component extends="quick.models.BaseEntity" {
 
 ## Formula, Computed, or Subselect properties
 
-Quick handles formula, computed, or subselect properties using query scopes and the `addSubselect` helper method. [Check out the docs in query scopes to learn more.](query-scopes.md#subselects)
+Quick handles formula, computed, or subselect properties using query scopes and the `addSubselect` helper method. [Check out the docs in query scopes to learn more.](query-scopes-and-subselects.md#subselects)
 
 ## Multiple datasource support
 

@@ -9,7 +9,7 @@
   * [Creating New Entities](getting-started/creating-new-entities.md)
   * [Updating Existing Entities](getting-started/updating-existing-entities.md)
   * [Deleting Entities](getting-started/deleting-entities.md)
-  * [Query Scopes](getting-started/query-scopes.md)
+  * [Query Scopes and Subselects](getting-started/query-scopes-and-subselects.md)
 * [Relationships](relationships/README.md)
   * [Relationship Types](relationships/relationship-types/README.md)
     * [hasOne](relationships/relationship-types/hasone.md)

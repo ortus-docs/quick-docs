@@ -82,6 +82,10 @@ component extends="quick.models.BaseEntity" {
 
 This approach does require a relationship defined for each level, but it works up and down any number of relationships to get to your desired entity.
 
+### assignAttributesData argument renamed to \`attributes\`
+
+This brings the API in line with the other methods referencing attributes.
+
 ### Method changes due to compound key support
 
 Compound key support required some method and parameter name changes.  Although the list seems extensive, you will likely not need to change anything in your code unless you have extended built-in Quick components.  \(You will see many relationship parameter name changes.  Note that the function you call to define a relationship is a function on the `BaseEntity` and has not changed its signature.\)
