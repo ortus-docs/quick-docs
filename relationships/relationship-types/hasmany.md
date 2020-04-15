@@ -101,3 +101,9 @@ user.setPosts( [ postA, 4 ] );
 
 After running this code, this user would only have two posts, the posts with ids `2` and `4`. Any other posts would now be disassociated with this user. Likely your database will be guarding against creating these orphan records. Admittedly, this method is not as likely to be used as the others, but it does exist if it solves your use case.
 
+## Visualizer
+
+{% embed url="https://codesandbox.io/embed/quick-has-many-visualizer-4qeek?fontsize=14&hidenavigation=1&theme=light&view=preview" %}
+
+
+
