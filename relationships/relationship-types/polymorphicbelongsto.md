@@ -41,3 +41,9 @@ component extends="quick.models.BaseEntity" {
 }
 ```
 
+## Visualizer
+
+{% embed url="https://codesandbox.io/embed/quick-polymorphic-belongs-to-visualizer-hem7u?autoresize=1&fontsize=14&hidenavigation=1&theme=light&view=preview" %}
+
+
+

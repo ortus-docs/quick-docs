@@ -42,3 +42,7 @@ component extends="quick.models.BaseEntity" {
 }
 ```
 
+## Visualizer
+
+{% embed url="https://codesandbox.io/embed/quick-has-one-visualizer-ldiyz?autoresize=1&fontsize=14&hidenavigation=1&theme=light&view=preview" %}
+

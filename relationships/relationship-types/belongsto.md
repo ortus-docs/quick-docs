@@ -86,3 +86,9 @@ post.setAuthor( 1 );
 
 After executing this code, the post would be updated in the database to be associated with the user with an id of `1`.
 
+## Visualizer
+
+{% embed url="https://codesandbox.io/embed/quick-belongs-to-visualizer-tptx7?autoresize=1&fontsize=14&hidenavigation=1&theme=light&view=preview" %}
+
+
+
