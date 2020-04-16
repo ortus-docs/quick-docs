@@ -1,6 +1,6 @@
 # hasMany
 
-## Defining
+## Usage
 
 A `hasMany` relationship is a `one-to-many` relationship. For instance, a `User` may have multiple `Posts`.
 
@@ -100,6 +100,63 @@ user.setPosts( [ postA, 4 ] );
 ```
 
 After running this code, this user would only have two posts, the posts with ids `2` and `4`. Any other posts would now be disassociated with this user. Likely your database will be guarding against creating these orphan records. Admittedly, this method is not as likely to be used as the others, but it does exist if it solves your use case.
+
+## Signature
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">Name</th>
+      <th style="text-align:left">Type</th>
+      <th style="text-align:left">Required</th>
+      <th style="text-align:left">Default</th>
+      <th style="text-align:left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left">relationName</td>
+      <td style="text-align:left">string</td>
+      <td style="text-align:left"><code>true</code>
+      </td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">The WireBox mapping for the related entity.</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">foreignKey</td>
+      <td style="text-align:left">String | [String]</td>
+      <td style="text-align:left"><code>false</code>
+      </td>
+      <td style="text-align:left"><code>entityName() &amp; keyNames()</code>
+      </td>
+      <td style="text-align:left">The foreign key on the parent entity.</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">localKey</td>
+      <td style="text-align:left">String | [String]</td>
+      <td style="text-align:left"><code>false</code>
+      </td>
+      <td style="text-align:left"><code>keyNames()</code>
+      </td>
+      <td style="text-align:left">The local primary key on the parent entity.</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">relationMethodName</td>
+      <td style="text-align:left">String</td>
+      <td style="text-align:left"><code>false</code>
+      </td>
+      <td style="text-align:left">The method name called on the entity to produce this relationship.</td>
+      <td
+      style="text-align:left">
+        <p>The method name called to retrieve this relationship. Uses a stack backtrace
+          to determine by default.</p>
+        <p>&lt;b&gt;&lt;/b&gt;</p>
+        <p><b>DO NOT PASS A VALUE HERE UNLESS YOU KNOW WHAT YOU ARE DOING.</b>
+        </p>
+        </td>
+    </tr>
+  </tbody>
+</table>Returns a HasMany relationship between this entity and the entity defined by `relationName`.
 
 ## Visualizer
 

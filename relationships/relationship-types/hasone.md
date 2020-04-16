@@ -1,6 +1,6 @@
 # hasOne
 
-## Defining
+## Usage
 
 A `hasOne` relationship is a "one-to-one" relationship. For instance, a `User` entity might have an `UserProfile` entity attached to it.
 
@@ -41,6 +41,63 @@ component extends="quick.models.BaseEntity" {
 
 }
 ```
+
+## Signature
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">Name</th>
+      <th style="text-align:left">Type</th>
+      <th style="text-align:left">Required</th>
+      <th style="text-align:left">Default</th>
+      <th style="text-align:left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left">relationName</td>
+      <td style="text-align:left">string</td>
+      <td style="text-align:left"><code>true</code>
+      </td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">The WireBox mapping for the related entity.</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">foreignKey</td>
+      <td style="text-align:left">String | [String]</td>
+      <td style="text-align:left"><code>false</code>
+      </td>
+      <td style="text-align:left"><code>entityName() &amp; keyNames()</code>
+      </td>
+      <td style="text-align:left">The foreign key on the parent entity.</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">localKey</td>
+      <td style="text-align:left">String | [String]</td>
+      <td style="text-align:left"><code>false</code>
+      </td>
+      <td style="text-align:left"><code>keyNames()</code>
+      </td>
+      <td style="text-align:left">The local primary key on the parent entity.</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">relationMethodName</td>
+      <td style="text-align:left">String</td>
+      <td style="text-align:left"><code>false</code>
+      </td>
+      <td style="text-align:left">The method name called on the entity to produce this relationship.</td>
+      <td
+      style="text-align:left">
+        <p>The method name called to retrieve this relationship. Uses a stack backtrace
+          to determine by default.</p>
+        <p>&lt;b&gt;&lt;/b&gt;</p>
+        <p><b>DO NOT PASS A VALUE HERE UNLESS YOU KNOW WHAT YOU ARE DOING.</b>
+        </p>
+        </td>
+    </tr>
+  </tbody>
+</table>Returns a HasOne relationship between this entity and the entity defined by `relationName`.
 
 ## Visualizer
 

@@ -155,9 +155,3 @@ post.setTags( [ 4, 12, someTag );
 
 This code calls `sync` on the relationship. After executing this code, the post would be updated in the database to be associated with the tags passed in \(`4`, `12`, and `2`\). Any tags that were previously associated with this post would no longer be and only the tags passed in would be associated now.
 
-## Visualizer
-
-{% embed url="https://codesandbox.io/embed/quick-belongs-to-many-visualizer-mj09m?autoresize=1&fontsize=14&hidenavigation=1&theme=light&view=preview" %}
-
-
-
