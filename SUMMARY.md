@@ -1,6 +1,7 @@
 # Table of contents
 
 * [Introduction](README.md)
+* [Why Quick?](why-quick.md)
 * [What's New?](whats-new.md)
 * [Upgrade Guide](upgrade-guide.md)
 * [Contributing](contributing.md)
