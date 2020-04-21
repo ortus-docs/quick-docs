@@ -2,7 +2,13 @@
 
 ## Coming from &lt;cfquery&gt; or queryExecute?
 
-You might be thinking, I don't need an ORM engine.  I don't even know what ORM means!  I know SQL backwards and forwards so there's nothing an ORM can offer me.
+You might be thinking, I don't need an ORM engine.  I don't even know what ORM means!  I know SQL backwards and forwards so there's nothing an ORM can offer me.  Maybe you've had experience with other ORM engines, whether CFML-based or not, and the experience was less that ideal.  Why should you consider Quick?
+
+Quick's ORM philosophy comes down to three main points:
+
+1. Give relevant names to important collections of SQL code. \([scopes](guide-1/getting-started/query-scopes-and-subselects.md#what-are-scopes), [relationships](guide-1/relationships/), etc.\)
+2. Make queries easy to compose at runtime to get the exact data you want in the most efficient way \([subselects](guide-1/getting-started/query-scopes-and-subselects.md#subselects), [eager loading](guide-1/relationships/eager-loading.md), etc.\)
+3. Get out of your way when you need or want to right barebones SQL.
 
 ## Coming from Hibernate?
 
