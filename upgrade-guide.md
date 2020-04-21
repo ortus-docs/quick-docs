@@ -28,7 +28,7 @@ moduleSettings = {
 };
 ```
 
-### [HasManyThrough relationship](relationships/relationship-types/hasmanythrough.md) re-tooled to be based on relationships
+### [HasManyThrough relationship](guide/relationships/relationship-types/hasmanythrough.md) re-tooled to be based on relationships
 
 It no longer accepts any entities or columns. Rather, it accepts an array of relationships to walk "through" to end up at the desired entity.
 
@@ -172,7 +172,7 @@ Quick 2.0 brings with it a lot of changes to make things more flexible and more 
 There were some common name clashes between internal Quick properties and custom attributes of your entities \(the most common being `fullName`\). All Quick internals have been obfuscated to avoid this situation. If you relied on these properties, please consult the following table below for the new property names.
 
 {% hint style="warning" %}
-If you are renaming your primary keys in your entities, you will have to change your key definition from `variables.key = "user_id";` to `variables._key` `= "user_id";` See [Defining an Entity](getting-started/defining-an-entity.md) for details.
+If you are renaming your primary keys in your entities, you will have to change your key definition from `variables.key = "user_id";` to `variables._key` `= "user_id";` See [Defining an Entity](guide/getting-started/defining-an-entity.md) for details.
 {% endhint %}
 
 | Old Property Name | New Property Name |
@@ -264,7 +264,7 @@ The way arguments are passed to scopes have been updated to allow for default ar
 
 ### Relationships
 
-The relationship methods are still named the same but some of the arguments have been changed to fix bugs and support better eager loading performance. Please [check the relationship docs](relationships/) for more details.
+The relationship methods are still named the same but some of the arguments have been changed to fix bugs and support better eager loading performance. Please [check the relationship docs](guide/relationships/) for more details.
 
 Additionally, the alternative syntax for defining relationships on a `relationships` struct has been removed. It created an unnecessary code path that had it's own share of bugs. All relationships should be defined as methods on the entity.
 
@@ -303,7 +303,7 @@ All methods available on the Quick entity are available on the service.
 
 ### Eager Loading
 
-Eager loading is now supported for nested relationships using a dot-separated syntax. Additionally, constraints can be added to an eager loaded relationship. See the [docs on eager loading](relationships/eager-loading.md) for more information.
+Eager loading is now supported for nested relationships using a dot-separated syntax. Additionally, constraints can be added to an eager loaded relationship. See the [docs on eager loading](guide/relationships/eager-loading.md) for more information.
 
 ### Column Aliases in Queries
 

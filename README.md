@@ -47,7 +47,7 @@ You need the following configured before using Quick:
 * Add a mapping for `quick` in your `Application.cfc`
 * Configure your `BaseGrammar` in `config/ColdBox.cfc`
 
-See [Getting Started](getting-started/) for more details.
+See [Getting Started](guide/getting-started/) for more details.
 
 ### Supported Databases
 
@@ -113,7 +113,7 @@ component {
 </cfoutput>
 ```
 
-Now that you've seen an example, [dig in to what you can do](getting-started/defining-an-entity.md) with Quick!
+Now that you've seen an example, [dig in to what you can do](guide/getting-started/defining-an-entity.md) with Quick!
 
 ### Prior Art, Acknowledgements, and Thanks
 
