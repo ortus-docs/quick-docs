@@ -1,4 +1,4 @@
-# Ordering By Relationship Attributes
+# Ordering By Relationships
 
 To order by a relationship field, you will use a dot-delimited syntax.
 

@@ -1,4 +1,4 @@
-# Relationships FAQ
+# FAQ
 
 ## What's the difference between \`posts\(\)\` and \`getPosts\(\)\`?
 

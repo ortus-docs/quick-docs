@@ -1,4 +1,4 @@
-# Cookbook
+# Introduction
 
 The cookbook is a place to show examples of using Quick in practice.  Each cookbook entry will include a short description of the problem to solve or use case and one or more code snippets showing the code.
 
