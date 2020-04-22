@@ -35,13 +35,13 @@ _Please see the_ [_Upgrade Guide_](upgrade-guide.md#3-0-0) _for more information
 * Add [`is` and `isNot`](guide-1/getting-started/defining-an-entity.md#comparing-entities) to compare entities.
 * Allow [hydrating entities](guide-1/getting-started/retrieving-entities.md#hydrate) from serialized data.
 * Allow returning default entities for null relations on [`HasOne`](guide-1/relationships/relationship-types/hasone.md#withdefault), [`BelongsTo`](guide-1/relationships/relationship-types/belongsto.md#withdefault), [`HasOneThrough`](guide-1/relationships/relationship-types/hasonethrough.md#withdefault), and [`BelongsToThrough`](guide-1/relationships/relationship-types/belongstothrough.md#withdefault) relationships.
-* Query relations using `has`, `doesntHave`, `whereHas`, and `whereDoesntHave`.
+* Query relations using [`has`](guide-1/relationships/querying-relationships.md#has), [`doesntHave`](guide-1/relationships/querying-relationships.md#doesnthave), [`whereHas`](guide-1/relationships/querying-relationships.md#wherehas), and [`whereDoesntHave`](guide-1/relationships/querying-relationships.md#wheredoesnthave).
 * Split `reset` into `reset` and `resetToNew` methods.
 * Store the original attributes for later resetting.
 * Use `parameterLimits` to eager load.
 * Use a new entity each time on BaseService.
 * Apply sql types for columns to `wheres`.
-* Apply global scopes more consistently - Apply global scopes when paginating.
+* Apply global scopes more consistently
 * Correctly ignore key column when updating.
 * Fix `hasRelationship` method to only return true for exact matches.
 * Better handling of constrained relationships when eager loading.
