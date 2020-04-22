@@ -2,6 +2,8 @@
 
 ## What's the difference between \`posts\(\)\` and \`getPosts\(\)\`?
 
+_Answered by_ [_Eric Peterson_](https://github.com/elpete)\_\_
+
 {% hint style="info" %}
 **TLDR:** Calling a relationship method returns a relationship component.  Preceding that call with `get` loads and executes the relationship query.
 {% endhint %}
@@ -68,4 +70,14 @@ component extends="quick.models.BaseEntity" {
     
 }
 ```
+
+## When do I use a scope method and when do I use a normal method?
+
+## I keep getting a \`QuickEntityNotLoaded\` exception.  What is the difference between a loaded entity and an unloaded entity?
+
+## How can I add a subselect field to my entity?
+
+## How can I add a computed field to my entity, like from a SQL CASE statement?
+
+## How can I always add a subselect or computed field to my queries?
 
