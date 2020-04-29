@@ -352,7 +352,7 @@ Returns a new collection of the given entities. It is expected to override this 
 
 ```javascript
 // Post.cfc
-component extends="quick.models.BaseEntity" {
+component extends="quick.models.BaseEntity" accessors="true" {
 
     function newCollection( array entities = [] ) {
         return variables._wirebox.getInstance(

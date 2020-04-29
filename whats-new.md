@@ -7,6 +7,8 @@
 _Please see the_ [_Upgrade Guide_](upgrade-guide.md#3-0-0) _for more information on these changes._
 
 * Drop support for Lucee 4.5 and Adobe ColdFusion 11.
+* Virtual Inheritance \(using a `quick` annotation instead of extending `quick.models.BaseEntity`\) has been removed.  It was hardly used, and removing it allows us to simplify some of the code paths.
+* `accessors="true"` is now required on every entity.  This is similar to above where requiring it allows us to simplify the codebase immensely.  A helpful error message will be thrown if `accessors="true"` is not present on your entity. 
 * The `defaultGrammar` mapping needs to be the full WireBox mapping, including the `@qb`, if needed.
   * For instance, `MSSQLGrammar` would become `MSSQLGrammar@qb`.
   * This will allow for other grammars to be more easily contributed via third party modules.

@@ -6,7 +6,7 @@ A `belongsToMany` relationship is a `many-to-many` relationship. For instance, a
 
 ```javascript
 // User.cfc
-component extends="quick.models.BaseEntity" {
+component extends="quick.models.BaseEntity" accessors="true" {
 
     function permissions() {
        return belongsToMany( "Permission" );
@@ -17,7 +17,7 @@ component extends="quick.models.BaseEntity" {
 
 ```javascript
 // Permission.cfc
-component extends="quick.models.BaseEntity" {
+component extends="quick.models.BaseEntity" accessors="true" {
 
     function users() {
        return belongsToMany( "User" );
@@ -40,7 +40,7 @@ As you can see, Quick uses a convention of combining the entity table names in a
 
 ```javascript
 // User.cfc
-component extends="quick.models.BaseEntity" {
+component extends="quick.models.BaseEntity" accessors="true" {
 
     function permissions() {
        return belongsToMany( "Permission", "user_permission_map" );
@@ -77,7 +77,7 @@ The inverse of `belongsToMany` is also `belongsToMany`. The `foreignKey` and `re
 
 ```javascript
 // Permission.cfc
-component extends="quick.models.BaseEntity" {
+component extends="quick.models.BaseEntity" accessors="true" {
 
     function user() {
         belongsToMany( "User", "user_permission_map", "FK_PermissionID", "FK_UserId" );
@@ -90,7 +90,7 @@ If you find yourself needing to interact with the pivot table \(`permissions_use
 
 ```javascript
 // User.cfc
-component extends="quick.models.BaseEntity" {
+component extends="quick.models.BaseEntity" accessors="true" {
 
     function userPermissions() {
         return hasMany( "UserPermission" );
@@ -108,14 +108,13 @@ component extends="quick.models.BaseEntity" {
 Use the `attach` method to relate two `belongsToMany` entities together. `attach` can take a single id, a single entity, or an array of ids or entities \(even mixed and matched\) to associate.
 
 ```javascript
-var post = getInstance("Post").findOrFail(1);
-
-var tag = getInstance("Tag").create("miscellaneous");
+var post = getInstance( "Post" ).findOrFail( 1 );
+var tag = getInstance( "Tag" ).create( { "name": "miscellaneous" });
 
 // pass an id
-post.tags().attach(tag.getId());
+post.tags().attach( tag.getId() );
 // or pass an entity
-post.tags().attach(tag);
+post.tags().attach( tag );
 ```
 
 ## detach
@@ -123,14 +122,13 @@ post.tags().attach(tag);
 Use the `detach` method to remove an existing entity from a `belongsToMany` relationship. `detatch` can also take a single id, a single entity, or an array of ids or entities \(even mixed and matched\) to remove.
 
 ```javascript
-var post = getInstance("Post").findOrFail(1);
-
-var tag = getInstance("Tag").create("miscellaneous");
+var post = getInstance( "Post" ).findOrFail( 1 );
+var tag = getInstance("Tag").firstWhere( "name", "miscellaneous" );
 
 // pass an id
-post.tags().detach(tag.getId());
+post.tags().detach( tag.getId() );
 // or pass an entity
-post.tags().detach(tag);
+post.tags().detach( tag );
 ```
 
 ## sync
@@ -138,9 +136,9 @@ post.tags().detach(tag);
 Sometimes you just want the related entities to be a list you give it. For these situations, use the `sync` method.
 
 ```javascript
-var post = getInstance("Post").findOrFail(1);
+var post = getInstance( "Post" ).findOrFail( 1 );
 
-post.tags().sync([2, 3, 6]);
+post.tags().sync( [ 2, 3, 6 ] );
 ```
 
 Now, no matter what relationships existed before, this `Post` will only have three tags associated with it.

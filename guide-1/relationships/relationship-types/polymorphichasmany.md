@@ -6,7 +6,7 @@ A `polymorphicHasMany` relationship is a `one-to-many` relationship. This relati
 
 ```javascript
 // Post.cfc
-component extends="quick.models.BaseEntity" {
+component extends="quick.models.BaseEntity" accessors="true" {
 
     function comments() {
        return polymorphicHasMany( "Comment", "commentable" );
@@ -17,7 +17,7 @@ component extends="quick.models.BaseEntity" {
 
 ```javascript
 // Video.cfc
-component extends="quick.models.BaseEntity" {
+component extends="quick.models.BaseEntity" accessors="true" {
 
     function comments() {
         return polymorphicHasMany( "Comment", "commentable" );
@@ -34,7 +34,7 @@ The inverse of `polymophicHasMany` is `polymorphicBelongsTo`.
 
 ```javascript
 // Comment.cfc
-component extends="quick.models.BaseEntity" {
+component extends="quick.models.BaseEntity" accessors="true" {
 
     function post() {
         return polymorphicBelongsTo( "commentable" );

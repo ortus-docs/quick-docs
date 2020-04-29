@@ -6,6 +6,18 @@
 
 Please migrate to a supported engine.
 
+### Virtual Inheritance support removed
+
+Virtual Inheritance allowed you to use a `quick` annotation on your entity instead of extending `quick.models.BaseEntity`.  This was hardly used and didn't offer any benefit to extending using traditional inheritance.  Additionally, removing the support allows us to clean up the code base by removing duplicate code paths.
+
+If any of your entities are using the `quick` annotation, instead have them `extends="quick.models.BaseEntity"`.
+
+### \`accessors="true"\` required for all entities
+
+From the early days of Quick, developers have wanted to have `accessors="true"` on their entities.  Because of this, Quick supported defining entities both with and without accessors.  However, just as with virtual inheritance, it created two code paths that could hide bugs and make it hard to follow the code.  In Quick 3.0.0, `accessors="true"` is required on all entities.  If it is omitted, a helpful error message is thrown to remind you.  This will help immensely in simplifying the code base.  \(In fact, just introducing this requirement helped find two bugs that were only present when using accessors.\)
+
+Ensure all entities have `accessors="true"` in their component metadata.
+
 ### AssignedKey removed
 
 Use `NullKeyType` instead.

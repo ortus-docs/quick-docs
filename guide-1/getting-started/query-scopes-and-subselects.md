@@ -38,7 +38,7 @@ Now we see the problem. Let's look at the solution.
 The key here is that we are trying to retrieve subscribed users. Let's add a scope to our `User` entity for `subscribed`:
 
 ```javascript
-component extends="quick.models.BaseEntity" {
+component extends="quick.models.BaseEntity" accessors="true" {
 
     function scopeSubscribed( query ) {
         return query.where( "subscribed", true );
@@ -69,7 +69,7 @@ We've successfully encapsulated our concept of a subscribed user!
 We can add as many scopes as we'd like. Let's add one for `longestSubscribers`.
 
 ```javascript
-component extends="quick.models.BaseEntity" {
+component extends="quick.models.BaseEntity" accessors="true" {
 
     function scopeLongestSubscribers( query ) {
         return query.orderBy( "subscribedDate" );
@@ -100,7 +100,7 @@ All query scopes are methods on an entity that begin with the `scope` keyword. Y
 Each scope is passed the `query`, a reference to the current `QuickBuilder` instance, as the first argument. Any other arguments passed to the scope will be passed in order after that.
 
 ```javascript
-component extends="quick.models.BaseEntity" {
+component extends="quick.models.BaseEntity" accessors="true" {
 
     function scopeOfType( query, type ) {
         return query.where( "type", type );
@@ -122,7 +122,7 @@ All of the examples so far either returned the `QuickBuilder` object or nothing.
 For example, maybe you have a domain method to reset passwords for a group of users, and you want the count of users updated returned.
 
 ```javascript
-component quick {
+component extends="quick.models.BaseEntity" accessors="true" {
 
     property name="id";
     property name="username";
@@ -149,7 +149,7 @@ getInstance( "User" ).ofType( "admin" ).resetPasswords(); // 1
 Occasionally, you want to apply a scope to each retrieval of an entity. An example of this is an Admin entity which is just a User entity with a type of admin. Global Scopes can be registered in the `applyGlobalScopes` method on an entity. Inside this entity you can call any number of scopes:
 
 ```javascript
-component extends="User" table="users" {
+component extends="User" table="users" accessors="true" {
 
     function applyGlobalScopes() {
         this.ofType( "admin" );
@@ -181,7 +181,7 @@ Quick handles subselect properties \(or computed or formula properties\) through
 Here's an example of grabbing the `lastLoginDate` for a User:
 
 ```javascript
-component extends="quick.models.BaseEntity" {
+component extends="quick.models.BaseEntity" accessors="true" {
 
     /* properties */
 
@@ -239,7 +239,7 @@ In most cases the values you want as subselects are values from your entity's re
 Let's re-write the above subselect for `lastLoginDate` for a User using the existing relationship:
 
 ```javascript
-component extends="quick.models.BaseEntity" {
+component extends="quick.models.BaseEntity" accessors="true" {
 
     /* properties */
 
@@ -270,7 +270,7 @@ user.getLastLoginDate(); // {ts 2019-05-02 08:24:51}
 Subselects can be used in conjunction with relationships to provide a dynamic, constrained relationship. In this example we will pull the latest post for a user.
 
 ```javascript
-component extends="BaseEntity" {
+component extends="quick.models.BaseEntity" accessors="true" {
 
     /* properties */
 
@@ -299,4 +299,49 @@ for ( var user in users ) {
 ```
 
 As you can see, we are loading the id of the latest post in a subquery and then using that value to eager load the `latestPost` relationship. This sequence will only execute two queries, no matter how many records are loaded.
+
+## Virtual Attributes
+
+Virtual attributes are attributes that are not present on the table backing the Quick entity.  A Subselect is an example of a virtual attribute.  Other examples could include calculated counts or `CASE` statement results.
+
+By default, if you add a virtual column to a Quick query, you won't see anything in the entity.  This is because Quick needs to have an attribute defined to map the result to.  You can create a virtual attribute in these cases.
+
+{% hint style="warning" %}
+This step is unnecessary when using the `addSubselect` helper method.
+{% endhint %}
+
+Here's an example including the result of a `CASE` statement as a field:
+
+```javascript
+// Post.cfc
+component extends="quick.models.BaseEntity" accessors="true" {
+
+    function scopeAddType( qb ) {
+        qb.selectRaw( "
+                CASE
+                    WHEN publishedDate IS NULL THEN 'unpublished'
+                    ELSE 'published'
+                END AS publishedStatus
+            " );
+        appendVirtualAttribute( "publishedStatus" );
+    }
+
+}
+```
+
+With this code, we could now access the `publishedStatus` just like any other attribute.  It will not be updated, inserted, or saved though, as it is just a virtual column.
+
+The `appendVirtualAttribute` method adds the given name as an attribute available in the entity.
+
+### appendVirtualAttribute
+
+| Argument | Type | Required | Default | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| name | string | `true` |  | The attribute name to create. |
+
+Creates a virtual attribute for the given name.
+
+{% hint style="success" %}
+It is likely that Quick will introduce more helper methods in the future making these calls simpler.
+{% endhint %}
 

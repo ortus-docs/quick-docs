@@ -6,7 +6,7 @@ A `belongsToThrough` relationship is either a `many-to-one` relationship. It is 
 
 ```javascript
 // Post.cfc
-component extends="quick.models.BaseEntity" {
+component extends="quick.models.BaseEntity" accessors="true" {
 
     function team() {
         return belongsToThrough( [ "author", "team" ] );
@@ -21,7 +21,7 @@ component extends="quick.models.BaseEntity" {
 
 ```javascript
 // User.cfc
-component extends="quick.models.BaseEntity" {
+component extends="quick.models.BaseEntity" accessors="true" {
 
     function posts() {
         return hasMany( "Post" );
@@ -36,7 +36,7 @@ component extends="quick.models.BaseEntity" {
 
 ```javascript
 // Team.cfc
-component extends="quick.models.BaseEntity" {
+component extends="quick.models.BaseEntity" accessors="true" {
 
     function members() {
         return hasMany( "User" );
@@ -63,7 +63,7 @@ This approach can scale to as many related entities as you need.  For instance, 
 
 ```javascript
 // Post.cfc
-component extends="quick.models.BaseEntity" {
+component extends="quick.models.BaseEntity" accessors="true" {
 
     function office() {
         return belongsToThrough( [ "author", "team", "office" ] );
@@ -78,7 +78,7 @@ component extends="quick.models.BaseEntity" {
 
 ```javascript
 // User.cfc
-component extends="quick.models.BaseEntity" {
+component extends="quick.models.BaseEntity" accessors="true" {
 
     function posts() {
         return hasMany( "Post" );
@@ -93,7 +93,7 @@ component extends="quick.models.BaseEntity" {
 
 ```javascript
 // Team.cfc
-component extends="quick.models.BaseEntity" {
+component extends="quick.models.BaseEntity" accessors="true" {
 
     function members() {
         return hasMany( "User" );
@@ -108,7 +108,7 @@ component extends="quick.models.BaseEntity" {
 
 ```javascript
 // Office.cfc
-component extends="quick.models.BaseEntity" {
+component extends="quick.models.BaseEntity" accessors="true" {
 
     function teams() {
         return hasMany( "Team" );
@@ -137,7 +137,7 @@ belongsToThrough( [ "author", "team", "office" ] );
 
 ```javascript
 // Post.cfc
-component extends="quick.models.BaseEntity" {
+component extends="quick.models.BaseEntity" accessors="true" {
 
     function team() {
         return belongsToThrough( [ "author", "team" ] ).withDefault();
@@ -154,7 +154,7 @@ Called this way will return a new unloaded entity with no data.  You can also sp
 
 ```javascript
 // Post.cfc
-component extends="quick.models.BaseEntity" {
+component extends="quick.models.BaseEntity" accessors="true" {
 
     function team() {
         return belongsToThrough( [ "author", "team" ] ).withDefault( {

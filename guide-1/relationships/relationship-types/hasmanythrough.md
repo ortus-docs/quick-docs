@@ -6,7 +6,7 @@ A `hasManyThrough` relationship is either a `one-to-many` or a `many-to-many` re
 
 ```javascript
 // User.cfc
-component extends="quick.models.BaseEntity" {
+component extends="quick.models.BaseEntity" accessors="true" {
 
     function permissions() {
         return hasManyThrough( [ "userPermissions", "permission" ] );
@@ -21,7 +21,7 @@ component extends="quick.models.BaseEntity" {
 
 ```javascript
 // Permission.cfc
-component extends="quick.models.BaseEntity" {
+component extends="quick.models.BaseEntity" accessors="true" {
 
     function users() {
        return hasManyThrough( [ "userPermissions", "user" ] );
@@ -36,7 +36,7 @@ component extends="quick.models.BaseEntity" {
 
 ```javascript
 // UserPermission.cfc
-component extends="quick.models.BaseEntity" {
+component extends="quick.models.BaseEntity" accessors="true" {
 
     function user() {
         return belongsTo( "User" );
@@ -69,7 +69,7 @@ The inverse of `hasManyThrough` is either a `belongsToThrough` or a `hasManyThro
 
 ```javascript
 // User.cfc
-component extends="quick.models.BaseEntity" {
+component extends="quick.models.BaseEntity" accessors="true" {
 
     function team() {
         return belongsTo( "Team" );
@@ -84,7 +84,7 @@ component extends="quick.models.BaseEntity" {
 
 ```javascript
 // Team.cfc
-component extends="quick.models.BaseEntity" {
+component extends="quick.models.BaseEntity" accessors="true" {
 
     function members() {
        return hasMany( "User" );
@@ -109,7 +109,7 @@ This approach can scale to as many related entities as you need.  For instance, 
 
 ```javascript
 // User.cfc
-component extends="quick.models.BaseEntity" {
+component extends="quick.models.BaseEntity" accessors="true" {
 
     function team() {
         return belongsTo( "Team" );
@@ -128,7 +128,7 @@ component extends="quick.models.BaseEntity" {
 
 ```javascript
 // Team.cfc
-component extends="quick.models.BaseEntity" {
+component extends="quick.models.BaseEntity" accessors="true" {
 
     function members() {
        return hasMany( "User" );
@@ -143,7 +143,7 @@ component extends="quick.models.BaseEntity" {
 
 ```javascript
 // Office.cfc
-component extends="quick.models.BaseEntity" {
+component extends="quick.models.BaseEntity" accessors="true" {
 
     function teams() {
        return hasMany( "Team" );
@@ -172,7 +172,7 @@ This next example can get a little gnarly - you can include other `hasManyThroug
 
 ```javascript
 // User.cfc
-component extends="quick.models.BaseEntity" {
+component extends="quick.models.BaseEntity" accessors="true" {
 
     function team() {
         return belongsTo( "Team" );
@@ -191,7 +191,7 @@ component extends="quick.models.BaseEntity" {
 
 ```javascript
 // Team.cfc
-component extends="quick.models.BaseEntity" {
+component extends="quick.models.BaseEntity" accessors="true" {
 
     function members() {
         return hasMany( "User" );
@@ -206,7 +206,7 @@ component extends="quick.models.BaseEntity" {
 
 ```javascript
 // Office.cfc
-component extends="quick.models.BaseEntity" {
+component extends="quick.models.BaseEntity" accessors="true" {
 
     function teams() {
         return hasMany( "Team" );

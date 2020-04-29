@@ -6,7 +6,7 @@ A `hasOneThrough` relationship is either a `many-to-one` or a `one-to-one` relat
 
 ```javascript
 // Team.cfc
-component extends="quick.models.BaseEntity" {
+component extends="quick.models.BaseEntity" accessors="true" {
 
     function latestPost() {
         return hasOneThrough( [ "members", "posts" ] )
@@ -22,7 +22,7 @@ component extends="quick.models.BaseEntity" {
 
 ```javascript
 // User.cfc
-component extends="quick.models.BaseEntity" {
+component extends="quick.models.BaseEntity" accessors="true" {
 
     function posts() {
         return hasMany( "Post" );
@@ -37,7 +37,7 @@ component extends="quick.models.BaseEntity" {
 
 ```javascript
 // Post.cfc
-component extends="quick.models.BaseEntity" {
+component extends="quick.models.BaseEntity" accessors="true" {
 
     function author() {
         return belongsTo( "Post" );
@@ -64,7 +64,7 @@ This approach can scale to as many related entities as you need.  For instance, 
 
 ```javascript
 // Office.cfc
-component extends="quick.models.BaseEntity" {
+component extends="quick.models.BaseEntity" accessors="true" {
 
     function latestPost() {
         return hasOneThrough( [ "teams", "members", "posts" ] )
@@ -80,7 +80,7 @@ component extends="quick.models.BaseEntity" {
 
 ```javascript
 // Team.cfc
-component extends="quick.models.BaseEntity" {
+component extends="quick.models.BaseEntity" accessors="true" {
 
     function members() {
         return hasMany( "User" );
@@ -95,7 +95,7 @@ component extends="quick.models.BaseEntity" {
 
 ```javascript
 // User.cfc
-component extends="quick.models.BaseEntity" {
+component extends="quick.models.BaseEntity" accessors="true" {
 
     function team() {
         return belongsTo( "Team" );
@@ -110,7 +110,7 @@ component extends="quick.models.BaseEntity" {
 
 ```javascript
 // Post.cfc
-component extends="quick.models.BaseEntity" {
+component extends="quick.models.BaseEntity" accessors="true" {
 
     function author() {
         return belongsTo( "User" );
@@ -139,7 +139,7 @@ hasOneThrough( [ "teams", "members", "posts" ] )
 
 ```javascript
 // Team.cfc
-component extends="quick.models.BaseEntity" {
+component extends="quick.models.BaseEntity" accessors="true" {
 
     function latestPost() {
         return hasOneThrough( [ "members", "posts" ] )
@@ -158,7 +158,7 @@ Called this way will return a new unloaded entity with no data.  You can also sp
 
 ```javascript
 // Team.cfc
-component extends="quick.models.BaseEntity" {
+component extends="quick.models.BaseEntity" accessors="true" {
 
     function latestPost() {
         return hasOneThrough( [ "members", "posts" ] )

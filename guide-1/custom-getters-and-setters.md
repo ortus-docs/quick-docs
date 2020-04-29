@@ -9,7 +9,7 @@ To retrieve the attribute value fetched from the database, call `retrieveAttribu
 To set an attribute for saving to the database, call `assignAttribute` passing in the name and the value.
 
 ```javascript
-component extends="quick.models.BaseEntity" {
+component extends="quick.models.BaseEntity" accessors="true" {
 
     property name="bcrypt" inject="@BCrypt";
 
@@ -24,5 +24,7 @@ component extends="quick.models.BaseEntity" {
 }
 ```
 
-> **Note:** Custom getters and setters with **not** be called when hydrating a model from the database.
+{% hint style="danger" %}
+Custom getters and setters with **not** be called when hydrating a model from the database.
+{% endhint %}
 

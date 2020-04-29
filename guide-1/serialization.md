@@ -7,7 +7,7 @@ The memento pattern is an established pattern in ColdBox apps. A `memento` in th
 For instance, the following example shows a User entity and its corresponding memento:
 
 ```javascript
-component extends="quick.models.BaseEntity" {
+component extends="quick.models.BaseEntity" accessors="true" {
 
     property name="id";
     property name="username";
@@ -40,7 +40,7 @@ Here is the default Quick memento struct:
 
 ```javascript
 this.memento = {
-    "defaultIncludes" : retrieveAttributeNames(),
+    "defaultIncludes" : retrieveAttributeNames( withVirtualAttributes = true ),
 	  "defaultExcludes" : [],
 	  "neverInclude"    : [],
 	  "defaults"        : {},
@@ -70,7 +70,7 @@ struct function getMemento(
 If this does not give you the control you need, you can further modify the memento by overriding the `getMemento` function on your entity.  In this case, a `$getMemento` function will be available which is the Mementifier function.
 
 ```javascript
-component extends="quick.models.BaseEntity" {
+component extends="quick.models.BaseEntity" accessors="true" {
 
     property name="id";
     property name="username";
@@ -133,6 +133,10 @@ component {
 ```
 
 `QuickCollection` also defines a `$renderData` method, which will delegate the call to each entity in the collection and return the array of serialized entities.
+
+{% hint style="info" %}
+Automatically serializing a returned collection only works when using the `QuickCollection` as your entity's `newCollection`.
+{% endhint %}
 
 ```javascript
 component {

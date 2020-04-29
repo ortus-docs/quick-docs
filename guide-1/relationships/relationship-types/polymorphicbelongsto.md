@@ -6,7 +6,7 @@ A `polymorphicBelongsTo` relationship is a `many-to-one` relationship. This rela
 
 ```javascript
 // Comment.cfc
-component extends="quick.models.BaseEntity" {
+component extends="quick.models.BaseEntity" accessors="true" {
 
     function post() {
         return polymorphicBelongsTo( "commentable" );
@@ -23,7 +23,7 @@ The inverse of `polymorphicBelongsTo` is also `polymorphicHasMany`. It is import
 
 ```javascript
 // Post.cfc
-component extends="quick.models.BaseEntity" {
+component extends="quick.models.BaseEntity" accessors="true" {
 
     function comments() {
        return polymorphicHasMany( "Comment", "commentable" );
@@ -34,7 +34,7 @@ component extends="quick.models.BaseEntity" {
 
 ```javascript
 // Video.cfc
-component extends="quick.models.BaseEntity" {
+component extends="quick.models.BaseEntity" accessors="true" {
 
     function comments() {
         return polymorphicHasMany( "Comment", "commentable" );
