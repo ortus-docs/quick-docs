@@ -42,6 +42,7 @@ user.update( rc, true );
 | :--- | :--- | :--- | :--- | :--- |
 | attributes | struct | `false` | `{}` | A struct of attributes to restrict the query. If no entity is found the attributes are filled on the new entity created. |
 | newAttributes | struct | `false` | `{}` | A struct of attributes to update on the found entity or the new entity if no entity is found. |
+| ignoreNonExistentAttributes | boolean | `false` | `false` | If true, does not throw an exception if an attribute does not exist.  Instead, it skips the non-existent attribute. |
 
 Updates an existing record or creates a new record with the given attributes.
 
