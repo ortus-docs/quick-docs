@@ -20,7 +20,9 @@ Fired after dependency injection has been performed on the entity and the metada
 
 Fired before attempting to load an entity from the database.
 
-> This method is only called for `find` actions.
+{% hint style="warning" %}
+This method is only called for `find` actions.
+{% endhint %}
 
 `interceptData` structure
 
@@ -32,8 +34,6 @@ Fired before attempting to load an entity from the database.
 ## quickPostLoad
 
 Fired after loading an entity from the database.
-
-> This method is only called for `find` actions.
 
 `interceptData` structure
 
