@@ -77,13 +77,12 @@ post.save();
 
 ## Relationship Setter
 
-You can also influence the associated entities by calling `"set" & relationshipName` and
-passing in an entity or key value.
+You can also influence the associated entities by calling `"set" & relationshipName` and passing in an entity or key value.
 
-```js
+```javascript
 var post = getInstance( "Post" ).first();
 post.setAuthor( 1 );
 ```
 
-After executing this code, the post would be updated in the database to be associated with
-the user with an id of `1`.
+After executing this code, the post would be updated in the database to be associated with the user with an id of `1`.
+
