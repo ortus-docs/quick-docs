@@ -14,7 +14,7 @@ component extends="quick.models.BaseEntity" accessors="true" {
     property name="bcrypt" inject="@BCrypt";
 
     function setPassword( value ) {
-        return assignAttribute( "password", bcrypt.value );
+        return assignAttribute( "password", bcrypt.hashPassword( value ) );
     }
 
     function getCreatedDate( value ) {
