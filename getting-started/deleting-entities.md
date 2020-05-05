@@ -4,7 +4,7 @@
 
 You can delete an entity by calling the `delete` method on it.
 
-```
+```javascript
 var user = getInstance( "User" ).find( 1 );
 user.delete();
 ```
@@ -15,7 +15,7 @@ user.delete();
 
 Just like `updateAll`, you can delete many records from the database by specifying a query with constraints and then calling the `deleteAll` method.
 
-```
+```javascript
 getInstance( "User" )
     .whereActive( false )
     .deleteAll();
@@ -23,7 +23,7 @@ getInstance( "User" )
 
 Additionally, you can pass in an array of ids to `deleteAll` to delete only those ids.
 
-```
+```javascript
 getInstance( "User" ).deleteAll( [ 4, 10, 22 ] );
 ```
 

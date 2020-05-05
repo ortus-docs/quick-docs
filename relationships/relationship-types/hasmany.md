@@ -4,7 +4,7 @@
 
 A `hasMany` relationship is a `one-to-many` relationship. For instance, a `User` may have multiple `Posts`.
 
-```
+```javascript
 // User.cfc
 component extends="quick.models.BaseEntity" {
 
@@ -19,19 +19,19 @@ The first value passed to `hasMany` is a WireBox mapping to the related entity.
 
 Quick determines the foreign key of the relationship based on the entity name and key values. In this case, the `Post` entity is assumed to have a `userId` foreign key. You can override this by passing a foreign key in as the second argument:
 
-```
+```javascript
 return hasMany("Post", "FK_userID");
 ```
 
 If your parent entity does not use `id` as its primary key, or you wish to join the child entity to a different column, you may pass a third argument to the `belongsTo` method specifying your parent table's custom key.
 
-```
+```javascript
 return hasMany("Post", "FK_userID", "relatedPostId");
 ```
 
 The inverse of `hasMany` is also [`belongsTo`](belongsto.md).
 
-```
+```javascript
 // Post.cfc
 component extends="quick.models.BaseEntity" {
 
@@ -50,7 +50,7 @@ There are two ways to add an entity to a `hasMany` relationship. Both mirror the
 
 You can call the `save` method on the relationship passing in an entity to relate.
 
-```
+```javascript
 var post = getInstance( "Post" ).create( {
     "title" = "My Post",
     "body" = "Hello, world!"
@@ -75,7 +75,7 @@ You can also add many entities in a `hasMany` relationship by calling `saveMany`
 
 Use the `create` method to create and save a related entity directly through the relationship.
 
-```
+```javascript
 var user = getInstance( "User" ).findOrFail( 1 );
 
 user.posts().create( {
@@ -94,7 +94,7 @@ Removing a `hasMany` relationship is handled in two ways: either by using the `d
 
 You can also influence the associated entities by calling `"set" & relationshipName` and passing in an array of entities or key values.
 
-```
+```text
 var postA = getInstance( "Post" ).findOrFail( 2 );
 user.setPosts( [ postA, 4 ] );
 ```

@@ -6,7 +6,7 @@ The memento pattern is an established pattern in ColdBox apps. A `memento` in th
 
 For instance, the following example shows a User entity and its corresponding memento:
 
-```
+```javascript
 component extends="quick.models.BaseEntity" {
 
     property name="id";
@@ -19,7 +19,7 @@ component extends="quick.models.BaseEntity" {
 }
 ```
 
-```
+```javascript
 {
     "id" = 1,
     "username" = "JaneDoe",
@@ -32,7 +32,7 @@ component extends="quick.models.BaseEntity" {
 
 You can modify the memento by overriding the `getMemento` function on your entity.
 
-```
+```javascript
 component extends="quick.models.BaseEntity" {
 
     property name="id";
@@ -56,7 +56,7 @@ component extends="quick.models.BaseEntity" {
 }
 ```
 
-```
+```javascript
 {
     "id" = 1,
     "username" = "JaneDoe",
@@ -70,7 +70,7 @@ component extends="quick.models.BaseEntity" {
 
 The `$renderData` method is a special method for ColdBox. When returning a model from a handler, this method will be called and the value returned will be used as the serialized response. This let's you simply return an entity from a handler for your API. By default this will call `getMemento()`.
 
-```
+```javascript
 component {
 
     // /users/:id
@@ -81,7 +81,7 @@ component {
 }
 ```
 
-```
+```javascript
 {
     "id" = 1,
     "username" = "JaneDoe",
@@ -93,7 +93,7 @@ component {
 
 `QuickCollection` also defines a `$renderData` method, which will delegate the call to each entity in the collection and return the array of serialized entities.
 
-```
+```javascript
 component {
 
     function index( event, rc, prc ) {
@@ -103,7 +103,7 @@ component {
 }
 ```
 
-```
+```javascript
 [
     {
         "id" = 1,
