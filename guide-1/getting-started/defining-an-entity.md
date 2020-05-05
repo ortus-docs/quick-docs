@@ -378,13 +378,13 @@ At the time of writing Valid grammar options are: `MySQLGrammar@qb`, `PostgresGr
 
 ## Comparing Entities
 
-You can compare entities using the `is` and `isNot` methods.  Each method takes another entity and returns `true` if the two objects represent the same entity.
+You can compare entities using the `isSameAs` and `isNotSameAs` methods.  Each method takes another entity and returns `true` if the two objects represent the same entity.
 
 ```javascript
 var userOne = getInstance( "User" ).findOrFail( 1 );
 var userTwo = getInstance( "User" ).findOrFail( 1 );
 
-userOne.is( userTwo ); // true
-userOne.isNot( userTwo ); // false
+userOne.isSameAs( userTwo ); // true
+userOne.isNotSameAs( userTwo ); // false
 ```
 
