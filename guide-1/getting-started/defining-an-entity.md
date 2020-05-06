@@ -9,6 +9,10 @@ component extends="quick.models.BaseEntity" accessors="true" {}
 
 That's all that is needed to get started with Quick. There are a few defaults of Quick worth mentioning here.
 
+{% hint style="success" %}
+You can generate Quick entities from CommandBox!  Install `quick-commands` and use `quick entity create` to get started!
+{% endhint %}
+
 ## Tables
 
 We don't need to tell Quick what table name to use for our entity. By default, Quick uses the pluralized name of the component for the table name. That means for our `User` entity Quick will assume the table name is `users`. You can override this by specifying a `table` metadata attribute on the component.
