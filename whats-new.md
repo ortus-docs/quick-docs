@@ -1,5 +1,9 @@
 # What's New?
 
+## 3.1.1
+
+* Fix [querying relationship methods](guide-1/relationships/querying-relationships.md) when using "OR" combinators.
+
 ## 3.1.0
 
 * Add support for JSON [casting](guide-1/getting-started/defining-an-entity.md#casts) using a new `JsonCast@quick` component.
