@@ -1,5 +1,22 @@
 # What's New?
 
+## 3.0.4
+
+* Compatibility updates for ColdBox 6
+
+## 3.0.3
+
+* Optimize [cast ](guide-1/getting-started/defining-an-entity.md#casts)caching
+
+## 3.0.2
+
+* Apply [custom sqltypes ](guide-1/getting-started/defining-an-entity.md#sql-type)during [eager loading](guide-1/relationships/eager-loading.md).
+
+## 3.0.1
+
+* Account for null values in [`fill`](guide-1/getting-started/creating-new-entities.md#fill).
+* Swap structAppend order for a Lucee bug in mementifier integration.
+
 ## 3.0.0
 
 #### **BREAKING CHANGES** <a id="breaking-changes"></a>

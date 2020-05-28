@@ -109,7 +109,9 @@ component extends="quick.models.BaseEntity" accessors="true" {
         </td>
     </tr>
   </tbody>
-</table>Returns a polymorphicBelongsTo relationship between this entity and the entity defined by `relationName`.
+</table>
+
+Returns a polymorphicBelongsTo relationship between this entity and the entity defined by `relationName`.
 
 ## Visualizer
 

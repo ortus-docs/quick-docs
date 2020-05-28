@@ -156,7 +156,9 @@ After running this code, this user would only have two posts, the posts with ids
         </td>
     </tr>
   </tbody>
-</table>Returns a HasMany relationship between this entity and the entity defined by `relationName`.
+</table>
+
+Returns a HasMany relationship between this entity and the entity defined by `relationName`.
 
 ## Visualizer
 

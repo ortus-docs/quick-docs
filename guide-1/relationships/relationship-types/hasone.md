@@ -127,7 +127,9 @@ component extends="quick.models.BaseEntity" accessors="true" {
         </td>
     </tr>
   </tbody>
-</table>Returns a HasOne relationship between this entity and the entity defined by `relationName`.
+</table>
+
+Returns a HasOne relationship between this entity and the entity defined by `relationName`.
 
 ## Visualizer
 

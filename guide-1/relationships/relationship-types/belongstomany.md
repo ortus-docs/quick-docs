@@ -255,7 +255,9 @@ This code calls `sync` on the relationship. After executing this code, the post 
         </td>
     </tr>
   </tbody>
-</table>Returns a BelongsToMany relationship between this entity and the entity defined by `relationName`.
+</table>
+
+Returns a BelongsToMany relationship between this entity and the entity defined by `relationName`.
 
 ## Visualizer
 
