@@ -92,6 +92,6 @@ Refreshes the attributes data for the entity with data from the database.  This 
 
 ```javascript
 var user = getInstance( "User" ).findOrFail( rc.userID );
-user.fresh(); // user now has updated data from the database
+user.refresh(); // user now has updated data from the database
 ```
 
