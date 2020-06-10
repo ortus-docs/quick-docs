@@ -176,7 +176,7 @@ var admins = getInstance( "Admin" ).withoutGlobalScope( [ "ofType" ] ).all();
 
 Subselects are a useful way to grab data from related tables without having to execute the full relationship. Sometimes you just want a small piece of information like the `lastLoginDate` of a user, not the entire `Login` relationship. Subselects are perfect for this use case. You can even use subselects to provide the correct key for dynamic subselect relationships. We'll show how both work here.
 
-Quick handles subselect properties \(or computed or formula properties\) through query scopes. This allows you to dynamically include a subselect. If you would like to always include a subselect, add it to your entity's [list of global scopes.](https://github.com/ortus-docs/quick-docs/tree/882521bd668671a1228bfffa5dbec7dcb78d0059/getting-started/getting-started/query-scopes.md#global-scopes)
+Quick handles subselect properties \(or computed or formula properties\) through query scopes. This allows you to dynamically include a subselect. If you would like to always include a subselect, add it to your entity's [list of global scopes.](https://github.com/ortus-docs/quick-docs/blob/2.1.0/getting-started/query-scopes.md#global-scopes)
 
 Here's an example of grabbing the `lastLoginDate` for a User:
 
