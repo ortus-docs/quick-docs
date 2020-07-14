@@ -117,7 +117,7 @@ var subscribedUsers = getInstance( "User" )
 
 ### Scopes that Return Values
 
-All of the examples so far either returned the `QuickBuilder` object or nothing.  Doing so lets you continue to chain methods on your Quick entity.  If you instead return a value, Quick will pass on that value to your code.  This lets you use scopes as shortcut methods that work on a query.
+All of the examples so far either returned the `QuickBuilder` object or nothing. Doing so lets you continue to chain methods on your Quick entity. If you instead return a value, Quick will pass on that value to your code. This lets you use scopes as shortcut methods that work on a query.
 
 For example, maybe you have a domain method to reset passwords for a group of users, and you want the count of users updated returned.
 
@@ -234,7 +234,7 @@ You might be wondering why not use the `logins` relationship? Or even `logins().
 
 ### Using Relationships in Subselects
 
-In most cases the values you want as subselects are values from your entity's relationships.  In these cases, you can use a shortcut to define your subselect in terms of your entity's relationships represented as a dot-delimited string.
+In most cases the values you want as subselects are values from your entity's relationships. In these cases, you can use a shortcut to define your subselect in terms of your entity's relationships represented as a dot-delimited string.
 
 Let's re-write the above subselect for `lastLoginDate` for a User using the existing relationship:
 
@@ -254,9 +254,9 @@ component extends="quick.models.BaseEntity" accessors="true" {
 }
 ```
 
-Much simpler!  In addition to be much simpler this code is also more dynamic and reusable.  We have a relationship defined for logins if we need to fetch them.  If we change how the `logins` relationship is structured, we only have one place we need to change.
+Much simpler! In addition to be much simpler this code is also more dynamic and reusable. We have a relationship defined for logins if we need to fetch them. If we change how the `logins` relationship is structured, we only have one place we need to change.
 
-With the query cleaned up using existing relationships, you might find yourself adding subselects directly in your handlers instead of behind scopes.  This is fine in most cases.  Keep an eye on how many places you use the subselect in case you need to re-evaluate and move it behind a scope.
+With the query cleaned up using existing relationships, you might find yourself adding subselects directly in your handlers instead of behind scopes. This is fine in most cases. Keep an eye on how many places you use the subselect in case you need to re-evaluate and move it behind a scope.
 
 ```javascript
 var user = getInstance( "User" )
@@ -302,9 +302,9 @@ As you can see, we are loading the id of the latest post in a subquery and then 
 
 ## Virtual Attributes
 
-Virtual attributes are attributes that are not present on the table backing the Quick entity.  A Subselect is an example of a virtual attribute.  Other examples could include calculated counts or `CASE` statement results.
+Virtual attributes are attributes that are not present on the table backing the Quick entity. A Subselect is an example of a virtual attribute. Other examples could include calculated counts or `CASE` statement results.
 
-By default, if you add a virtual column to a Quick query, you won't see anything in the entity.  This is because Quick needs to have an attribute defined to map the result to.  You can create a virtual attribute in these cases.
+By default, if you add a virtual column to a Quick query, you won't see anything in the entity. This is because Quick needs to have an attribute defined to map the result to. You can create a virtual attribute in these cases.
 
 {% hint style="warning" %}
 This step is unnecessary when using the `addSubselect` helper method.
@@ -329,7 +329,7 @@ component extends="quick.models.BaseEntity" accessors="true" {
 }
 ```
 
-With this code, we could now access the `publishedStatus` just like any other attribute.  It will not be updated, inserted, or saved though, as it is just a virtual column.
+With this code, we could now access the `publishedStatus` just like any other attribute. It will not be updated, inserted, or saved though, as it is just a virtual column.
 
 The `appendVirtualAttribute` method adds the given name as an attribute available in the entity.
 

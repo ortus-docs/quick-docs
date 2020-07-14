@@ -1,5 +1,180 @@
 # Upgrade Guide
 
+## 3.0.0
+
+### Adobe ColdFusion 11 and Lucee 4.5 are no longer supported
+
+Please migrate to a supported engine.
+
+### Virtual Inheritance support removed
+
+Virtual Inheritance allowed you to use a `quick` annotation on your entity instead of extending `quick.models.BaseEntity`.  This was hardly used and didn't offer any benefit to extending using traditional inheritance.  Additionally, removing the support allows us to clean up the code base by removing duplicate code paths.
+
+If any of your entities are using the `quick` annotation, instead have them `extends="quick.models.BaseEntity"`.
+
+### \`accessors="true"\` required for all entities
+
+From the early days of Quick, developers have wanted to have `accessors="true"` on their entities.  Because of this, Quick supported defining entities both with and without accessors.  However, just as with virtual inheritance, it created two code paths that could hide bugs and make it hard to follow the code.  In Quick 3.0.0, `accessors="true"` is required on all entities.  If it is omitted, a helpful error message is thrown to remind you.  This will help immensely in simplifying the code base.  \(In fact, just introducing this requirement helped find two bugs that were only present when using accessors.\)
+
+Ensure all entities have `accessors="true"` in their component metadata.
+
+### AssignedKey removed
+
+Use `NullKeyType` instead.
+
+### Boolean casts updates to hook in to new Cast system
+
+Previously, the only valid cast type was `casts="boolean"`.  In introducing the new Casts system, the boolean cast was refactored to use the same system.  For this reason, any `casts="boolean"` needs to be changed to `casts="BooleanCast@quick"`
+
+### defaultGrammar updated to be the full WireBox mapping <a id="defaultgrammar-updated-to-be-the-full-wirebox-mapping"></a>
+
+In previous versions, the value passed to `defaultGrammar` was used to look up a mapping in the `@qb` namespace. This made it difficult to add or use grammars that weren't part of qb. \(You could get around this be registering your custom grammar in the `@qb` namespace, but doing so seemed strange.\)
+
+To migrate this code, change your `defaultGrammar` to be the full WireBox mapping in your `moduleSettings`:
+
+```javascript
+moduleSettings = {
+    "quick": {
+        "defaultGrammar": "MSSQLGrammar@qb"
+    }
+};
+```
+
+### [HasManyThrough relationship](guide-1/relationships/relationship-types/hasmanythrough.md) re-tooled to be based on relationships
+
+It no longer accepts any entities or columns. Rather, it accepts an array of relationships to walk "through" to end up at the desired entity.
+
+Here's how the old syntax would be used to define the relationship between `Country` and `Post`.
+
+{% tabs %}
+{% tab title="Country.cfc" %}
+```javascript
+component extends="quick.models.BaseEntity" {
+
+    function posts() {
+        return hasManyThrough( "Post", "User", "country_id", "user_id" );
+    }
+    
+}
+```
+{% endtab %}
+{% endtabs %}
+
+This same relationship now needs to be defined in terms of other relationships, like so.
+
+{% tabs %}
+{% tab title="Country.cfc" %}
+```javascript
+component extends="quick.models.BaseEntity" {
+
+    function posts() {
+        return hasManyThrough( [ "users", "posts" ] );
+    }
+    
+    function users() {
+        return hasMany( "User" );
+    }
+
+}
+```
+{% endtab %}
+
+{% tab title="User.cfc" %}
+```javascript
+component extends="quick.models.BaseEntity" {
+
+    function posts() {
+        return hasMany( "Post" );
+    }
+
+}
+```
+{% endtab %}
+{% endtabs %}
+
+This approach does require a relationship defined for each level, but it works up and down any number of relationships to get to your desired entity.
+
+### assignAttributesData argument renamed to \`attributes\`
+
+This brings the API in line with the other methods referencing attributes.
+
+### Method changes due to compound key support
+
+Compound key support required some method and parameter name changes.  Although the list seems extensive, you will likely not need to change anything in your code unless you have extended built-in Quick components.  \(You will see many relationship parameter name changes.  Note that the function you call to define a relationship is a function on the `BaseEntity` and has not changed its signature.\)
+
+**BaseEntity.cfc:**
+
+* `retrieveQualifiedKeyName : String` -&gt; `retrieveQualifiedKeyNames : [String]`
+* `keyName : String` -&gt; `keyNames : [String]`
+* `keyColumn : String` -&gt; `keyColumns : [String]`
+* `keyValue : String` -&gt; `keyValues : [String]`
+
+**AutoIncrementingKeyType.cfc**
+
+* This cannot be used with composite primary keys
+
+**BaseRelationship.cfc**
+
+* `getKeys` now takes an array of `keys` as the second argument
+* `getQualifiedLocalKey : String` -&gt; `getQualifiedLocalKeys : [String]`
+* `getExistenceCompareKey : String` -&gt; `getExistenceCompareKeys : [String]`
+
+**BelongsTo.cfc**
+
+* `init` arguments have changed
+  * `foreignKey : String` -&gt; `foreignKeys : [String]`
+  * `ownerKey : String` -&gt; `ownerKeys : [String]`
+* `getQualifiedLocalKey : String` -&gt; `getQualifiedLocalKeys : [String]`
+* `getExistenceCompareKey : String` -&gt; `getExistenceCompareKeys : [String]`
+
+**BelongsToMany.cfc**
+
+* `init` arguments have changed
+  * `foreignPivotKey : String` -&gt; `foreignPivotKeys : [String]`
+  * `relatedPivotKey : String` -&gt; `relatedPivotKeys : [String]`
+  * `parentKey : String` -&gt; `parentKeys : [String]`
+  * `relatedKey : String` -&gt; `relatedKeys : [String]`
+* `getQualifiedRelatedPivotKeyName : String` -&gt; `getQualifiedRelatedPivotKeyNames : [String]`
+* `getQualifiedForeignPivotKeyName : String` -&gt; `getQualifiedForeignPivotKeyNames : [String]`
+* `getQualifiedForeignKeyName : String` -&gt; getQualifiedForeignKeyNames : \[String\]\`
+
+**HasManyThrough.cfc**
+
+* This component now extends `quick.models.Relationships.HasOneOrManyThrough`
+* `init` arguments are now as follows:
+  * `related`: The related entity instance.
+  * `relationName`: The WireBox mapping for the related entity.
+  * `relationMethodName`: The method name called to retrieve this relationship.
+  * `parent`: The parent entity instance for the relationship.
+  * `relationships`: An array of relationships between the parent entity and the related entity.
+  * `relationshipsMap`: A dictionary of relationship name to relationship component.
+* The following methods no longer exist:
+  * `getQualifiedFarKeyName`
+  * `getQualifiedForeignKeyName`
+  * `getQualifiedFirstKeyName`
+  * `getQualifiedParentKeyName`
+
+**HasOneOrMany.cfc**
+
+* `init` arguments have changed
+  * `foreignKey : String` -&gt; `foreignKeys : [String]`
+  * `localKey : String` -&gt; `localKeys : [String]`
+* `getParentKey : any` -&gt; `getParentKeys : [any]`
+* `getQualifiedLocalKey : String` -&gt; `getQualifiedLocalKeys : [String]`
+* `getQualifiedForeignKeyName : String` -&gt; `getQualifiedForeignKeyNames : [String]`
+
+**PolymorphicBelongsTo.cfc**
+
+* `init` arguments have changed
+  * `foreignKey : String` -&gt; `foreignKeys : [String]`
+  * `ownerKey : String` -&gt; `ownerKeys : [String]`
+
+**PolymorphicHasOneOrMany.cfc**
+
+* `init` arguments have changed
+  * `id : String` -&gt; `ids : [String]`
+  * `localKey : String` -&gt; `localKeys : [String]`
+
 ## 2.0.0
 
 Quick 2.0 brings with it a lot of changes to make things more flexible and more performant. This shouldn't take too long — maybe 2-5 minutes per entity.
@@ -9,7 +184,7 @@ Quick 2.0 brings with it a lot of changes to make things more flexible and more 
 There were some common name clashes between internal Quick properties and custom attributes of your entities \(the most common being `fullName`\). All Quick internals have been obfuscated to avoid this situation. If you relied on these properties, please consult the following table below for the new property names.
 
 {% hint style="warning" %}
-If you are renaming your primary keys in your entities, you will have to change your key definition from `variables.key = "user_id";` to `variables._key` `= "user_id";` See [Defining an Entity](getting-started/defining-an-entity.md) for details.
+If you are renaming your primary keys in your entities, you will have to change your key definition from `variables.key = "user_id";` to `variables._key` `= "user_id";` See [Defining an Entity](https://github.com/ortus-docs/quick-docs/tree/63f32b8cec17d528f0156c8493189b777ed594d2/getting-started/defining-an-entity.md) for details.
 {% endhint %}
 
 | Old Property Name | New Property Name |
@@ -101,7 +276,7 @@ The way arguments are passed to scopes have been updated to allow for default ar
 
 ### Relationships
 
-The relationship methods are still named the same but some of the arguments have been changed to fix bugs and support better eager loading performance. Please [check the relationship docs](relationships/) for more details.
+The relationship methods are still named the same but some of the arguments have been changed to fix bugs and support better eager loading performance. Please [check the relationship docs](https://github.com/ortus-docs/quick-docs/tree/63f32b8cec17d528f0156c8493189b777ed594d2/relationships/README.md) for more details.
 
 Additionally, the alternative syntax for defining relationships on a `relationships` struct has been removed. It created an unnecessary code path that had it's own share of bugs. All relationships should be defined as methods on the entity.
 
@@ -140,7 +315,7 @@ All methods available on the Quick entity are available on the service.
 
 ### Eager Loading
 
-Eager loading is now supported for nested relationships using a dot-separated syntax. Additionally, constraints can be added to an eager loaded relationship. See the [docs on eager loading](relationships/eager-loading.md) for more information.
+Eager loading is now supported for nested relationships using a dot-separated syntax. Additionally, constraints can be added to an eager loaded relationship. See the [docs on eager loading](https://github.com/ortus-docs/quick-docs/tree/63f32b8cec17d528f0156c8493189b777ed594d2/relationships/eager-loading.md) for more information.
 
 ### Column Aliases in Queries
 
