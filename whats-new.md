@@ -1,5 +1,30 @@
 # What's New?
 
+## 3.1.7
+
+* Correct jQuery link in test runner.
+
+## 3.1.6
+
+* Allow expressions in basic where clauses.
+* Fix `delete` naming collision.
+
+## 3.1.5
+
+* Add an alias to `with` to QuickBuilder.
+
+## 3.1.4
+
+* Fix a stack overflow on nested relationship checks.
+
+## 3.1.3
+
+* Configured tables \(`.from`\) are now used for qualifying columns.
+
+## 3.1.2
+
+* Remove unnecessary nesting in compare queries.
+
 ## 3.1.1
 
 * Fix [querying relationship methods](guide-1/relationships/querying-relationships.md) when using "OR" combinators.
