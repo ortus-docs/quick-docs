@@ -94,6 +94,48 @@ component extends="quick.models.BaseEntity" {
 
 This approach does require a relationship defined for each level, but it works up and down any number of relationships to get to your desired entity.
 
+### \`[associate](guide-1/relationships/relationship-types/belongsto.md#updating)\` cannot be called on unloaded entities
+
+To update the foreign key of a `belongsTo` relationship you use the `associate` method.  In the past, it was possible to associate a new, unsaved child entity to its parent using this method.
+
+```javascript
+var newChild = getInstance( "Child" );
+newChild.fill( fields );
+newChild.parent().associate( parent );
+newChild.save();
+```
+
+In an attempt to provide more helpful error messages, this behavior is no longer possible.  You can achieve the same effect in one of two ways.
+
+The first is to manually assign the foreign keys:
+
+```javascript
+var newChild = getInstance( "Child" );
+newChild.fill( fields );
+newChild.setParentKey( parent.getId() );
+newChild.save();
+```
+
+While this works, it breaks the encapsulation provided by the relationship.
+
+The second approach is to use the `hasOne` or `hasMany` side of the relationship to create the new child entity:
+
+```javascript
+var newChild = getInstance( "Child" );
+newChild.fill( fields );
+var parent = getInstance( "Parent" ).findOrFail( id );
+parent.children().save( newChild );
+```
+
+If you have all the data handy in a struct, you can use the `create` method for a more concise syntax.
+
+```javascript
+var parent = getInstance( "Parent" ).findOrFail( id );
+var newChild = parent.children().create( fields );
+```
+
+This is the recommended way of creating these components.
+
 ### assignAttributesData argument renamed to \`attributes\`
 
 This brings the API in line with the other methods referencing attributes.
