@@ -36,18 +36,20 @@ Quick bundles in the excellent [Mementifier](https://www.forgebox.io/view/mement
 
 By default, Quick includes all defined attributes as `includes`.   You can change this or add other Mementifier options by defining your own `this.memento` struct on your entity.  Your custom `this.memento` struct will be merged with Quick's default, so you can only define what changes you need.
 
-Here is the default Quick memento struct:
+Here is the default Quick memento struct. It is inside the `instanceReady()` lifecycle method in this example because `retrieveAttributeNames()` relies on the entity being wired (though not loaded); it is note otherwise necessary to put `this.memento` inside `instanceReady()`.
 
 ```javascript
-this.memento = {
-    "defaultIncludes" : retrieveAttributeNames( withVirtualAttributes = true ),
-	  "defaultExcludes" : [],
-	  "neverInclude"    : [],
-	  "defaults"        : {},
-	  "mappers"         : {},
-	  "trustedGetters"  : true,
-	  "ormAutoIncludes" : false
-};
+function instanceReady() {
+	this.memento = {
+	    "defaultIncludes" : retrieveAttributeNames( withVirtualAttributes = true ),
+		  "defaultExcludes" : [],
+		  "neverInclude"    : [],
+		  "defaults"        : {},
+		  "mappers"         : {},
+		  "trustedGetters"  : true,
+		  "ormAutoIncludes" : false
+	};
+}
 ```
 
 ### getMemento Arguments
