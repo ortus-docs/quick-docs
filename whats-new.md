@@ -2,6 +2,10 @@
 
 ## 4.0.0
 
+{% hint style="success" %}
+📹  [Watch a walkthrough of these changes on CFCasts.](https://cfcasts.com/series/whats-new-in-quick-4)
+{% endhint %}
+
 #### BREAKING CHANGES
 
 * [Scopes](guide-1/getting-started/query-scopes-and-subselects.md), [`whereHas`](guide-1/relationships/querying-relationships.md#wherehas), and [`whereDoesntHave`](guide-1/relationships/querying-relationships.md#wheredoesnthave) callbacks now automatically group where clauses when an `OR` combinator is detected.
