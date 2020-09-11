@@ -1,5 +1,7 @@
 # Introduction
 
+![Quick logo](.gitbook/assets/quick300.png)
+
 ## A CFML ORM Engine
 
 ### Why?
