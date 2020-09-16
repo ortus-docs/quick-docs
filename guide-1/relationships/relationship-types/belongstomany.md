@@ -97,7 +97,7 @@ component extends="quick.models.BaseEntity" accessors="true" {
     }
 
     function permissions() {
-        return hasManyThrough( "UserPermissions", "Permission" );
+        return hasManyThrough( [ "UserPermissions", "Permission" ] );
     }
 
 }
