@@ -23,7 +23,7 @@ Quick determines the foreign key of the relationship based on the entity name an
 return hasMany( "Post", "FK_userID" );
 ```
 
-If your parent entity does not use `id` as its primary key, or you wish to join the child entity to a different column, you may pass a third argument to the `belongsTo` method specifying your parent table's custom key.
+If your parent entity does not use `id` as its primary key, or you wish to join the child entity to a different column, you may pass a third argument to the `hasMany` method specifying your parent table's custom key.
 
 ```javascript
 return hasMany( "Post", "FK_userID", "relatedPostId" );
