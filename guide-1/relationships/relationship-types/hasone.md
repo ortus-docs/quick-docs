@@ -23,10 +23,10 @@ Quick determines the foreign key of the relationship based on the entity name an
 return hasOne( "UserProfile", "FK_userID" );
 ```
 
-If your parent entity does not use `id` as its primary key, or you wish to join the child entity to a different column, you may pass a third argument to the `belongsTo` method specifying your parent table's custom key.
+If your parent entity does not use `id` as its primary key, or you wish to join the child entity to a different column, you may pass a third argument to the `hasOne` method specifying your parent table's custom key.
 
 ```javascript
-return belongsTo( "UserProfile", "FK_userID", "profile_id" );
+return hasOne( "UserProfile", "FK_userID", "profile_id" );
 ```
 
 The inverse of `hasOne` is [`belongsTo`](belongsto.md). It is important to choose the right relationship for your database structure. `hasOne` assumes that the related model has the foreign key for the relationship.
