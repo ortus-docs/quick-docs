@@ -262,7 +262,7 @@ Compound key support required some method and parameter name changes.  Although 
 
 * `init` arguments have changed
   * `foreignKey : String` -&gt; `foreignKeys : [String]`
-  * `ownerKey : String` -&gt; `ownerKeys : [String]`
+  * `localKey : String` -&gt; `localKeys : [String]`
 * `getQualifiedLocalKey : String` -&gt; `getQualifiedLocalKeys : [String]`
 * `getExistenceCompareKey : String` -&gt; `getExistenceCompareKeys : [String]`
 
@@ -306,7 +306,7 @@ Compound key support required some method and parameter name changes.  Although 
 
 * `init` arguments have changed
   * `foreignKey : String` -&gt; `foreignKeys : [String]`
-  * `ownerKey : String` -&gt; `ownerKeys : [String]`
+  * `localKey : String` -&gt; `localKeys : [String]`
 
 **PolymorphicHasOneOrMany.cfc**
 
