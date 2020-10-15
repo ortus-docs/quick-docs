@@ -2,7 +2,7 @@
 
 ## Usage
 
-A `belongsToThrough` relationship is either a `many-to-one` relationship. It is used when you want to access a related, owning entity through one or more intermediate entities. For instance, a `Post` may belong to a `Team` via a `User`.
+A `belongsToThrough` relationship is the `one` side of a `many-to-one` relationship with an intermediate entity. It is used when you want to access a related, owning entity through one or more intermediate entities. For instance, a `Post` may belong to a `Team` via a `User`.
 
 ```javascript
 // Post.cfc
