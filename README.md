@@ -1,5 +1,7 @@
 # Introduction
 
+![Quick logo](.gitbook/assets/quick300.png)
+
 ## A CFML ORM Engine
 
 ### Why?
@@ -47,7 +49,7 @@ You need the following configured before using Quick:
 * Add a mapping for `quick` in your `Application.cfc`
 * Configure your `BaseGrammar` in `config/ColdBox.cfc`
 
-See [Getting Started](getting-started/) for more details.
+See [Getting Started](https://github.com/ortus-docs/quick-docs/tree/63f32b8cec17d528f0156c8493189b777ed594d2/getting-started/README.md) for more details.
 
 ### Supported Databases
 
@@ -109,7 +111,7 @@ component {
 </cfoutput>
 ```
 
-Now that you've seen an example, [dig in to what you can do](getting-started/defining-an-entity.md) with Quick!
+Now that you've seen an example, [dig in to what you can do](https://github.com/ortus-docs/quick-docs/tree/63f32b8cec17d528f0156c8493189b777ed594d2/getting-started/defining-an-entity.md) with Quick!
 
 ### Prior Art, Acknowledgements, and Thanks
 
