@@ -1,5 +1,14 @@
 # What's New?
 
+## 4.0.2
+
+* Skip eager loading database call when no keys are found.
+* Only apply `CONCAT` when needed in `*Through` relationships.
+
+## 4.0.1
+
+* Use `WHERE EXISTS` over `DISTINCT` when fetching relationships.  `DISTINCT` restricts some of the queries that can be run.
+
 ## 4.0.0
 
 {% hint style="success" %}

@@ -183,12 +183,9 @@ This code calls `sync` on the relationship. After executing this code, the post 
       </td>
       <td style="text-align:left">Table names in alphabetical order separated by an underscore.</td>
       <td
-      style="text-align:left">
-        <p></p>
-        <p>The table name used as the pivot table for the relationship. A pivot table
-          is a table that stores, at a minimum, the primary key values of each side
-          of the relationship as foreign keys.</p>
-        </td>
+      style="text-align:left">The table name used as the pivot table for the relationship. A pivot table
+        is a table that stores, at a minimum, the primary key values of each side
+        of the relationship as foreign keys.</td>
     </tr>
     <tr>
       <td style="text-align:left">foreignPivotKey</td>
@@ -197,11 +194,8 @@ This code calls `sync` on the relationship. After executing this code, the post 
       </td>
       <td style="text-align:left"><code>keyNames()</code>
       </td>
-      <td style="text-align:left">
-        <p></p>
-        <p>The name of the column on the pivot <code>table</code> that holds the value
-          of the <code>parentKey</code> of the <code>parent</code> entity.</p>
-      </td>
+      <td style="text-align:left">The name of the column on the pivot <code>table</code> that holds the value
+        of the <code>parentKey</code> of the <code>parent</code> entity.</td>
     </tr>
     <tr>
       <td style="text-align:left">relatedPivotKey</td>
@@ -209,11 +203,8 @@ This code calls `sync` on the relationship. After executing this code, the post 
       <td style="text-align:left"><code>false</code>
       </td>
       <td style="text-align:left"></td>
-      <td style="text-align:left">
-        <p></p>
-        <p>The name of the column on the pivot <code>table</code> that holds the value
-          of the <code>relatedKey</code> of the <code>ralated</code> entity.</p>
-      </td>
+      <td style="text-align:left">The name of the column on the pivot <code>table</code> that holds the value
+        of the <code>relatedKey</code> of the <code>ralated</code> entity.</td>
     </tr>
     <tr>
       <td style="text-align:left">parentKey</td>
@@ -221,11 +212,8 @@ This code calls `sync` on the relationship. After executing this code, the post 
       <td style="text-align:left"><code>false</code>
       </td>
       <td style="text-align:left"></td>
-      <td style="text-align:left">
-        <p></p>
-        <p>The name of the column on the <code>parent</code> entity that is stored
-          in the <code>foreignPivotKey</code> column on <code>table</code>.</p>
-      </td>
+      <td style="text-align:left">The name of the column on the <code>parent</code> entity that is stored
+        in the <code>foreignPivotKey</code> column on <code>table</code>.</td>
     </tr>
     <tr>
       <td style="text-align:left">relatedKey</td>
@@ -233,11 +221,8 @@ This code calls `sync` on the relationship. After executing this code, the post 
       <td style="text-align:left"><code>false</code>
       </td>
       <td style="text-align:left"></td>
-      <td style="text-align:left">
-        <p></p>
-        <p>The name of the column on the <code>related</code> entity that is stored
-          in the <code>relatedPivotKey</code> column on <code>table</code>.</p>
-      </td>
+      <td style="text-align:left">The name of the column on the <code>related</code> entity that is stored
+        in the <code>relatedPivotKey</code> column on <code>table</code>.</td>
     </tr>
     <tr>
       <td style="text-align:left">relationMethodName</td>
@@ -261,7 +246,5 @@ Returns a BelongsToMany relationship between this entity and the entity defined 
 
 ## Visualizer
 
-{% embed url="https://codesandbox.io/embed/quick-belongs-to-many-visualizer-mj09m?autoresize=1&fontsize=14&hidenavigation=1&theme=light&view=preview" %}
-
-
+{% embed url="https://codesandbox.io/embed/quick-belongs-to-many-visualizer-mj09m?autoresize=1&fontsize=14&hidenavigation=1&theme=light&view=preview" caption="" %}
 

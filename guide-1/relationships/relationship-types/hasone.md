@@ -44,7 +44,7 @@ component extends="quick.models.BaseEntity" accessors="true" {
 
 ## withDefault
 
-`HasOne` relationships can be configured to return a default entity if no entity is found.  This is done by calling `withDefault` on the relationship object.
+`HasOne` relationships can be configured to return a default entity if no entity is found. This is done by calling `withDefault` on the relationship object.
 
 ```javascript
 // User.cfc
@@ -57,7 +57,7 @@ component extends="quick.models.BaseEntity" accessors="true" {
 }
 ```
 
-Called this way will return a new unloaded entity with no data.  You can also specify any default attributes data by passing in a struct of data to `withDefault`.
+Called this way will return a new unloaded entity with no data. You can also specify any default attributes data by passing in a struct of data to `withDefault`.
 
 ```javascript
 // User.cfc
@@ -133,5 +133,5 @@ Returns a HasOne relationship between this entity and the entity defined by `rel
 
 ## Visualizer
 
-{% embed url="https://codesandbox.io/embed/quick-has-one-visualizer-ldiyz?autoresize=1&fontsize=14&hidenavigation=1&theme=light&view=preview" %}
+{% embed url="https://codesandbox.io/embed/quick-has-one-visualizer-ldiyz?autoresize=1&fontsize=14&hidenavigation=1&theme=light&view=preview" caption="" %}
 

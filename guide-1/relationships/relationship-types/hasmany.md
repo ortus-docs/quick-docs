@@ -162,7 +162,5 @@ Returns a HasMany relationship between this entity and the entity defined by `re
 
 ## Visualizer
 
-{% embed url="https://codesandbox.io/embed/quick-has-many-visualizer-4qeek?fontsize=14&hidenavigation=1&theme=light&view=preview" %}
-
-
+{% embed url="https://codesandbox.io/embed/quick-has-many-visualizer-4qeek?fontsize=14&hidenavigation=1&theme=light&view=preview" caption="" %}
 

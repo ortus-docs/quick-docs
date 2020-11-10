@@ -4,9 +4,9 @@
 
 ### Scopes, whereHas, and whereDoesntHave are now automatically grouped when using an OR combinator
 
-This isn't a breaking change that will affect most people.  In fact, it will most likely improve your code.
+This isn't a breaking change that will affect most people. In fact, it will most likely improve your code.
 
-Previously, when using [scopes](guide-1/getting-started/query-scopes-and-subselects.md#what-are-scopes), [`whereHas`](guide-1/relationships/querying-relationships.md#wherehas), or [`whereDoesntHave`](guide-1/relationships/querying-relationships.md#wheredoesnthave), you were fully responsible for the wrapping of your where statements.  For example, the following query:
+Previously, when using [scopes](guide-1/getting-started/query-scopes-and-subselects.md#what-are-scopes), [`whereHas`](guide-1/relationships/querying-relationships.md#wherehas), or [`whereDoesntHave`](guide-1/relationships/querying-relationships.md#wheredoesnthave), you were fully responsible for the wrapping of your where statements. For example, the following query:
 
 ```javascript
 var users = getInstance( "User" )
@@ -40,7 +40,7 @@ WHERE "active" = ?
 
 The problem with this statement is that the `OR` can short circuit the `active` check.
 
-The fix is to wrap the `LIKE` statements in parenthesis.  This is done in qb using a function callback to `where`.  Adding this nesting inside our scope will fix this problem.
+The fix is to wrap the `LIKE` statements in parenthesis. This is done in qb using a function callback to `where`. Adding this nesting inside our scope will fix this problem.
 
 ```javascript
 function scopeSearch( qb, term ) {
@@ -51,9 +51,9 @@ function scopeSearch( qb, term ) {
 }
 ```
 
-But this was easy to miss this.  This is because you are in a completely different file than the built query.  It also breaks the mental model of a scope as an encapsulated piece of SQL code.
+But this was easy to miss this. This is because you are in a completely different file than the built query. It also breaks the mental model of a scope as an encapsulated piece of SQL code.
 
-In Quick 4.0.0,  scopes, `whereHas`, and `whereDoesntHave` will automatically group added where clauses when needed.  That means our original example now produces the SQL we probably expected.
+In Quick 4.0.0, scopes, `whereHas`, and `whereDoesntHave` will automatically group added where clauses when needed. That means our original example now produces the SQL we probably expected.
 
 ```sql
 SELECT *
@@ -65,7 +65,7 @@ WHERE "active" = ?
     )
 ```
 
-Grouping is not needed if there is no `OR` combinator.  In these cases no grouping is added.
+Grouping is not needed if there is no `OR` combinator. In these cases no grouping is added.
 
 ```javascript
 var users = getInstance( "User" )
@@ -93,9 +93,9 @@ WHERE "active" = ?
     AND "hireDate IS NOT NULL
 ```
 
-If you had already wrapped your expression in a group inside the scope, `whereHas`, or `whereDoesntHave` call, nothing changes.  Your code works as before.  The `OR` combinator check only works on the top most level of added where clauses.  Additionally, if you do not add any where clauses inside your scope, nothing changes.
+If you had already wrapped your expression in a group inside the scope, `whereHas`, or `whereDoesntHave` call, nothing changes. Your code works as before. The `OR` combinator check only works on the top most level of added where clauses. Additionally, if you do not add any where clauses inside your scope, nothing changes.
 
-The breaking change part is if you were relying on these statements residing at the same level without grouping.  If so, you will need to group your changes into a single scope where you control the grouping or do the querying at the builder level outside of scopes.
+The breaking change part is if you were relying on these statements residing at the same level without grouping. If so, you will need to group your changes into a single scope where you control the grouping or do the querying at the builder level outside of scopes.
 
 ## 3.0.0
 
@@ -105,13 +105,13 @@ Please migrate to a supported engine.
 
 ### Virtual Inheritance support removed
 
-Virtual Inheritance allowed you to use a `quick` annotation on your entity instead of extending `quick.models.BaseEntity`.  This was hardly used and didn't offer any benefit to extending using traditional inheritance.  Additionally, removing the support allows us to clean up the code base by removing duplicate code paths.
+Virtual Inheritance allowed you to use a `quick` annotation on your entity instead of extending `quick.models.BaseEntity`. This was hardly used and didn't offer any benefit to extending using traditional inheritance. Additionally, removing the support allows us to clean up the code base by removing duplicate code paths.
 
 If any of your entities are using the `quick` annotation, instead have them `extends="quick.models.BaseEntity"`.
 
 ### \`accessors="true"\` required for all entities
 
-From the early days of Quick, developers have wanted to have `accessors="true"` on their entities.  Because of this, Quick supported defining entities both with and without accessors.  However, just as with virtual inheritance, it created two code paths that could hide bugs and make it hard to follow the code.  In Quick 3.0.0, `accessors="true"` is required on all entities.  If it is omitted, a helpful error message is thrown to remind you.  This will help immensely in simplifying the code base.  \(In fact, just introducing this requirement helped find two bugs that were only present when using accessors.\)
+From the early days of Quick, developers have wanted to have `accessors="true"` on their entities. Because of this, Quick supported defining entities both with and without accessors. However, just as with virtual inheritance, it created two code paths that could hide bugs and make it hard to follow the code. In Quick 3.0.0, `accessors="true"` is required on all entities. If it is omitted, a helpful error message is thrown to remind you. This will help immensely in simplifying the code base. \(In fact, just introducing this requirement helped find two bugs that were only present when using accessors.\)
 
 Ensure all entities have `accessors="true"` in their component metadata.
 
@@ -121,7 +121,7 @@ Use `NullKeyType` instead.
 
 ### Boolean casts updates to hook in to new Cast system
 
-Previously, the only valid cast type was `casts="boolean"`.  In introducing the new Casts system, the boolean cast was refactored to use the same system.  For this reason, any `casts="boolean"` needs to be changed to `casts="BooleanCast@quick"`
+Previously, the only valid cast type was `casts="boolean"`. In introducing the new Casts system, the boolean cast was refactored to use the same system. For this reason, any `casts="boolean"` needs to be changed to `casts="BooleanCast@quick"`
 
 ### defaultGrammar updated to be the full WireBox mapping <a id="defaultgrammar-updated-to-be-the-full-wirebox-mapping"></a>
 
@@ -151,7 +151,7 @@ component extends="quick.models.BaseEntity" {
     function posts() {
         return hasManyThrough( "Post", "User", "country_id", "user_id" );
     }
-    
+
 }
 ```
 {% endtab %}
@@ -167,7 +167,7 @@ component extends="quick.models.BaseEntity" {
     function posts() {
         return hasManyThrough( [ "users", "posts" ] );
     }
-    
+
     function users() {
         return hasMany( "User" );
     }
@@ -193,7 +193,7 @@ This approach does require a relationship defined for each level, but it works u
 
 ### \`[associate](guide-1/relationships/relationship-types/belongsto.md#updating)\` cannot be called on unloaded entities
 
-To update the foreign key of a `belongsTo` relationship you use the `associate` method.  In the past, it was possible to associate a new, unsaved child entity to its parent using this method.
+To update the foreign key of a `belongsTo` relationship you use the `associate` method. In the past, it was possible to associate a new, unsaved child entity to its parent using this method.
 
 ```javascript
 var newChild = getInstance( "Child" );
@@ -202,7 +202,7 @@ newChild.parent().associate( parent );
 newChild.save();
 ```
 
-In an attempt to provide more helpful error messages, this behavior is no longer possible.  You can achieve the same effect in one of two ways.
+In an attempt to provide more helpful error messages, this behavior is no longer possible. You can achieve the same effect in one of two ways.
 
 The first is to manually assign the foreign keys:
 
@@ -239,7 +239,7 @@ This brings the API in line with the other methods referencing attributes.
 
 ### Method changes due to compound key support
 
-Compound key support required some method and parameter name changes.  Although the list seems extensive, you will likely not need to change anything in your code unless you have extended built-in Quick components.  \(You will see many relationship parameter name changes.  Note that the function you call to define a relationship is a function on the `BaseEntity` and has not changed its signature.\)
+Compound key support required some method and parameter name changes. Although the list seems extensive, you will likely not need to change anything in your code unless you have extended built-in Quick components. \(You will see many relationship parameter name changes. Note that the function you call to define a relationship is a function on the `BaseEntity` and has not changed its signature.\)
 
 **BaseEntity.cfc:**
 
