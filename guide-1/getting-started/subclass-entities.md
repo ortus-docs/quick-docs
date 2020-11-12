@@ -35,7 +35,7 @@ component
     property name="displayOrder";
     property name="designation";
 
-    function approvalStatus(){
+    function book(){
         return belongsTo( "Book", "FK_book" );
     }
 
@@ -113,7 +113,7 @@ component
     property name="displayOrder";
     property name="designation";
 
-    function approvalStatus(){
+    function book(){
         return belongsTo( "Book", "FK_book" );
     }
 
