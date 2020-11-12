@@ -11,7 +11,7 @@ You can do this any way you'd like: through the web admin, in `Application.cfc`,
 Make sure to set `this.datasource` in your `Application.cfc` so Quick knows which datasource to use.
 
 {% hint style="info" %}
-Quick can use [multiple datasources](defining-an-entity.md#multiple-datasource-support), but it makes it easier to use when you don't have to deal with that.
+Quick can use [multiple datasources](defining-an-entity/#multiple-datasource-support), but it makes it easier to use when you don't have to deal with that.
 {% endhint %}
 
 ## Download Quick
@@ -42,5 +42,5 @@ moduleSettings = {
 
 Valid options are any of the [qb supported grammars](https://qb.ortusbooks.com). At the time of writing valid grammar options are: `MySQLGrammar@qb`, `PostgresGrammar@qb`, `MSSQLGrammar@qb` and `OracleGrammar@qb`. You can also have qb discover your grammar on application init using `AutoDiscover@qb`. Please check the qb docs for additional options.
 
-If you want to use a different datasource and/or grammar for individual entitities you can do so by [adding some metadata](defining-an-entity.md#multiple-datasource-support) attributes to your entities.
+If you want to use a different datasource and/or grammar for individual entitities you can do so by [adding some metadata](defining-an-entity/#multiple-datasource-support) attributes to your entities.
 
