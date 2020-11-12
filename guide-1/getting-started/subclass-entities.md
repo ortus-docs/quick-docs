@@ -56,7 +56,7 @@ Or properties on the parent class can be used as first-class properties within t
 ```javascript
 var smallCoverPhotos = getInstance( "BookMedia" )
                     .where( "designation", "cover" )
-                    .whereLT( "fileSizeBytes", 40000 )
+                    .where( "fileSizeBytes", "<", 40000 )
                     .orderBy( "displayOrder", "ASC" )
                     .orderBy( "uploadFileName", "ASC" );
 ```
@@ -134,4 +134,3 @@ Loading a collection of `BookMedia` entities, however, will always return a coll
 ## Summary
 
 Discriminated and child class entities, allow for a more Object oriented approach to entity-specific relationships by allowing you to eliminate pivot/join tables and extend the attributes of the base class.
-
