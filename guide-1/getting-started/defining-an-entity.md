@@ -22,6 +22,10 @@ We don't need to tell Quick what table name to use for our entity. By default, Q
 component table="my_users" extends="quick.models.BaseEntity" accessors="true" {}
 ```
 
+## Inheritance
+
+For more information on using inheritance and child tables in your relational database model, see [Subclass Entities](subclass-entities.md).
+
 ## Primary Key
 
 By default, Quick assumes a primary key of `id`. The name of this key can be configured by setting `variables._key` in your component.

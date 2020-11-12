@@ -10,6 +10,7 @@
 
 * [Getting Started](guide-1/getting-started/README.md)
   * [Defining An Entity](guide-1/getting-started/defining-an-entity.md)
+    * [Subclass Entities](guide-1/getting-started/subclass-entities.md)
   * [Retrieving Entities](guide-1/getting-started/retrieving-entities.md)
   * [Working with Entities](guide-1/getting-started/working-with-entities.md)
   * [Creating New Entities](guide-1/getting-started/creating-new-entities.md)
