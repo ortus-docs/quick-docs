@@ -1,12 +1,16 @@
 # What's New?
 
+## 4.2.0
+
+* Add a [`simplePaginate`](guide-1/getting-started/retrieving-entities.md#simplepaginate) pagination method for quicker performance when total records or total pages are not needed or too slow.
+
 ## 4.1.6
 
 * Configure columns are no longer cleared when setting up a `BelongsToMany` relationship.
 
 ## 4.1.5
 
-* Provide `initialThroughConstraints` for `hasOne` relationships.
+* Provide `initialThroughConstraints` for `hasOne` relationships \(used in `*Through` relationships\).
 
 ## 4.1.4
 

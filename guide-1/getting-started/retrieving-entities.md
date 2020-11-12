@@ -143,6 +143,34 @@ var posts = getInstance( "Post" )
 }
 ```
 
+### simplePaginate
+
+| Name | Type | Required | Default | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| page | numeric | `false` | 1 | The page of results to return. |
+| maxRows | numeric | `false` | 25 | The number of rows to return. |
+
+Executes the configured query, eager loads any relations, and returns the entities in the configured qb simple pagination struct.
+
+```javascript
+var posts = getInstance( "Post" )
+    .whereNotNull( "publishedDate" )
+    .simplePaginate( rc.page, rc.maxrows );
+```
+
+```javascript
+// default response example
+{
+    "results": [ User#1, User#2, ... ],
+    "pagination": {
+        "hasMore": true,
+        "maxRows": 25,
+        "offset": 0,
+        "page": 1
+    }
+}
+```
+
 ### first
 
 | Name | Type | Required | Default | Description |
