@@ -25,7 +25,7 @@ Finds the first matching record or creates a new entity.
 | attributes | struct | `false` | `{}` | A struct of key / value pairs to fill in to the new entity. |
 | ignoreNonExistentAttributes | boolean | `false` | `false` | If true, does not throw an exception if an attribute does not exist.  Instead, it skips the non-existent attribute. |
 
-Sets attributes data from a struct of key / value pairs.  This method does the following, in order:
+Sets attributes data from a struct of key / value pairs. This method does the following, in order:
 
 1. Guard against read-only attributes.
 2. Attempt to call a relationship setter.
@@ -49,7 +49,7 @@ user.save();
 | attributes | struct | `false` | `{}` | A struct of key / value pairs to fill in to the new entity. |
 | ignoreNonExistentAttributes | boolean | `false` | `false` | If true, does not throw an exception if an attribute does not exist.  Instead, it skips the non-existent attribute. |
 
-Populate is simply an alias for `fill`.  Use whichever one suits you best.
+Populate is simply an alias for `fill`. Use whichever one suits you best.
 
 ## create
 
@@ -113,10 +113,10 @@ Returns the entity with the id value as the primary key. If no record is found, 
 ```javascript
 var user = getInstance( "User" ).findOrNew(
     9999,
-	  {
-			  "firstName" : "doesnt",
-			  "lastName"  : "exist"
-	  }
+      {
+              "firstName" : "doesnt",
+              "lastName"  : "exist"
+      }
 );
 ```
 
@@ -133,12 +133,12 @@ Returns the entity with the id value as the primary key. If no record is found, 
 ```javascript
 var user = getInstance( "User" ).findOrCreate(
     9999,
-	  {
+      {
         "username"  : "doesntexist",
-			  "firstName" : "doesnt",
-			  "lastName"  : "exist",
-			  "password"  : "secret"
-	  }
+              "firstName" : "doesnt",
+              "lastName"  : "exist",
+              "password"  : "secret"
+      }
 );
 ```
 
@@ -160,7 +160,7 @@ var user = getInstance( "User" ).updateOrCreate( {
 
 ## Hydration Methods
 
-Hydration is a term to describe filling an entity with a struct of data and then marking it as loaded, without doing any database queries.  For example, this might be useful when hydrating a user from session data instead of doing a query every request.
+Hydration is a term to describe filling an entity with a struct of data and then marking it as loaded, without doing any database queries. For example, this might be useful when hydrating a user from session data instead of doing a query every request.
 
 ### hydrate
 
@@ -169,7 +169,7 @@ Hydration is a term to describe filling an entity with a struct of data and then
 | attributes | struct | `false` | `{}` | A struct of key / value pairs to fill in to the entity. |
 | ignoreNonExistentAttributes | boolean | `false` | `false` | If true, does not throw an exception if an attribute does not exist.  Instead, it skips the non-existent attribute. |
 
-Hyrdates an entity from a struct of data.  Hydrating an entity fills the entity and then marks it as loaded.
+Hyrdates an entity from a struct of data. Hydrating an entity fills the entity and then marks it as loaded.
 
 If the entity's keys are not included in the struct of data, a `MissingHydrationKey` is thrown.
 

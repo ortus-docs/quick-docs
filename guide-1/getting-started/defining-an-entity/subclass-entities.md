@@ -42,7 +42,13 @@ component
 }
 ```
 
-Note the additional component attribute `joincolumn`. The presence of this attribute on a child class signifies that it is a child entity of the parent and that the parent's properties should be loaded whenever the `BookMedia` entity is loaded. In addition, the primary key of the entity is that of the parent. Child entities can be retrieved by queries specific to their own properties:
+Note the additional component attribute `joincolumn`. The presence of this attribute on a child class signifies that it is a child entity of the parent and that the parent's properties should be loaded whenever the `BookMedia` entity is loaded. In addition, the primary key of the entity is that of the parent.
+
+{% hint style="info" %}
+Note that a `table` attribute is required on a child entity if the parent entity has one.  This is because ColdBox will perform a deep merge on the entire inheritance chain for metadata properties.  If a parent class has a `table` attribute, it will show up as the child's `table` attribute.
+{% endhint %}
+
+Child entities can be retrieved by queries specific to their own properties:
 
 ```javascript
 var coverPhotos = getInstance( "BookMedia" )
@@ -60,13 +66,13 @@ var smallCoverPhotos = getInstance( "BookMedia" )
                     .orderBy( "uploadFileName", "ASC" );
 ```
 
-Child entities can be retreived, individually, using the value of the `joinColumn`, which should be a foreign key to the parent identifier column:
+Child entities can be retrieved, individually, using the value of the `joinColumn`, which should be a foreign key to the parent identifier column:
 
-```text
+```javascript
 var myBookMediaItem = getInstance( "BookMedia" ).get( myId );
 ```
 
-Now my `Book` entity can use its extended media class to retreive media items which are specific to its own purpose:
+Now my `Book` entity can use its extended media class to retrieve media items which are specific to its own purpose:
 
 ```javascript
 function media(){
@@ -76,7 +82,7 @@ function media(){
 
 ## Discriminated Entities
 
-A discriminated child class functions, basically, in the same way as a subclassed entity, with one exception: The parent entity is aware of the discriminated child, due to a `discriminatorValue` attribute and will return that specific class when a retreival is performed through the parent Entity. Let's take our `BookMedia` class, again, but this time defining it as a discriminated entity.
+A discriminated child class functions, basically, in the same way as a subclassed entity, with one exception: The parent entity is aware of the discriminated child, due to a `discriminatorValue` attribute and will return that specific class when a retrieval is performed through the parent Entity. Let's take our `BookMedia` class, again, but this time defining it as a discriminated entity.
 
 The first step is to add the `discriminatorColumn` attribute to the `Media` entity:
 
@@ -108,6 +114,30 @@ component
 {
     property name="displayOrder";
     property name="designation";
+
+    function approvalStatus(){
+        return belongsTo( "Book", "FK_book" );
+    }
+
+}
+```
+
+Finally, we define an array of possible discriminated entities for the parent.  This is so we don't have to scan all Quick components just to determine if there are any discriminated entities.
+
+```javascript
+component
+    extends="Media"
+    table="book_media"
+    joinColumn="FK_media"
+    discriminatorValue="book"
+    accessors="true"
+{
+    property name="displayOrder";
+    property name="designation";
+    
+    variables._discriminators = [
+        "BookMedia"
+    ];
 
     function approvalStatus(){
         return belongsTo( "Book", "FK_book" );
