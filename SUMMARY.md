@@ -47,7 +47,7 @@
 
 ## External Links
 
-* [API Docs](https://s3.amazonaws.com/apidocs.ortussolutions.com/coldbox-modules/quick/3.0.0/index.html)
+* [API Docs](https://s3.amazonaws.com/apidocs.ortussolutions.com/coldbox-modules/quick/4.2.0/index.html)
 * [Source Code](https://github.com/coldbox-modules/quick)
 * [Issue Tracker](https://github.com/coldbox-modules/quick/issues)
 
