@@ -264,6 +264,19 @@ var user = getInstance( "User" )
     .first();
 user.getLastLoginDate(); // {ts 2019-05-02 08:24:51}
 ```
+{% hint style="success" %}
+`addSubSelect` call must come after a `select` clause. See below example.
+{% endhint %}
+
+```javascript
+var user = getInstance( "User" )
+    // Select clause specified
+    .select( "firstName" )
+    // addSubSelect after select clause
+    .addSubselect( "lastLoginDate", "logins.timestamp" )
+    .first();
+user.getLastLoginDate(); // {ts 2019-05-02 08:24:51}
+```
 
 ### Dynamic Subselect Relationships
 
