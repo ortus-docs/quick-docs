@@ -121,3 +121,9 @@ Quick is inspired heavily by [Eloquent in Laravel](https://laravel.com/docs/5.6/
 
 Development of Quick is sponsored by Ortus Solutions. Thank you Ortus Solutions for investing in the future of CFML.
 
+
+
+### Discussion & Help 
+
+The Box products  community for further discussion and help can be found here: [https://community.ortussolutions.com/c/communities/quick-orm/23](https://community.ortussolutions.com/c/communities/quick-orm/23)
+
