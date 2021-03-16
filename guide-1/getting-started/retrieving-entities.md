@@ -242,7 +242,7 @@ Finds the first matching record or creates a new entity.
 
 ```javascript
 var user = getInstance( "User" )
-    .firstOrNew( { "username": rc.username } );
+    .firstOrCreate( { "username": rc.username } );
 ```
 
 ### find
