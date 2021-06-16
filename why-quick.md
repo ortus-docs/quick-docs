@@ -6,8 +6,8 @@ You might be thinking, I don't need an ORM engine.  I don't even know what ORM m
 
 Quick's ORM philosophy comes down to three main points:
 
-1. Give relevant names to important collections of SQL code. \([scopes](guide-1/getting-started/query-scopes-and-subselects.md#what-are-scopes), [relationships](guide-1/relationships/), etc.\)
-2. Make queries easy to compose at runtime to get the exact data you want in the most efficient way \([subselects](guide-1/getting-started/query-scopes-and-subselects.md#subselects), [eager loading](guide-1/relationships/eager-loading.md), etc.\)
+1. Give relevant names to important collections of SQL code. \([scopes](guide/getting-started/query-scopes-and-subselects.md#what-are-scopes), [relationships](guide/relationships/), etc.\)
+2. Make queries easy to compose at runtime to get the exact data you want in the most efficient way \([subselects](guide/getting-started/query-scopes-and-subselects.md#subselects), [eager loading](guide/relationships/eager-loading.md), etc.\)
 3. Get out of your way when you need or want to write barebones SQL.
 
 ## Coming from Hibernate?

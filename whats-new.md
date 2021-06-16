@@ -2,7 +2,7 @@
 
 ## 4.2.0
 
-* Add a [`simplePaginate`](guide-1/getting-started/retrieving-entities.md#simplepaginate) pagination method for quicker performance when total records or total pages are not needed or too slow.
+* Add a [`simplePaginate`](guide/getting-started/retrieving-entities.md#simplepaginate) pagination method for quicker performance when total records or total pages are not needed or too slow.
 
 ## 4.1.6
 
@@ -22,7 +22,7 @@
 
 ## 4.1.0
 
-* Allow for [child entities,](guide-1/getting-started/defining-an-entity/subclass-entities.md) including [discriminated entities.](guide-1/getting-started/defining-an-entity/subclass-entities.md#discriminated-entities)
+* Allow for [child entities,](guide/getting-started/defining-an-entity/subclass-entities.md) including [discriminated entities.](guide/getting-started/defining-an-entity/subclass-entities.md#discriminated-entities)
 * Look up returning values by column name not by alias in the `ReturningKeyType`.
 
 ## 4.0.2
@@ -42,13 +42,13 @@
 
 #### BREAKING CHANGES
 
-* [Scopes](guide-1/getting-started/query-scopes-and-subselects.md), [`whereHas`](guide-1/relationships/querying-relationships.md#wherehas), and [`whereDoesntHave`](guide-1/relationships/querying-relationships.md#wheredoesnthave) callbacks now automatically group where clauses when an `OR` combinator is detected.
+* [Scopes](guide/getting-started/query-scopes-and-subselects.md), [`whereHas`](guide/relationships/querying-relationships.md#wherehas), and [`whereDoesntHave`](guide/relationships/querying-relationships.md#wheredoesnthave) callbacks now automatically group where clauses when an `OR` combinator is detected.
 
 #### Other Changes
 
-* Dynamically add [relationship counts](guide-1/relationships/relationship-counts.md) to a parent entity without loading all of the relationship.
+* Dynamically add [relationship counts](guide/relationships/relationship-counts.md) to a parent entity without loading all of the relationship.
 * Give a helpful error message when trying to set relationship values before saving an entity, where applicable.
-* Multiple bug fixes related to [subselects](guide-1/getting-started/query-scopes-and-subselects.md#subselects) and [querying relationships ](guide-1/relationships/querying-relationships.md)when using `belongsToThrough`, `hasOneThrough`, or `hasManyThrough`.
+* Multiple bug fixes related to [subselects](guide/getting-started/query-scopes-and-subselects.md#subselects) and [querying relationships ](guide/relationships/querying-relationships.md)when using `belongsToThrough`, `hasOneThrough`, or `hasManyThrough`.
 
 ## 3.1.7
 
@@ -77,11 +77,11 @@
 
 ## 3.1.1
 
-* Fix [querying relationship methods](guide-1/relationships/querying-relationships.md) when using "OR" combinators.
+* Fix [querying relationship methods](guide/relationships/querying-relationships.md) when using "OR" combinators.
 
 ## 3.1.0
 
-* Add support for JSON [casting](guide-1/getting-started/defining-an-entity/#casts) using a new `JsonCast@quick` component.
+* Add support for JSON [casting](guide/getting-started/defining-an-entity/#casts) using a new `JsonCast@quick` component.
 
 ## 3.0.4
 
@@ -89,15 +89,15 @@
 
 ## 3.0.3
 
-* Optimize [cast ](guide-1/getting-started/defining-an-entity/#casts)caching
+* Optimize [cast ](guide/getting-started/defining-an-entity/#casts)caching
 
 ## 3.0.2
 
-* Apply [custom sqltypes ](guide-1/getting-started/defining-an-entity/#sql-type)during [eager loading](guide-1/relationships/eager-loading.md).
+* Apply [custom sqltypes ](guide/getting-started/defining-an-entity/#sql-type)during [eager loading](guide/relationships/eager-loading.md).
 
 ## 3.0.1
 
-* Account for null values in [`fill`](guide-1/getting-started/creating-new-entities.md#fill).
+* Account for null values in [`fill`](guide/getting-started/creating-new-entities.md#fill).
 * Swap structAppend order for a Lucee bug in mementifier integration.
 
 ## 3.0.0
@@ -112,32 +112,32 @@ _Please see the_ [_Upgrade Guide_](upgrade-guide.md#3-0-0) _for more information
 * The `defaultGrammar` mapping needs to be the full WireBox mapping, including the `@qb`, if needed.
   * For instance, `MSSQLGrammar` would become `MSSQLGrammar@qb`.
   * This will allow for other grammars to be more easily contributed via third party modules.
-* \`\`[`HasManyThrough` relationships](guide-1/relationships/relationship-types/hasmanythrough.md) now only accept a `relationships` parameter of relationship methods to walk to get to the intended entity.
-* Attributes using `casts="boolean"` need to be updated to [`casts="BooleanCast@quick"`](guide-1/getting-started/defining-an-entity/#casts).
+* \`\`[`HasManyThrough` relationships](guide/relationships/relationship-types/hasmanythrough.md) now only accept a `relationships` parameter of relationship methods to walk to get to the intended entity.
+* Attributes using `casts="boolean"` need to be updated to [`casts="BooleanCast@quick"`](guide/getting-started/defining-an-entity/#casts).
 * Some method and parameter names have been changed to support composite keys.  **The majority of changes will only affect you if you have extended base Quick components.** The full list can be found in the Upgrade Guide.
 
 ####  **Other Changes** <a id="other-changes"></a>
 
-* [Bundle Mementifier](guide-1/serialization.md) for memento transformations.
-* Use [asMemento](guide-1/serialization.md#asmemento) to automatically convert queries to mementos.
+* [Bundle Mementifier](guide/serialization.md) for memento transformations.
+* Use [asMemento](guide/serialization.md#asmemento) to automatically convert queries to mementos.
 * Automatically-generated [API docs](https://apidocs.ortussolutions.com/#/coldbox-modules/quick/).
 * Add error message for defaulting key values.
 * Update to [qb 7.0.0](https://qb.ortusbooks.com/).
-* Add a [belongsToThrough relationship](guide-1/relationships/relationship-types/belongstothrough.md).
-* Add a [HasOneThrough relationship](guide-1/relationships/relationship-types/hasonethrough.md).
-* [Custom Casts](guide-1/getting-started/defining-an-entity/#casts) - using custom components to represent one or more attributes.
-* [Ordering by relationship attributes](guide-1/relationships/ordering-by-relationships.md).
-* [addSubselect](guide-1/getting-started/query-scopes-and-subselects.md#subselects) [improvements](guide-1/getting-started/query-scopes-and-subselects.md#using-relationships-in-subselects).
+* Add a [belongsToThrough relationship](guide/relationships/relationship-types/belongstothrough.md).
+* Add a [HasOneThrough relationship](guide/relationships/relationship-types/hasonethrough.md).
+* [Custom Casts](guide/getting-started/defining-an-entity/#casts) - using custom components to represent one or more attributes.
+* [Ordering by relationship attributes](guide/relationships/ordering-by-relationships.md).
+* [addSubselect](guide/getting-started/query-scopes-and-subselects.md#subselects) [improvements](guide/getting-started/query-scopes-and-subselects.md#using-relationships-in-subselects).
 * Add a new QuickBuilder to better handle interop with qb.
-* [Add `exists` and `existsOrFail` methods](guide-1/getting-started/retrieving-entities.md#existsorfail).
-* Allow [custom](guide-1/getting-started/retrieving-entities.md#existsorfail) [error](guide-1/getting-started/retrieving-entities.md#firstorfail) [messages](guide-1/getting-started/retrieving-entities.md#findorfail) for `orFail` methods.
+* [Add `exists` and `existsOrFail` methods](guide/getting-started/retrieving-entities.md#existsorfail).
+* Allow [custom](guide/getting-started/retrieving-entities.md#existsorfail) [error](guide/getting-started/retrieving-entities.md#firstorfail) [messages](guide/getting-started/retrieving-entities.md#findorfail) for `orFail` methods.
 * Ensure `loadRelationship` doesn't reload existing relationships.
-* Add multiple retrieve or new/create methods - [`firstWhere`](guide-1/getting-started/retrieving-entities.md#firstwhere), [`firstOrNew`](guide-1/getting-started/retrieving-entities.md#firstornew), [`firstOrCreate`](guide-1/getting-started/retrieving-entities.md#firstorcreate), [`findOrNew`](guide-1/getting-started/retrieving-entities.md#findornew), and [`findOrCreate`](guide-1/getting-started/retrieving-entities.md#findorcreate).
-* Add [`paginate`](guide-1/getting-started/retrieving-entities.md#paginate) to Quick.
-* Add [`is` and `isNot`](guide-1/getting-started/defining-an-entity/#comparing-entities) to compare entities.
-* Allow [hydrating entities](guide-1/getting-started/retrieving-entities.md#hydrate) from serialized data.
-* Allow returning default entities for null relations on [`HasOne`](guide-1/relationships/relationship-types/hasone.md#withdefault), [`BelongsTo`](guide-1/relationships/relationship-types/belongsto.md#withdefault), [`HasOneThrough`](guide-1/relationships/relationship-types/hasonethrough.md#withdefault), and [`BelongsToThrough`](guide-1/relationships/relationship-types/belongstothrough.md#withdefault) relationships.
-* Query relations using [`has`](guide-1/relationships/querying-relationships.md#has), [`doesntHave`](guide-1/relationships/querying-relationships.md#doesnthave), [`whereHas`](guide-1/relationships/querying-relationships.md#wherehas), and [`whereDoesntHave`](guide-1/relationships/querying-relationships.md#wheredoesnthave).
+* Add multiple retrieve or new/create methods - [`firstWhere`](guide/getting-started/retrieving-entities.md#firstwhere), [`firstOrNew`](guide/getting-started/retrieving-entities.md#firstornew), [`firstOrCreate`](guide/getting-started/retrieving-entities.md#firstorcreate), [`findOrNew`](guide/getting-started/retrieving-entities.md#findornew), and [`findOrCreate`](guide/getting-started/retrieving-entities.md#findorcreate).
+* Add [`paginate`](guide/getting-started/retrieving-entities.md#paginate) to Quick.
+* Add [`is` and `isNot`](guide/getting-started/defining-an-entity/#comparing-entities) to compare entities.
+* Allow [hydrating entities](guide/getting-started/retrieving-entities.md#hydrate) from serialized data.
+* Allow returning default entities for null relations on [`HasOne`](guide/relationships/relationship-types/hasone.md#withdefault), [`BelongsTo`](guide/relationships/relationship-types/belongsto.md#withdefault), [`HasOneThrough`](guide/relationships/relationship-types/hasonethrough.md#withdefault), and [`BelongsToThrough`](guide/relationships/relationship-types/belongstothrough.md#withdefault) relationships.
+* Query relations using [`has`](guide/relationships/querying-relationships.md#has), [`doesntHave`](guide/relationships/querying-relationships.md#doesnthave), [`whereHas`](guide/relationships/querying-relationships.md#wherehas), and [`whereDoesntHave`](guide/relationships/querying-relationships.md#wheredoesnthave).
 * Split `reset` into `reset` and `resetToNew` methods.
 * Store the original attributes for later resetting.
 * Use `parameterLimits` to eager load.
@@ -155,30 +155,30 @@ _Please see the_ [_Upgrade Guide_](upgrade-guide.md#3-0-0) _for more information
 
 ## 2.5.0
 
-* Define [custom collections](guide-1/collections.md) per entity.
+* Define [custom collections](guide/collections.md) per entity.
 
 ## 2.4.0
 
 * ~~Apply custom setters when hydrating from the database.~~ \(Reverted in `2.5.3` for unintended consequences with things like password hashing.\)
-* [Query scopes can return any value.](guide-1/getting-started/query-scopes-and-subselects.md#scopes-that-return-values)  This allows you to use scopes to perform query functions and return values.  \(If you do not want to return a custom value, return the `QueryBuilder` instance or nothing.\)
+* [Query scopes can return any value.](guide/getting-started/query-scopes-and-subselects.md#scopes-that-return-values)  This allows you to use scopes to perform query functions and return values.  \(If you do not want to return a custom value, return the `QueryBuilder` instance or nothing.\)
 * Improve error messages for not loaded entities.
 * Return the correct memento with accessors on.
 
 ## 2.3.0
 
-* [Option to ignore non-existent attributes](guide-1/getting-started/updating-existing-entities.md#update)
+* [Option to ignore non-existent attributes](guide/getting-started/updating-existing-entities.md#update)
 
 ## 2.2.0
 
-* [Relationship Fetch Methods](guide-1/relationships/retrieving-relationships.md) \(`first` and `find` methods\)
+* [Relationship Fetch Methods](guide/relationships/retrieving-relationships.md) \(`first` and `find` methods\)
 
 ## 2.1.0
 
-* [Subselect Helper](guide-1/getting-started/query-scopes-and-subselects.md#subselects)
-* [Global Scopes](guide-1/getting-started/query-scopes-and-subselects.md#global-scopes)
-* [saveMany](guide-1/relationships/relationship-types/hasmany.md#saveMany)
+* [Subselect Helper](guide/getting-started/query-scopes-and-subselects.md#subselects)
+* [Global Scopes](guide/getting-started/query-scopes-and-subselects.md#global-scopes)
+* [saveMany](guide/relationships/relationship-types/hasmany.md#saveMany)
 * Mapping foreign keys for relationships is now optional
 * Either entities or primary key values can be passed to relationship persistance methods
 * Relationships can also be saved by calling `"set" & relationshipName`
-* [Virtual Inheritance](guide-1/getting-started/defining-an-entity/) works on ColdBox 5.2+
+* [Virtual Inheritance](guide/getting-started/defining-an-entity/) works on ColdBox 5.2+
 

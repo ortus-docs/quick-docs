@@ -6,7 +6,7 @@
 
 This isn't a breaking change that will affect most people. In fact, it will most likely improve your code.
 
-Previously, when using [scopes](guide-1/getting-started/query-scopes-and-subselects.md#what-are-scopes), [`whereHas`](guide-1/relationships/querying-relationships.md#wherehas), or [`whereDoesntHave`](guide-1/relationships/querying-relationships.md#wheredoesnthave), you were fully responsible for the wrapping of your where statements. For example, the following query:
+Previously, when using [scopes](guide/getting-started/query-scopes-and-subselects.md#what-are-scopes), [`whereHas`](guide/relationships/querying-relationships.md#wherehas), or [`whereDoesntHave`](guide/relationships/querying-relationships.md#wheredoesnthave), you were fully responsible for the wrapping of your where statements. For example, the following query:
 
 ```javascript
 var users = getInstance( "User" )
@@ -137,7 +137,7 @@ moduleSettings = {
 };
 ```
 
-### [HasManyThrough relationship](guide-1/relationships/relationship-types/hasmanythrough.md) re-tooled to be based on relationships
+### [HasManyThrough relationship](guide/relationships/relationship-types/hasmanythrough.md) re-tooled to be based on relationships
 
 It no longer accepts any entities or columns. Rather, it accepts an array of relationships to walk "through" to end up at the desired entity.
 
@@ -191,7 +191,7 @@ component extends="quick.models.BaseEntity" {
 
 This approach does require a relationship defined for each level, but it works up and down any number of relationships to get to your desired entity.
 
-### \`[associate](guide-1/relationships/relationship-types/belongsto.md#updating)\` cannot be called on unloaded entities
+### \`[associate](guide/relationships/relationship-types/belongsto.md#updating)\` cannot be called on unloaded entities
 
 To update the foreign key of a `belongsTo` relationship you use the `associate` method. In the past, it was possible to associate a new, unsaved child entity to its parent using this method.
 
