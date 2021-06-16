@@ -44,6 +44,7 @@
 ## Cookbook <a id="cookbook-1"></a>
 
 * [Introduction](cookbook-1/cookbook-introduction.md)
+* [Dynamic Datasource](cookbook-1/dynamic-datasource.md)
 
 ## External Links
 

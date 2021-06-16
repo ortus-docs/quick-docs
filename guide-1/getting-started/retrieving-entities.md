@@ -3,7 +3,7 @@
 Once you have an entity and its associated database table you can start retrieving data from your database.
 
 {% hint style="success" %}
-You can configure your query to retrieve entities using any qb method.  It is highly recommended you become familiar with the [qb documentation.](https://qb.ortusbooks.com/)
+You can configure your query to retrieve entities using any qb method. It is highly recommended you become familiar with the [qb documentation.](https://qb.ortusbooks.com/)
 {% endhint %}
 
 ## Active Record
@@ -58,7 +58,7 @@ component {
 }
 ```
 
-If you have a existing Service, and you would like to extend the quickService, you can extend the quikc.models.BaseService and then call super.init inside of the service init function passing the name of the entity (for example your User Entity) shown below: 
+If you have a existing Service, and you would like to extend the quickService, you can extend the quikc.models.BaseService and then call super.init inside of the service init function passing the name of the entity \(for example your User Entity\) shown below:
 
 ```javascript
 component singleton extends="quick.models.BaseService" {
@@ -70,7 +70,7 @@ component singleton extends="quick.models.BaseService" {
 }
 ```
 
-Any method you can call on an entity can be called on the service.  A new entity will be used for all calls to a Quick Service.
+Any method you can call on an entity can be called on the service. A new entity will be used for all calls to a Quick Service.
 
 ```javascript
 var users = userService
@@ -189,7 +189,7 @@ var posts = getInstance( "Post" )
 | :--- | :--- | :--- | :--- | :--- |
 | No arguments |  | \`\` |  |  |
 
-Executes the configured query and returns the first entity found.  If no entity is found, returns `null`.
+Executes the configured query and returns the first entity found. If no entity is found, returns `null`.
 
 ```javascript
 var user = getInstance( "User" )
@@ -219,7 +219,7 @@ var user = getInstance( "User" )
 | :--- | :--- | :--- | :--- | :--- |
 | errorMessage | any | `false` | `"No [#entityName()#] found with constraints [#serializeJSON( retrieveQuery().getBindings() )#]"` | An optional string error message or callback to produce a string error message.  If a callback is used, it is passed the unloaded entity as the only argument. |
 
-Executes the configured query and returns the first entity found.  If no entity is found, then an `EntityNotFound` exception is thrown with the given or default error message.
+Executes the configured query and returns the first entity found. If no entity is found, then an `EntityNotFound` exception is thrown with the given or default error message.
 
 ```javascript
 var user = getInstance( "User" )
@@ -297,10 +297,10 @@ Returns the entity with the id value as the primary key. If no record is found, 
 ```javascript
 var user = getInstance( "User" ).findOrNew(
     9999,
-	  {
-			  "firstName" : "doesnt",
-			  "lastName"  : "exist"
-	  }
+      {
+              "firstName" : "doesnt",
+              "lastName"  : "exist"
+      }
 );
 ```
 
@@ -317,18 +317,18 @@ Returns the entity with the id value as the primary key. If no record is found, 
 ```javascript
 var user = getInstance( "User" ).findOrCreate(
     9999,
-	  {
+      {
         "username"  : "doesntexist",
-			  "firstName" : "doesnt",
-			  "lastName"  : "exist",
-			  "password"  : "secret"
-	  }
+              "firstName" : "doesnt",
+              "lastName"  : "exist",
+              "password"  : "secret"
+      }
 );
 ```
 
 ## Hydration Methods
 
-Hydration is a term to describe filling an entity with a struct of data and then marking it as loaded, without doing any database queries.  For example, this might be useful when hydrating a user from session data instead of doing a query every request.
+Hydration is a term to describe filling an entity with a struct of data and then marking it as loaded, without doing any database queries. For example, this might be useful when hydrating a user from session data instead of doing a query every request.
 
 ### hydrate
 
@@ -337,7 +337,7 @@ Hydration is a term to describe filling an entity with a struct of data and then
 | attributes | struct | `false` | `{}` | A struct of key / value pairs to fill in to the entity. |
 | ignoreNonExistentAttributes | boolean | `false` | `false` | If true, does not throw an exception if an attribute does not exist.  Instead, it skips the non-existent attribute. |
 
-Hyrdates an entity from a struct of data.  Hydrating an entity fills the entity and then marks it as loaded.
+Hyrdates an entity from a struct of data. Hydrating an entity fills the entity and then marks it as loaded.
 
 If the entity's keys are not included in the struct of data, a `MissingHydrationKey` is thrown.
 
@@ -380,7 +380,7 @@ var users = getInstance( "User" ).hydrateAll( [
 
 ## Custom Collections
 
-If you would like collections of entities to be returned as something besides an array, you can override the `newCollection` method.  It receives the array of entities.  You can return any custom collection you desire.
+If you would like collections of entities to be returned as something besides an array, you can override the `newCollection` method. It receives the array of entities. You can return any custom collection you desire.
 
 ### newCollection
 
