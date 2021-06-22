@@ -80,6 +80,10 @@ var users = userService
     .get();
 ```
 
+{% hint style="info" %}
+If you need a new **unsaved** entity from your service, you can call `myService.newEntity()`
+{% endhint %}
+
 ## Aggregates
 
 Calling qb's aggregate methods \(`count`, `max`, etc.\) will return the appropriate value instead of an entity or collection of entities.
@@ -324,6 +328,24 @@ var user = getInstance( "User" ).findOrCreate(
               "password"  : "secret"
       }
 );
+```
+
+### newEntity
+
+| Name | type | required | default | description |
+| :--- | :--- | :--- | :--- | :--- |
+| name |  | string |  | wirebox name of the quick entity |
+
+You will probably not use newEntity very often if you use wirebox `getinstance("someQuickEntity")`  to retrieve an entity, because that will already give you a new entity. If you are using a QuickService you will need this method for creating a new entity
+
+```javascript
+var user = getInstance( "User" )
+
+//or
+
+property name="UserService" inject="quickService:User"; //inject a quick service
+
+var user = UserService.newEntity();
 ```
 
 ## Hydration Methods
