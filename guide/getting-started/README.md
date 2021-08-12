@@ -40,7 +40,7 @@ moduleSettings = {
 };
 ```
 
-Valid options are any of the [qb supported grammars](https://qb.ortusbooks.com). At the time of writing valid grammar options are: `MySQLGrammar@qb`, `PostgresGrammar@qb`, `MSSQLGrammar@qb` and `OracleGrammar@qb`. You can also have qb discover your grammar on application init using `AutoDiscover@qb`. Please check the qb docs for additional options.
+Valid options are any of the [qb supported grammars](https://qb.ortusbooks.com). At the time of writing valid grammar options are: `MySQLGrammar@qb`, `PostgresGrammar@qb`, `SqlServerGrammar@qb` and `OracleGrammar@qb`. You can also have qb discover your grammar on application init using `AutoDiscover@qb`. Please check the qb docs for additional options.
 
 If you want to use a different datasource and/or grammar for individual entitities you can do so by [adding some metadata](defining-an-entity/#multiple-datasource-support) attributes to your entities.
 
