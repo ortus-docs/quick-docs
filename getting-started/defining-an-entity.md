@@ -31,6 +31,17 @@ component extends="quick.models.BaseEntity" {
 }
 ```
 
+You can use multiple columns for your primary key by providing them in an array of strings
+
+```javascript
+// UserPermission.cfc for Many to Many Joining Table
+component extends="quick.models.BaseEntity" {
+    
+    variables._key = [ "user_id", "permission_id" ];
+
+}
+```
+
 Quick also assumes a key type that is auto-incrementing. If you would like a different key type, define a function called \`keyType\` and return the key type from that function.
 
 ```javascript
