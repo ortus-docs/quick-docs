@@ -122,7 +122,7 @@ var users = getInstance( "User" ).all();
 | :--- | :--- | :--- | :--- | :--- |
 | No arguments |  | \`\` |  |  |
 
-Executes the configured query, and returns the entities in a new collection.
+Executes the configured query, eager loads any specified relations, and returns the entities in a new collection.
 
 ```javascript
 var posts = getInstance( "Post" )
@@ -137,7 +137,7 @@ var posts = getInstance( "Post" )
 | page | numeric | `false` | 1 | The page of results to return. |
 | maxRows | numeric | `false` | 25 | The number of rows to return. |
 
-Executes the configured query, and returns the entities in the configured qb pagination struct.
+Executes the configured query, eager loads any specified relations, and returns the entities in the configured qb pagination struct.
 
 ```javascript
 var posts = getInstance( "Post" )
@@ -166,7 +166,7 @@ var posts = getInstance( "Post" )
 | page | numeric | `false` | 1 | The page of results to return. |
 | maxRows | numeric | `false` | 25 | The number of rows to return. |
 
-Executes the configured query, and returns the entities in the configured qb simple pagination struct.
+Executes the configured query, eager loads any specified relations, and returns the entities in the configured qb simple pagination struct.
 
 ```javascript
 var posts = getInstance( "Post" )
