@@ -58,7 +58,7 @@ component {
 }
 ```
 
-If you have a existing Service, and you would like to extend the quickService, you can extend the quikc.models.BaseService and then call super.init inside of the service init function passing the name of the entity \(for example your User Entity\) shown below:
+If you have a existing Service, and you would like to extend the quickService, you can extend the quick.models.BaseService and then call super.init inside of the service init function passing the name of the entity \(for example your User Entity\) shown below:
 
 ```javascript
 component singleton extends="quick.models.BaseService" {
