@@ -25,6 +25,6 @@ component extends="quick.models.BaseEntity" accessors="true" {
 ```
 
 {% hint style="danger" %}
-Custom getters and setters with **not** be called when hydrating a model from the database. For that use case, use [`casts`](getting-started/defining-an-entity/#casts).
+Custom getters and setters will **not** be called when hydrating a model from the database. For that use case, use [`casts`](getting-started/defining-an-entity/#casts).
 {% endhint %}
 
