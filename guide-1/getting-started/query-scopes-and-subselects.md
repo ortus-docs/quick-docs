@@ -265,7 +265,7 @@ var user = getInstance( "User" )
 user.getLastLoginDate(); // {ts 2019-05-02 08:24:51}
 ```
 {% hint style="success" %}
-`addSubSelect` call must come after a `select` clause. See below example.
+`addSubSelect` call must come after a `select` clause. This is because the `select` method overwrites the selected columns. If you use `selectRaw` or `addSelect`, this will not affect you. See below example.
 {% endhint %}
 
 ```javascript
