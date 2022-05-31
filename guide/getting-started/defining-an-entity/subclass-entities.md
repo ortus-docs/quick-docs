@@ -125,23 +125,20 @@ component
 Finally, we define an array of possible discriminated entities for the parent.  This is so we don't have to scan all Quick components just to determine if there are any discriminated entities.
 
 ```javascript
-component
-    extends="Media"
-    table="book_media"
-    joinColumn="FK_media"
-    discriminatorValue="book"
+component 
+    table="media" 
+    extends="quick.models.BaseEntity" 
     accessors="true"
+    discriminatorColumn="type"
 {
-    property name="displayOrder";
-    property name="designation";
+    property name="id";
+    property name="uploadFileName";
+    property name="fileLocation";
+    property name="fileSizeBytes";
     
     variables._discriminators = [
         "BookMedia"
     ];
-
-    function approvalStatus(){
-        return belongsTo( "Book", "FK_book" );
-    }
 
 }
 ```
