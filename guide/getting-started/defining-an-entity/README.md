@@ -15,7 +15,7 @@ You can generate Quick entities from CommandBox! Install `quick-commands` and us
 
 ## Tables
 
-We don't need to tell Quick what table name to use for our entity. By default, Quick uses the pluralized name of the component for the table name. That means for our `User` entity Quick will assume the table name is `users`. You can override this by specifying a `table` metadata attribute on the component.
+We don't need to tell Quick what table name to use for our entity. By default, Quick uses the pluralized, `snake_cased` name of the component for the table name. That means for our `User` entity Quick will assume the table name is `users`. For an entity with multiple words like `PasswordResetToken` the default table would be `password_reset_tokens`. You can override this by specifying a `table` metadata attribute on the component.
 
 ```javascript
 // User.cfc
@@ -97,7 +97,7 @@ component extends="quick.models.BaseEntity" accessors="true" {
 Now, only the `id`, `username`, and `email` attributes will be retrieved.
 
 {% hint style="warning" %}
-Make sure to include the primary key \(`id` by default\) as a property.
+Make sure to include the primary key (`id` by default) as a property.
 {% endhint %}
 
 ### Persistent
@@ -135,7 +135,7 @@ component extends="quick.models.BaseEntity" accessors="true" {
 
 To work around CFML's lack of `null`, you can use the `nullValue` and `convertToNull` attributes.
 
-`nullValue` defines the value that is considered `null` for a attribute. By default it is an empty string. \(`""`\)
+`nullValue` defines the value that is considered `null` for a attribute. By default it is an empty string. (`""`)
 
 `convertToNull` is a flag that, when false, will not try to insert `null` in to the database. By default this flag is `true`.
 
@@ -183,7 +183,7 @@ Two casters ship with Quick: `BooleanCast@quick` and `JsonCast@quick`. You can a
 
 #### Custom Casts
 
-The `casts` attribute must point to a WireBox mapping that resolves to a component that implements the `quick.models.Casts.CastsAttribute` interface. \(The `implements` keyword is optional.\) This component defines how to `get` a value from the database in to the casted value and how to `set` a casted value back to the database. Below is an example of the built-in `BooleanCast`, which comes bundled with Quick.
+The `casts` attribute must point to a WireBox mapping that resolves to a component that implements the `quick.models.Casts.CastsAttribute` interface. (The `implements` keyword is optional.) This component defines how to `get` a value from the database in to the casted value and how to `set` a casted value back to the database. Below is an example of the built-in `BooleanCast`, which comes bundled with Quick.
 
 ```javascript
 // User.cfc
@@ -398,4 +398,3 @@ var userTwo = getInstance( "User" ).findOrFail( 1 );
 userOne.isSameAs( userTwo ); // true
 userOne.isNotSameAs( userTwo ); // false
 ```
-
