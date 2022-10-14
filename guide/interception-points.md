@@ -10,11 +10,13 @@ If you create your own Interceptors, they will not fire if you define them in yo
 
 Fired after dependency injection has been performed on the entity and the metadata has been inspected.
 
-`interceptData` structure
+`eventData` structure
 
 | Key | Description |
 | :--- | :--- |
 | entity | The entity loaded |
+| entityName | The name of the entity |
+
 
 ## quickPreLoad
 
@@ -24,22 +26,24 @@ Fired before attempting to load an entity from the database.
 This method is only called for `find` actions.
 {% endhint %}
 
-`interceptData` structure
+`eventData` structure
 
 | Key | Description |
 | :--- | :--- |
 | id | The id of the entity attempting to be loaded |
 | metadata | The metadata of the entity |
+| entityName | The name of the entity |
 
 ## quickPostLoad
 
 Fired after loading an entity from the database.
 
-`interceptData` structure
+`eventData` structure
 
 | Key | Description |
 | :--- | :--- |
 | entity | The entity loaded |
+| entityName | The name of the entity |
 
 ## quickPreSave
 
@@ -47,11 +51,12 @@ Fired before saving an entity to the database.
 
 > This method is called for both insert and update actions.
 
-`interceptData` structure
+`eventData` structure
 
 | Key | Description |
 | :--- | :--- |
 | entity | The entity to be saved |
+| entityName | The name of the entity |
 
 ## quickPostSave
 
@@ -59,69 +64,76 @@ Fired after saving an entity to the database.
 
 > This method is called for both insert and update actions.
 
-`interceptData` structure
+`eventData` structure
 
 | Key | Description |
 | :--- | :--- |
 | entity | The entity that was saved |
+| entityName | The name of the entity |
 
 ## quickPreInsert
 
 Fired before inserting an entity into the database.
 
-`interceptData` structure
+`eventData` structure
 
 | Key | Description |
 | :--- | :--- |
 | entity | The entity to be inserted |
+| entityName | The name of the entity |
 
 ## quickPostInsert
 
 Fired after inserting an entity into the database.
 
-`interceptData` structure
+`eventData` structure
 
 | Key | Description |
 | :--- | :--- |
 | entity | The entity that was inserted |
+| entityName | The name of the entity |
 
 ## quickPreUpdate
 
 Fired before updating an entity in the database.
 
-`interceptData` structure
+`eventData` structure
 
 | Key | Description |
 | :--- | :--- |
 | entity | The entity to be updated |
+| entityName | The name of the entity |
 
 ## quickPostUpdate
 
 Fired after updating an entity in the database.
 
-`interceptData` structure
+`eventData` structure
 
 | Key | Description |
 | :--- | :--- |
 | entity | The entity that was updated |
+| entityName | The name of the entity |
 
 ## quickPreDelete
 
 Fired before deleting a entity from the database.
 
-`interceptData` structure
+`eventData` structure
 
 | Key | Description |
 | :--- | :--- |
 | entity | The entity to be deleted |
+| entityName | The name of the entity |
 
 ## quickPostDelete
 
 Fired after deleting a entity from the database.
 
-`interceptData` structure
+`eventData` structure
 
 | Key | Description |
 | :--- | :--- |
 | entity | The entity that was deleted |
+| entityName | The name of the entity |
 
