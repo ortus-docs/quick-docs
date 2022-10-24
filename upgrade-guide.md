@@ -187,7 +187,7 @@ To migrate this code, change your `defaultGrammar` to be the full WireBox mappin
 ```javascript
 moduleSettings = {
     "quick": {
-        "defaultGrammar": "MSSQLGrammar@qb"
+        "defaultGrammar": "SqlServerGrammar@qb"
     }
 };
 ```
