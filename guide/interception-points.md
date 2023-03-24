@@ -133,8 +133,8 @@ Fired after deleting a entity from the database.
 ```
 function quickPreSave(  ){
 	if( arguments.interceptData.entity.entityName() == "Download" ){
-		if( !len( entity.getDownloadGUID() ) ){
-			entity.setDownloadGUID( createUUID() );
+		if( !len( arguments.interceptData.entity.getDownloadGUID() ) ){
+			arguments.interceptData.entity.setDownloadGUID( createUUID() );
 		}
 	}
 	if( !len( arguments.interceptData.entity.getCreatedAt() ) ){
