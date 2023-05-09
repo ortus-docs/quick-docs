@@ -1,5 +1,42 @@
 # What's New?
 
+## 5.2.11
+
+Upgrade to qb 9
+
+## 5.2.10
+
+**HasOneOrManyThrough:** Fix too many joins for `has` and `whereHas`
+
+## 5.2.9
+
+**HasOneOrManyThrough:** Fixed applying of through constraints\
+**BaseEntity:** Use wirebox to get the util to work in CommandBox
+
+## 5.2.8
+
+Fix bad link to Getting Started guide
+
+## 5.2.7
+
+Use existing builder when adding subselects
+
+## 5.2.6
+
+Update to latest mementifier (v3.0.0)
+
+## 5.2.5
+
+CommandBox compatibility
+
+## 5.2.4
+
+Force generated key to be an integer.
+
+## 5.2.3
+
+CommandBox-friendly injections using the `box` namespace.
+
 ## 5.2.2
 
 Fixed regression where eager loading inside a relationship was broken.
@@ -167,7 +204,7 @@ _Please see the_ [_Upgrade Guide_](upgrade-guide.md#3-0-0) _for more information
 * The `defaultGrammar` mapping needs to be the full WireBox mapping, including the `@qb`, if needed.
   * For instance, `MSSQLGrammar` would become `MSSQLGrammar@qb`.
   * This will allow for other grammars to be more easily contributed via third party modules.
-* ``[`HasManyThrough` relationships](guide/relationships/relationship-types/hasmanythrough.md) now only accept a `relationships` parameter of relationship methods to walk to get to the intended entity.
+* [`HasManyThrough` relationships](guide/relationships/relationship-types/hasmanythrough.md) now only accept a `relationships` parameter of relationship methods to walk to get to the intended entity.
 * Attributes using `casts="boolean"` need to be updated to [`casts="BooleanCast@quick"`](guide/getting-started/defining-an-entity/#casts).
 * Some method and parameter names have been changed to support composite keys.  **The majority of changes will only affect you if you have extended base Quick components.** The full list can be found in the Upgrade Guide.
 
