@@ -165,10 +165,16 @@ var admins = getInstance( "Admin" ).all();
 // SELECT * FROM users WHERE type = 'admin'
 ```
 
-If you have a global scope applied to an entity that you need to temporarily disable, you can disable them individually using the `withoutGlobalScope` method:
+To temporarily disable global scopes that have been applied to an entity, you have the option to disable them individually or all at once by utilizing the `withoutGlobalScope` method.
 
 ```javascript
+
+// disable all global scopes
+var admins = getInstance( "Admin" ).withoutGlobalScope().all();
+
+// selectively disable global scopes
 var admins = getInstance( "Admin" ).withoutGlobalScope( [ "ofType" ] ).all();
+
 // SELECT * FROM users
 ```
 
