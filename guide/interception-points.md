@@ -126,3 +126,20 @@ Fired after deleting a entity from the database.
 | Key    | Description                 |
 | ------ | --------------------------- |
 | entity | The entity that was deleted |
+
+
+## Example QuickPreSave
+
+```
+function quickPreSave(  ){
+	if( arguments.interceptData.entity.entityName() == "Download" ){
+		if( !len( arguments.interceptData.entity.getDownloadGUID() ) ){
+			arguments.interceptData.entity.setDownloadGUID( createUUID() );
+		}
+	}
+	if( !len( arguments.interceptData.entity.getCreatedAt() ) ){
+		arguments.interceptData.entity.setCreatedAt( now() );
+	}
+  arguments.interceptData.entity.setModifiedAt( now() );
+}
+```
