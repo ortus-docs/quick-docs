@@ -1,5 +1,9 @@
 # What's New?
 
+## 7.0.1
+
+Correctly handle null values with casted attributes.
+
 ## 7.0.0
 
 `QuickBuilder` now has its own `clone` method that behaves as you would expect. Previously, it only cloned the enclosed `QueryBuilder` which was not that useful.
