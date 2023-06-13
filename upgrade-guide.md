@@ -1,5 +1,11 @@
 # Upgrade Guide
 
+## 7.0.0
+
+### QuickBuilder.newQuery() now returns QuickBuilder instances
+
+Calling `newQuery` on a `QuickBuilder` now returns a new `QuickBuilder` instance instead of a new `QueryBuilder` instance.  If you needed a `QueryBuilder` instance, use the `newQuickQB` method instead.
+
 ## 6.0.0
 
 ### Dropped support for ColdBox 5
