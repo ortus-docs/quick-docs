@@ -1,5 +1,9 @@
 # What's New?
 
+## 6.2.1
+
+Allow a QuickBuilder to be used wherever a QueryBuilder can be used.
+
 ## 6.2.0
 
 Add the ability to [exclude all global scopes at once](guide/getting-started/query-scopes-and-subselects.md#global-scopes).
