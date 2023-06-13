@@ -18,8 +18,6 @@ We can shortcut the setters above using a `fill` method.
 
 ## fill
 
-Finds the first matching record or creates a new entity.
-
 | Name                        | Type          | Required | Default | Description                                                                                                         |
 | --------------------------- | ------------- | -------- | ------- | ------------------------------------------------------------------------------------------------------------------- |
 | attributes                  | struct        | `false`  | `{}`    | A struct of key / value pairs to fill in to the new entity.                                                         |
@@ -43,6 +41,9 @@ user.fill( {
 } );
 user.save();
 ```
+{% hint style="info" %}
+Note that quick will set the values of attributes, not all properties. If you want to populate all properties then consider using Wirebox's `populateFromStruct` method.
+{% endhint %}
 
 ## populate
 
