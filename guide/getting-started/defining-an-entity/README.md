@@ -39,6 +39,8 @@ component extends="quick.models.BaseEntity" accessors="true" {
 }
 ```
 
+### Key Types
+
 Quick also assumes a key type that is auto-incrementing. If you would like a different key type, override the`keyType` function and return the desired key type from that function.
 
 ```javascript
@@ -79,6 +81,31 @@ interface displayname="KeyType" {
 
 }
 ```
+
+### Compound Keys
+
+Quick also supports compound or composite keys as a primary key.  Define your `variables._key` as an array of the composite keys:
+
+```cfscript
+// PlayingField.cfc
+component extends="quick.models.BaseEntity" accessors="true" {
+
+    property name="fieldID";
+    property name="clientID";
+    property name="fieldName";
+
+    variables._key = [ "fieldID", "clientID" ];
+    
+    function keyType() {
+        return variables._wirebox.getInstance( "NullKeyType@quick" );
+    }
+
+}
+```
+
+{% hint style="info" %}
+Note that your chosen `keyType` will need to be able to handle composite keys.
+{% endhint %}
 
 ## Attributes
 
