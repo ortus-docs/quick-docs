@@ -70,6 +70,19 @@ component extends="quick.models.BaseEntity" {
     
 }
 ```
+## Can I access qb to run an SQL statement?
+
+Quick is powered by qb [qb documentation.](https://qb.ortusbooks.com/) and can be accessed from within Quick using either the `getQB` or `retrieveQuery` methods. For your convenience, the qb builder will have already populated the database table and column names for you in the returned qb instance.
+
+```cfml
+qb = getInstance( "User" ).getQB();
+// OR
+qb = getInstance( "User" ).retrieveQuery();
+```
+
+## What's the difference between retrieveAttribute( "x" ) and getX()?
+
+`getX` uses onMissingMethod to call `retrieveAttribute`. This is so you can create your own custom getters.
 
 ## When do I use a scope method and when do I use a normal method?
 
