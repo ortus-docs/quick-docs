@@ -41,8 +41,8 @@ user.fill( {
 } );
 user.save();
 ```
-{% hint style="info" %}
-Note that quick will set the values of attributes, not all properties. If you want to populate all properties then consider using Wirebox's `populateFromStruct` method.
+{% hint style="warn" %}
+Note that Quick will set the values of attributes only, not all properties. This is usually desirable. If you want to populate all properties then consider using Wirebox's [`populateFromStruct`](https://wirebox.ortusbooks.com/advanced-topics/wirebox-object-populator/populatefromstruct) method.
 {% endhint %}
 
 ## populate
