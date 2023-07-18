@@ -1,9 +1,5 @@
 # What's New?
 
-## 7.1.0
-
-Add a `withSum` method, similar to `withCount` for quickly adding a subselect based on the sum of a relationship's attribute.
-
 ## 7.0.1
 
 Correctly handle null values with casted attributes.
