@@ -1,3 +1,4 @@
+
 # FAQ
 
 ## What's the difference between \`posts\(\)\` and \`getPosts\(\)\`?
@@ -70,6 +71,31 @@ component extends="quick.models.BaseEntity" {
     
 }
 ```
+## Why do interception points on subclassed entities fire twice?
+
+{% hint style="info" %}
+**TLDR:** Quick will call service methods first on the parent entity and then on the child entity. Both instances will fire inception point events.
+{% endhint %}
+
+When working with subclassed entities and you call a method that would change that state of the database ( such as `.save()` or `.delete()` ) quick will first retrieve an instance of the parent entity and perform the same method call on that instance before calling the method on the child class. Interception points will subsequently be fired for both method calls. To overcome this, you can explicitly check which entity was used to fire events in the code. Quick will pass the `entityName` in the eventData argument of the interception point which can be used to check which instance fired the event. 
+
+```javascript
+// User.cfc
+component extends="quick.models.BaseEntity" {
+    
+    function preSave(event, eventData, buffer, rc, prc) {
+        if(arguments.eventData.entityName eq 'User'){
+            // this code will only execute once when interacting with Admin.cfc
+        }
+    }
+    
+}
+
+// Admin.cfc
+component extends="models.User" {
+
+}
+```
 
 ## When do I use a scope method and when do I use a normal method?
 
@@ -80,4 +106,5 @@ component extends="quick.models.BaseEntity" {
 ## How can I add a computed field to my entity, like from a SQL CASE statement?
 
 ## How can I always add a subselect or computed field to my queries?
+?
 
