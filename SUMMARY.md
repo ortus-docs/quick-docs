@@ -30,7 +30,7 @@
     * [polymorphicHasMany](guide/relationships/relationship-types/polymorphichasmany.md)
   * [Retrieving Relationships](guide/relationships/retrieving-relationships.md)
   * [Querying Relationships](guide/relationships/querying-relationships.md)
-  * [Relationship Counts](guide/relationships/relationship-counts.md)
+  * [Relationship Aggregates](guide/relationships/relationship-counts.md)
   * [Ordering By Relationships](guide/relationships/ordering-by-relationships.md)
   * [Eager Loading](guide/relationships/eager-loading.md)
 * [CBORM Compatibility Shim](guide/cborm-compatibility-shim.md)
