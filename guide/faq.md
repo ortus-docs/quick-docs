@@ -83,8 +83,8 @@ When working with subclassed entities and you call a method that would change th
 // User.cfc
 component extends="quick.models.BaseEntity" {
     
-    function preSave(event, eventData, buffer, rc, prc) {
-        if(arguments.eventData.entityName eq 'User'){
+    function preSave( event, eventData, buffer, rc, prc ) {
+        if ( arguments.eventData.entityName == "User" ) {
             // this code will only execute once when interacting with Admin.cfc
         }
     }
