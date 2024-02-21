@@ -1,5 +1,9 @@
 # What's New?
 
+## 7.1.1
+
+Pin [`commandbox-semantic-release`](https://forgebox.io/view/commandbox-semantic-release) to version 3.
+
 ## 7.1.0
 
 Add a [`withSum`](guide/relationships/relationship-counts.md#withsum) method, similar to [`withCount`](guide/relationships/relationship-counts.md#withcount) for quickly adding a subselect based on the sum of a relationship's attribute.
