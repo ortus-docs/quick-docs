@@ -204,7 +204,7 @@ moduleSettings = {
 };
 ```
 
-### [HasManyThrough relationship](guide/relationships/relationship-types/hasmanythrough.md) re-tooled to be based on relationships
+### [HasManyThrough relationship](guide/relationships/relationship-types/hasmanythrough-1.md) re-tooled to be based on relationships
 
 It no longer accepts any entities or columns. Rather, it accepts an array of relationships to walk "through" to end up at the desired entity.
 

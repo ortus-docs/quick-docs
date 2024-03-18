@@ -1,248 +1,190 @@
-# hasManyThrough
+# hasManyDeep
 
 ## Usage
 
-A `hasManyThrough` relationship is either a `one-to-many` or a `many-to-many` relationship. It is used when you want to access related entities through one or more intermediate entities. The most common example for this is through a pivot table. For instance, a `User` may have multiple `Permissions` via a `UserPermission` entity. This allows you to store additional data on the `UserPermission` entity, like a `createdDate` .
+A `hasManyDeep` relationship is either a `one-to-many` or a `many-to-many` relationship. It is used when you want to access related entities through one or more intermediate entities.  For example, you may want to retrieve all the blog posts for a `Team`:
+
+```cfscript
+// Team.cfc
+component extends="quick.models.BaseEntity" accessors="true" {
+
+    function posts() {
+        return hasManyDeep(
+            relationName = "Post",
+            through = [ "User" ],
+            foreignKeys = [
+                "teamId", // the key on User that refers to Team
+                "authorId" // the key on Post that refers to User
+            ],
+            localKeys = [
+                "id", // the key on Team that identifies Team
+                "id" // the key on User that identifies User
+            ]
+        );
+    }
+
+}
+```
+
+This would generate the following SQL:
+
+```sql
+SELECT *
+FROM `posts`
+INNER JOIN `users`
+    ON `posts`.`authorId` = `users`.`id`
+WHERE `users`.`teamId` = ? // team.getId()
+```
+
+You can generate this same relationship using a Builder syntax:
+
+```cfscript
+// Team.cfc
+component extends="quick.models.BaseEntity" accessors="true" {
+
+    function posts() {
+        return newHasManyDeepBuilder()
+            .throughEntity( "User", "teamId", "id" )
+            .toRelated( "Post", "authorId", "id" );
+    }
+
+}
+```
+
+`HasManyDeep` relationships can also traverse pivot tables. For instance, a `User` may have multiple `Permissions` via a `Role` entity.
 
 ```javascript
 // User.cfc
 component extends="quick.models.BaseEntity" accessors="true" {
 
     function permissions() {
-        return hasManyThrough( [ "userPermissions", "permission" ] );
-    }
-    
-    function userPermissions() {
-        return hasMany( "UserPermission" );
-    }
-
-}
-```
-
-```javascript
-// Permission.cfc
-component extends="quick.models.BaseEntity" accessors="true" {
-
-    function users() {
-       return hasManyThrough( [ "userPermissions", "user" ] );
-    }
-    
-    function userPermissions() {
-        return hasMany( "UserPermission" );
+        return hasManyDeep(
+            relationName = "Role",
+            through = [ "roles_users", "Role", "permissions_roles" ],
+            foreignKeys = [ "userId", "id", "roleId", "id" ],
+            localKeys = [ "id", "roleId", "id", "permissionId" ]
+        );
     }
 
 }
 ```
 
-```javascript
-// UserPermission.cfc
-component extends="quick.models.BaseEntity" accessors="true" {
+{% hint style="info" %}
+If a mapping in the `through` array is found as a WireBox mapping, it will be treated as a Pivot Table.
+{% endhint %}
 
-    function user() {
-        return belongsTo( "User" );
-    }
+{% hint style="info" %}
+If you are traversing a `polymorhpic` relationship, pass an array as the key type where the first key points to the polymorphic type column and the second key points to the identifying value.
+{% endhint %}
 
-    function permission() {
-        return belongsTo( "Permission" );
-    }
+## Constraining Relationships
 
-}
-```
+There are two options for constraining a `HasManyDeep` relationship.
 
-The only value needed for `hasManyThrough` is an array of relationship function names to walk through to get to the related entity.  The first relationship function name in the array must exist on the current entity.  Each subsequent function name must exist on the related entity of the previous relationship result.  For our previous example, `userPermissions` must be a relationship function on `User`.  `permission` must then be a relationship function on the related entity resulting from calling `User.userPermissions()`.  This returns a `hasMany` relationship where the related entity is `UserPermission`.  So, `UserPermission` must have a `permission` relationship function.  That is the end of the relationship function names array, so the related entity resulting from calling `UserPermission.permission()` is our final entity which is `Permission`.
+The first option is by using table aliases.
 
-```
-hasManyThrough( [ "userPermissions", "permission" ] );
-
-+----------------+---------------------------+----------------+
-| Current Entity | Relationship Method Names | Related Entity |
-+================+===========================+================+
-| User           | userPermissions           | UserPermission |
-+----------------+---------------------------+----------------+
-| UserPermission | permission                | Permission     |
-+----------------+---------------------------+----------------+
-```
-
-Let's take a look at another example.  `HasManyThrough` relationships can go up and down the relationship chain.  Here's an example of finding a User's teammates
-
-The inverse of `hasManyThrough` is either a `belongsToThrough` or a `hasManyThrough` relationship.&#x20;
-
-```javascript
-// User.cfc
-component extends="quick.models.BaseEntity" accessors="true" {
-
-    function team() {
-        return belongsTo( "Team" );
-    }
-    
-    function teammates() {
-        return hasManyThrough( [ "team", "members" ] );
-    }
-
-}
-```
-
-```javascript
+{% tabs %}
+{% tab title="Traditional Syntax" %}
+```cfscript
 // Team.cfc
 component extends="quick.models.BaseEntity" accessors="true" {
 
-    function members() {
-       return hasMany( "User" );
+    function activePosts() {
+        return hasManyDeep(
+            relationName = "Post",
+            through = [ "User AS u" ],
+            foreignKeys = [
+                "teamId", // the key on User that refers to Team
+                "authorId" // the key on Post that refers to User
+            ],
+            localKeys = [
+                "id", // the key on Team that identifies Team
+                "id" // the key on User that identifies User
+            ]
+        ).where( "u.active", 1 );
     }
 
 }
 ```
+{% endtab %}
 
-```
-hasManyThrough( [ "team", "members" ] );
-
-+----------------+---------------------------+----------------+
-| Current Entity | Relationship Method Names | Related Entity |
-+================+===========================+================+
-| User           | team                      | Team           |
-+----------------+---------------------------+----------------+
-| Team           | members                   | User           |
-+----------------+---------------------------+----------------+
-```
-
-This approach can scale to as many related entities as you need.  For instance, let's expand the previous example to include an Office that houses many Teams.
-
-```javascript
-// User.cfc
-component extends="quick.models.BaseEntity" accessors="true" {
-
-    function team() {
-        return belongsTo( "Team" );
-    }
-    
-    function teammates() {
-        return hasManyThrough( [ "team", "members" ] );
-    }
-    
-    function officemates() {
-        return hasManyThrough( [ "team", "office", "teams", "members" ] );
-    }
-
-}
-```
-
-```javascript
+{% tab title="Builder Syntax" %}
+```cfscript
 // Team.cfc
 component extends="quick.models.BaseEntity" accessors="true" {
 
-    function members() {
-       return hasMany( "User" );
-    }
-    
-    function office() {
-       return belongsTo( "Office" );
-    }
-
-}
-```
-
-```javascript
-// Office.cfc
-component extends="quick.models.BaseEntity" accessors="true" {
-
-    function teams() {
-       return hasMany( "Team" );
+    function activePosts() {
+        return newHasManyDeepBuilder()
+            .throughEntity( "User AS u", "teamId", "id" )
+            .toRelated( "Post", "authorId", "id" )
+            .where( "u.active", 1 );
     }
 
 }
 ```
+{% endtab %}
+{% endtabs %}
 
-```
-hasManyThrough( [ "team", "office", "teams", "members" ] );
+This produces the following SQL:
 
-+----------------+---------------------------+----------------+
-| Current Entity | Relationship Method Names | Related Entity |
-+================+===========================+================+
-| User           | team                      | Team           |
-+----------------+---------------------------+----------------+
-| Team           | office                    | Office         |
-+----------------+---------------------------+----------------+
-| Office         | teams                     | Team           |
-+----------------+---------------------------+----------------+
-| Team           | members                   | User           |
-+----------------+---------------------------+----------------+
+```sql
+SELECT *
+FROM `posts`
+INNER JOIN `users` AS `u`
+    ON `posts`.`authorId` = `users`.`id`
+WHERE `u`.`teamId` = ? // team.getId()
+AND `u`.`active` = ? // 1
 ```
 
-This next example can get a little gnarly - you can include other `hasManyThrough` relationships in a `hasManyThrough` relationship function names array.  You can rewrite the `officemates` relationship like so:
+If you want to use scopes or avoid table aliases, you can use callback functions to constrain the relationship:
 
-```javascript
-// User.cfc
-component extends="quick.models.BaseEntity" accessors="true" {
-
-    function team() {
-        return belongsTo( "Team" );
-    }
-    
-    function teammates() {
-        return hasManyThrough( [ "team", "members" ] );
-    }
-    
-    function officemates() {
-        return hasManyThrough( [ "team", "office", "members" ] );
-    }
-
-}
-```
-
-```javascript
+{% tabs %}
+{% tab title="Traditional Syntax" %}
+```cfscript
 // Team.cfc
 component extends="quick.models.BaseEntity" accessors="true" {
 
-    function members() {
-        return hasMany( "User" );
-    }
-    
-    function office() {
-       return belongsTo( "Office" );
+    function activePosts() {
+        return hasManyDeep(
+            relationName = "Post",
+            through = [ () => newEntity( "User ).active() ],
+            foreignKeys = [
+                "teamId", // the key on User that refers to Team
+                "authorId" // the key on Post that refers to User
+            ],
+            localKeys = [
+                "id", // the key on Team that identifies Team
+                "id" // the key on User that identifies User
+            ]
+        );
     }
 
 }
 ```
+{% endtab %}
 
-```javascript
-// Office.cfc
+{% tab title="Builder Syntax" %}
+```cfscript
+// Team.cfc
 component extends="quick.models.BaseEntity" accessors="true" {
 
-    function teams() {
-        return hasMany( "Team" );
-    }
-    
-    function members() {
-        return hasManyThrough( [ "teams", "members" ] );
+    function activePosts() {
+        return newHasManyDeepBuilder()
+            .throughEntity(
+                entityName = "User",
+                foreignKey = "teamId",
+                localKey = "id",
+                callback = ( user ) => user.active()
+            )
+            .toRelated( "Post", "authorId", "id" )
     }
 
 }
 ```
-
-```
-hasManyThrough( [ "team", "office", "members" ] );
-
-+----------------+---------------------------+----------------+
-| Current Entity | Relationship Method Names | Related Entity |
-+================+===========================+================+
-| User           | team                      | Team           |
-+----------------+---------------------------+----------------+
-| Team           | office                    | Office         |
-+----------------+---------------------------+----------------+
-| Office         | members                   | (below)        |
-+----------------+---------------------------+----------------+---+
-    | Office         | teams                     | Team           |
-    +----------------+---------------------------+----------------+
-    | Team           | members                   | User           |
-    +----------------+---------------------------+----------------+
-```
-
-As you can see, this is a very powerful relationship type that can save you many unnecessary queries to get the data you need. &#x20;
+{% endtab %}
+{% endtabs %}
 
 ## Signature
 
-| Name               | Type   | Required | Default             | Description                                                                                                                                                                                                  |
-| ------------------ | ------ | -------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| relationships      | array  | `true`   |                     | An array of relationship function names. The relationships are resolved from left to right.  Each relationship will be resolved from the previously resolved relationship, starting with the current entity. |
-| relationMethodName | string | false    | Current Method Name | The method name called to retrieve this relationship.  Uses a stack backtrace to determine by default.                                                                                                       |
+<table data-header-hidden><thead><tr><th>Name</th><th>Type</th><th data-type="checkbox">Required</th><th>Default</th><th>Description</th></tr></thead><tbody><tr><td>relationName</td><td><code>String</code> | <code>Function</code> | <code>QuickBuilder</code> | <code>IRelationship</code></td><td>true</td><td></td><td>A mapping name to the final related entity, a function that produces a <code>QuickBuilder</code> or <code>Relationship</code> instance, or a <code>QuickBuilder</code> or <code>Relationship</code> instance.</td></tr><tr><td>through</td><td>Array&#x3C;<code>String</code> | <code>Function</code> | <code>QuickBuilder</code> | <code>IRelationship</code>></td><td>true</td><td></td><td><p>The entities to traverse through from the parent (current) entity to get to the <code>relatedEntity</code>.  </p><p></p><p>Each item in the array can be either a mapping name to the final related entity, a function that produces a <code>QuickBuilder</code> or <code>Relationship</code> instance, or a <code>QuickBuilder</code> or <code>Relationship</code> instance.</p></td></tr><tr><td>foreignKeys</td><td><code>Array&#x3C;String></code></td><td>true</td><td></td><td>An array of foreign keys traversing to the <code>relatedEntity</code>.<br><br>The length of this array should be one more than the length of <code>through</code>.<br><br>The first key of this array would be the column on the first <code>through</code> entity that refers back to the parent (current) entity, and so forth. </td></tr><tr><td>localKeys</td><td><code>Array&#x3C;String></code></td><td>true</td><td></td><td>An array of local keys traversing to the <code>relatedEntity</code>.<br><br>The length of this array should be one more than the length of <code>through</code>.<br><br>The first key of this array would be the column on the parent (current) entity that identifies it, and so forth.</td></tr><tr><td>nested</td><td><code>boolean</code></td><td>false</td><td><code>false</code></td><td>Signals the relationship that it is currently being resolved as part of another <code>hasManyDeep</code> relationship.  This is handled by the framework when using a <code>hasManyThrough</code> relationship.</td></tr><tr><td>relationMethodName</td><td><code>String</code></td><td>false</td><td>Current Method Name</td><td>The method name called to retrieve this relationship.  Uses a stack backtrace to determine by default.</td></tr></tbody></table>
 

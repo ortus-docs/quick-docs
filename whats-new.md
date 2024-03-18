@@ -1,5 +1,19 @@
 # What's New?
 
+## 7.4.0
+
+### HasManyDeep
+
+Introduced a new alternative relationship to the old `hasManyThrough` — `hasManyDeep`. It produces more readable, parsable SQL and is the basis for the new version of `hasManyThrough`.
+
+### HasManyDeepBuilder
+
+If you prefer the `hasManyDeep` syntax over the `hasManyThrough` syntax, you might enjoy the `HasManyDeepBuilder`, a builder object to create the `hasManyDeep` relationship.  It is generally more readable, especially when using additional constraints on related or through entities, at the cost of verbosity.
+
+### Revamped HasManyThrough relationships
+
+All `hasManyThrough` relationships are now `hasManyDeep` relationships under the hood.  No code changes should be necessary for you to enjoy more readable SQL, less bugs, and greater performance. :race\_car:
+
 ## 7.3.2
 
 Use the interceptor approach instead of `wirebox:targetId` to support CommandBox 5.
@@ -292,7 +306,7 @@ _Please see the_ [_Upgrade Guide_](upgrade-guide.md#3-0-0) _for more information
 * The `defaultGrammar` mapping needs to be the full WireBox mapping, including the `@qb`, if needed.
   * For instance, `MSSQLGrammar` would become `MSSQLGrammar@qb`.
   * This will allow for other grammars to be more easily contributed via third party modules.
-* [`HasManyThrough` relationships](guide/relationships/relationship-types/hasmanythrough.md) now only accept a `relationships` parameter of relationship methods to walk to get to the intended entity.
+* [`HasManyThrough` relationships](guide/relationships/relationship-types/hasmanythrough-1.md) now only accept a `relationships` parameter of relationship methods to walk to get to the intended entity.
 * Attributes using `casts="boolean"` need to be updated to [`casts="BooleanCast@quick"`](guide/getting-started/defining-an-entity/#casts).
 * Some method and parameter names have been changed to support composite keys.  **The majority of changes will only affect you if you have extended base Quick components.** The full list can be found in the Upgrade Guide.
 

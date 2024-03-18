@@ -6,7 +6,8 @@
 | [hasMany](hasmany.md)                           |
 | [belongsTo](belongsto.md)                       |
 | [belongsToMany](belongstomany.md)               |
-| [hasManyThrough](hasmanythrough.md)             |
+| [hasManyDeep](hasmanythrough.md)                |
+| [hasManyThrough](hasmanythrough-1.md)           |
 | [hasOneThrough](hasonethrough.md)               |
 | [belongsToThrough](belongstothrough.md)         |
 | [polymorphicBelongsTo](polymorphicbelongsto.md) |
