@@ -1,5 +1,21 @@
 # What's New?
 
+## 7.4.4
+
+Fix for thread safety when loading multiple relationships off of a single entity
+
+## 7.4.3
+
+Fix qualifying column issue when using `HasManyDeep` relationships.
+
+## 7.4.2
+
+Remove duplicate join from `addCompareConstraints` when using `HasManyDeep` relationships.
+
+## 7.4.1
+
+Upgrade to latest str dependency
+
 ## 7.4.0
 
 ### HasManyDeep
