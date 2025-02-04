@@ -1,5 +1,19 @@
 # What's New?
 
+## 9.0.3
+
+**Child Entities:** Ensure single table inheritance columns are not duplicated.
+
+## 9.0.2
+
+**HasOneThrough:** Added the missing `matchOne`method.
+
+**Child Entities:** Fixed qualifying columns on discriminated joined entities.
+
+## 9.0.1
+
+Fixed an issue with `NULL`values being inserted into identify columns for SQL Server
+
 ## 9.0.0
 
 ### BREAKING CHANGES
