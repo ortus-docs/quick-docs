@@ -5,7 +5,7 @@
 #### Eager Loading
 
 * Give entities a way to [automatically eager load](guide/relationships/eager-loading.md#default-eager-loading) certain relationships.
-* Allow [preventing all lazy loading](guide/relationships/eager-loading.md#preventing-lazy-loading) of relationships — very handing for quickly identifying N+1 problems.
+* Allow [preventing all lazy loading](guide/relationships/eager-loading.md#preventing-lazy-loading) of relationships — very handy for quickly identifying N+1 problems.
 
 #### Bug Fixes
 
