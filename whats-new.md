@@ -1,5 +1,9 @@
 # What's New?
 
+## 11.2.1
+
+* Use `box` namespace for CommandBox compatibility.
+
 ## 11.2.0
 
 #### Eager Loading
