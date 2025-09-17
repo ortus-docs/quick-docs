@@ -1,5 +1,47 @@
 # What's New?
 
+## 12.0.7
+
+**BooleanCast:** `booleanFormat` actually returns a string — use `!!` to correctly cast to a Boolean.
+
+## 12.0.6
+
+**QuickBuilder:** Fix for potential scope walking bug.
+
+(Relying on Lucee to check for `arguments` in a parent scope from a closure did not work as intended.)
+
+## 12.0.5
+
+Minor fix for `isQuickBuilder` checks on BoxLang
+
+## 12.0.4
+
+Allow passing `options` for retrieval methods like `first`, `findOrFail`, etc.
+
+{% hint style="info" %}
+This could have been a minor release, but I thought it was always there, so I classified it as a bug fix.
+{% endhint %}
+
+## 12.0.3
+
+Fix for parallel relationship loading in ACF. (This required the use of `cfthread` and breaks my heart.)
+
+## 12.0.2
+
+**ModuleConfig:** Ensure cache exists before clearing it when unloading Quick
+
+## 12.0.1
+
+Fix for casts in where statements
+
+## 12.0.0
+
+* Fix for bringing back columns correct when multiple child entities share the same column.
+* Preserve case for `withCount` and `withSum`
+* Fix for deep entities with compound keys in `HasManyDeep`.
+* Casts values when using them in where clauses.
+* Upgrade to qb 13
+
 ## 11.3.0
 
 * Allow parallel loading for [`loadRelationship`](guide/relationships/retrieving-relationships.md)
