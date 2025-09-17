@@ -1,5 +1,27 @@
 # Upgrade Guide
 
+## 12.0.0
+
+### Fix for deep entities with compound keys in `HasManyDeep`
+
+The issue stemmed from using a nested array as a polymorphic relationship syntax. This has been swapped to a struct so that compound keys can continue to be represented as nested arrays.
+
+Polymorphic relationships used inside `hasManyDeep` relationships need to be constructed as a `struct`:
+
+```
+{
+    "type": "morph",
+    "morphType": arguments.type,
+    "foreignKeys" : arguments.foreignKey
+};
+```
+
+Using the `HasManyDeepBuilder` is a preferred option and requires no code changes.
+
+### Upgrade to qb 13
+
+qb 13.0.0 included potential breaking changes due to how columns were stored internally. See [https://qb.ortusbooks.com/13.0.0/migration-guide#v13.0.0](https://qb.ortusbooks.com/13.0.0/migration-guide#v13.0.0) for more details.
+
 ## 11.0.0
 
 **No changes needed.** Major version bumped for BoxLang compatibility.
