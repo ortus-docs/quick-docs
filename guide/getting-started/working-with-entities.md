@@ -31,3 +31,21 @@ Clones an entity and return an exact copy of the entity. This returned object is
 var user = getInstance( "User" );
 var clonedUser = user.clone();
 ```
+
+## fresh
+
+Retrieves a new entity from the database with the same key value as the current entity.
+
+```javascript
+var user = getInstance( "User" );
+var freshUser = user.fresh();
+```
+
+## refresh
+
+Refreshes the attributes data for the entity with data from the database.
+
+```javascript
+var user = getInstance( "User" );
+var refreshedUser = user.refresh();
+```
