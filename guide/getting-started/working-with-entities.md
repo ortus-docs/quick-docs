@@ -34,10 +34,13 @@ var clonedUser = user.clone();
 
 ## fresh
 
-Retrieves a new entity from the database with the same key value as the current entity.
+Retrieves a new entity from the database with the same key value as the current entity. The current entity must be loaded (or otherwise have a primary key value), and calling `fresh()` executes a database query to retrieve the latest state.
 
 ```javascript
-var user = getInstance( "User" );
+// Load an existing user record (throws if not found)
+var user = getInstance( "User" ).findOrFail( 123 );
+
+// Retrieve a fresh copy from the database (executes a DB query)
 var freshUser = user.fresh();
 ```
 
