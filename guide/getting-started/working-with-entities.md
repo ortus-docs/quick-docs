@@ -49,6 +49,6 @@ var freshUser = user.fresh();
 Refreshes the attributes data for the entity with data from the database.
 
 ```javascript
-var user = getInstance( "User" );
+var user = getInstance( "User" ).findOrFail( 123 );
 var refreshedUser = user.refresh();
 ```
