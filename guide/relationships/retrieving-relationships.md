@@ -24,6 +24,24 @@ You can also call the other Quick fetch methods: `first`, `firstOrFail`, `find`,
 var post = user.posts().findOrFail( rc.id );
 ```
 
+## Assigning a Loaded Relationship
+
+Use `assignRelationship` when you already have a related value and want the relationship accessor to return it without executing a relationship query. This is especially useful after creating related records:
+
+```javascript
+var user = getInstance( "User" ).findOrFail( 1 );
+var post = user.posts().create( { "body" : "A new post" } );
+
+// getPosts() now returns this array without querying the database.
+user.assignRelationship( "posts", [ post ] );
+```
+
+Pass a Quick entity for a singular relationship and an array for a collection relationship. Assigning a value replaces any previously loaded value and marks the relationship as loaded.
+
+`assignRelationship` only changes the in-memory entity. It does not save either entity, update foreign keys, attach pivot records, or validate that the value matches the relationship type.
+
+Call `clearRelationship( "posts" )` to discard the assigned value and its loaded marker. The next relationship accessor call can then lazy load the relationship normally, when lazy loading is enabled.
+
 You can also use other Quick fetch methods that provide new entities if a related entity is not found, such as `firstOrNew`, `firstOrCreate`, `findOrNew`, and `findOrCreate`.
 
 ```javascript
