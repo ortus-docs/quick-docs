@@ -72,6 +72,22 @@ var user = getInstance( "User" ).create( {
 
 There is no need to call `save` when using the `create` method.
 
+{% hint style="warning" %}
+`create` is a factory method. It creates, saves, and returns a **new entity instance**; it does not fill, save, or otherwise mutate the entity on which it was called. Always use the returned entity when you need the persisted record.
+{% endhint %}
+
+```javascript
+var user = getInstance( "User" ).newEntity();
+
+user = user.create( {
+    "username": "JaneDoe",
+    "email": "jane@example.com",
+    "password": "mypass1234"
+} );
+
+user.isLoaded(); // true
+```
+
 ## firstOrNew
 
 | Name                        | Type    | Required | Default | Description                                                                                                               |
