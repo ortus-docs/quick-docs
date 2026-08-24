@@ -3,8 +3,54 @@
 Quick allows you to hook in to multiple points in the entity lifecycle. If the event is on the component, you do not need to prefix it with `quick`. If you are listening to an interception point, include `quick` at the beginning.
 
 {% hint style="warning" %}
-If you create your own Interceptors, they will not fire if you define them in your Main application. `quick` will be loaded AFTER your interceptors, so the `quick` interception points will **not** be registered with your interceptor. This can be solved by moving your interceptors to a module with a dependency on `quick`, of by also registering the `quick` custom interception points in your main coldbox configuration.
+If you create your own Interceptors, they will not fire if you define them in your Main application. `quick` will be loaded AFTER your interceptors, so the `quick` interception points will **not** be registered with your interceptor. This can be solved by moving your interceptors to a module with a dependency on `quick`, or by also registering the `quick` custom interception points in your main ColdBox configuration.
 {% endhint %}
+
+## Custom entity lifecycle events
+
+An entity can map a Quick lifecycle event to one or more application-specific interception points using `_dispatchesEvents`:
+
+```javascript
+component extends="quick.models.BaseEntity" {
+
+    variables._dispatchesEvents = {
+        "postInsert" : "onOrderCreated",
+        "postSave"   : [ "onOrderSaved", "onAggregateChanged" ]
+    };
+
+}
+```
+
+Quick announces each configured custom point when it fires the corresponding lifecycle event. The custom point receives the same `eventData` as the standard Quick interception point.
+
+{% hint style="warning" %}
+`_dispatchesEvents` does not register the custom interception points with ColdBox. Every configured point must also be registered in your ColdBox application or module before an interceptor can listen to it.
+{% endhint %}
+
+For example, register the names in `config/Coldbox.cfc`:
+
+```javascript
+interceptorSettings = {
+    customInterceptionPoints : [
+        "onOrderCreated",
+        "onOrderSaved",
+        "onAggregateChanged"
+    ]
+};
+```
+
+Alternatively, an interceptor method can register its own custom point using ColdBox's `interceptionPoint` annotation:
+
+```javascript
+/**
+ * @interceptionPoint
+ */
+function onOrderCreated( event, interceptData ) {
+    // ...
+}
+```
+
+The annotation registers the custom point with ColdBox; the entity's `_dispatchesEvents` map still defines which Quick lifecycle event announces it.
 
 ## quickInstanceReady
 
