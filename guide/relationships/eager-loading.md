@@ -203,24 +203,34 @@ component {
 
 You can also set this callback per-entity by passing in the callback to the `preventLazyLoading` function.
 
-### Default Eager Loading
+### Preconfigured (Default) Eager Loading
 
-Occasionally, you may find that when loading an entity you always want to eager load a relationship. To do this, set a `variables._with`property on your entity as if you were calling the `with`function.
+Entities can declare relationships that should be eager loaded on every query by assigning an array of relationship paths to `variables._with`:
 
 ```cfscript
 component name="Post" extends="quick.models.BaseEntity" accessors="true" {
 
-    variables._with = [ "author" ];
-    
-    function author() {
-        return belongsTo( "User" );
-    }
+	variables._with = [ "author", "comments.author" ];
+
+	function author() {
+		return belongsTo( "User" );
+	}
+
+	function comments() {
+		return hasMany( "Comment" );
+	}
 
 }
 ```
 
-Now, whenever you load the `Post`entity, the `author`relationship will automatically be eager loaded.
+The paths use the same dot notation as the query builder's `with()` method, so nested relationships can be preconfigured. Quick applies these relationships whenever it creates a new query for the entity, including calls such as `all()`, `get()`, `first()`, and `find()`.
+
+Preconfigured eager loading is most useful for relationships that nearly every consumer needs. Every configured relationship adds work to each entity query and can retrieve substantially more data than the caller needs. For relationships used only by specific operations, prefer an explicit query-level call:
+
+```cfscript
+getInstance( "Post" ).with( "comments" ).get();
+```
 
 {% hint style="warning" %}
-Use this sparingly, as it becomes easy to over fetch data when you are eager loading by default.
+Use preconfigured eager loading sparingly. It can add queries and over-fetch data for consumers that do not need the configured relationships.
 {% endhint %}
