@@ -341,11 +341,22 @@ The `appendVirtualAttribute` method adds the given name as an attribute availabl
 
 ### appendVirtualAttribute
 
-| Argument | Type   | Required | Default | Description                   |
-| -------- | ------ | -------- | ------- | ----------------------------- |
-| name     | string | `true`   |         | The attribute name to create. |
+| Argument           | Type    | Required | Default | Description                                      |
+| ------------------ | ------- | -------- | ------- | ------------------------------------------------ |
+| name               | string  | `true`   |         | The attribute name to create.                    |
+| defaultValue       | any     | `false`  |         | A default value for new and hydrated entities.   |
+| excludeFromMemento | boolean | `false`  | `false` | Exclude the attribute from the default memento.  |
 
-Creates a virtual attribute for the given name.
+Creates a virtual attribute for the given name. Virtual attributes can now carry a default value that is applied to the current entity and entities created from the same builder configuration.
+
+```javascript
+qb.appendVirtualAttribute( "hasPosts", false );
+qb.appendVirtualAttribute(
+    name = "internalFlag",
+    defaultValue = false,
+    excludeFromMemento = true
+);
+```
 
 {% hint style="success" %}
 It is likely that Quick will introduce more helper methods in the future making these calls simpler.

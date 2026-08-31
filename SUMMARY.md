@@ -16,6 +16,7 @@
   * [Working with Entities](guide/getting-started/working-with-entities.md)
   * [Creating New Entities](guide/getting-started/creating-new-entities.md)
   * [Updating Existing Entities](guide/getting-started/updating-existing-entities.md)
+  * [Automatic Timestamps](guide/getting-started/automatic-timestamps.md)
   * [Deleting Entities](guide/getting-started/deleting-entities.md)
   * [Query Scopes and Subselects](guide/getting-started/query-scopes-and-subselects.md)
 * [Relationships](guide/relationships/README.md)
@@ -41,6 +42,7 @@
 * [Serialization](guide/serialization.md)
 * [Interception Points](guide/interception-points.md)
 * [Debugging](guide/debugging.md)
+* [Testing with Model Factories](guide/model-factories.md)
 * [FAQ](guide/faq.md)
 
 ## Cookbook

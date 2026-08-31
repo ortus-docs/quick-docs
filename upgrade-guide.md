@@ -1,5 +1,85 @@
 # Upgrade Guide
 
+## 13.0.0
+
+### Upgrade to qb 14
+
+Quick 13 requires qb 14. Review the [qb 14 Migration Guide](https://qb.ortusbooks.com/migration-guide) for its query builder, grammar, return formatter, binding, and schema changes before upgrading Quick.
+
+### Automatic timestamps are enabled by default
+
+Quick now automatically maintains declared `createdDate` and `modifiedDate` attributes. Inserts set both values, entity updates set `modifiedDate`, and bulk `updateAll()` and `upsert()` mutations also maintain their applicable timestamps.
+
+If an application already manages these columns in the database or application code, disable Quick's behavior globally:
+
+```javascript
+moduleSettings = {
+    "quick" : {
+        "automaticTimestamps" : false
+    }
+};
+```
+
+You can instead disable it for one entity:
+
+```javascript
+component
+    extends="quick.models.BaseEntity"
+    accessors="true"
+    automaticTimestamps="false"
+{
+    // ...
+}
+```
+
+Use `withoutAutomaticTimestamps()` when only one builder mutation should skip timestamps. See [Automatic Timestamps](guide/getting-started/automatic-timestamps.md) for the complete behavior.
+
+### appendVirtualAttribute has a new second argument
+
+`appendVirtualAttribute()` now accepts a default value as its second positional argument:
+
+```javascript
+appendVirtualAttribute(
+    name = "hasPosts",
+    defaultValue = false,
+    excludeFromMemento = true
+);
+```
+
+Code that previously passed `excludeFromMemento` positionally must move that flag to the third argument or use its named argument.
+
+```javascript
+// Quick 12 — the second argument excluded the attribute.
+appendVirtualAttribute( "internalFlag", true );
+
+// Quick 13
+appendVirtualAttribute( name = "internalFlag", excludeFromMemento = true );
+```
+
+### reset clears the cached query builder
+
+`BaseEntity.reset()` now resets query state in addition to attributes and relationships. This prevents constraints forwarded through an entity from leaking into later queries.
+
+If you need to retain a configured query while resetting an entity, keep the builder returned from that query chain and execute it separately.
+
+### Loaded primary keys cannot be changed
+
+Assigning a different primary key to a loaded entity now throws `QuickPrimaryKeyMutationException`. Create a new entity or use [`replicate()`](guide/getting-started/working-with-entities.md#replicate) when you need a record with a different identity.
+
+### Duplicate property names are rejected
+
+Quick now throws `QuickDuplicateProperty` when an entity declares the same property name more than once. Remove or rename duplicate declarations. Different property names may still map to explicit columns as long as each entity property is unique.
+
+### Custom casts receive null values
+
+Quick now delegates null database values to custom cast `get()` and `set()` methods. Update custom casts to handle a missing `value` and return either the desired transformed value or `javacast( "null", "" )`.
+
+The built-in `BooleanCast@quick` now preserves null instead of converting it to `false`. Review application code that treated a nullable Boolean as always true or false.
+
+### New entities return empty relationship values
+
+Accessing an unloaded relationship on a new entity no longer executes a query or throws a not-loaded guard. To-one relationships return `null` or their configured default, and collection relationships return an empty collection. Code that used the previous exception to detect unsaved entities should check `isLoaded()` instead.
+
 ## 12.0.0
 
 ### Fix for deep entities with compound keys in `HasManyDeep`

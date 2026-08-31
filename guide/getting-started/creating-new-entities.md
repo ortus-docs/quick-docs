@@ -14,11 +14,13 @@ user.save();
 
 When we call `save`, the record is persisted from the database and the primary key is set to the auto-generated value (if any).
 
+Quick can also [maintain timestamps](automatic-timestamps.md) and [refresh database-generated attributes](defining-an-entity/README.md#refresh-on-save) as part of the same save lifecycle.
+
 We can shortcut the setters above using a `fill` method.
 
 ## fill
 
-Finds the first matching record or creates a new entity.
+Fills an entity from a struct of values.
 
 | Name                        | Type          | Required | Default | Description                                                                                                         |
 | --------------------------- | ------------- | -------- | ------- | ------------------------------------------------------------------------------------------------------------------- |
@@ -31,8 +33,9 @@ Sets attributes data from a struct of key / value pairs. This method does the fo
 
 1. Guard against read-only attributes.
 2. Attempt to call a relationship setter.
-3. Calls custom attribute setters for attributes that exist.
-4. Throws an error if an attribute does not exist (if `ignoreNonExistentAttributes` is `false` which is the default).
+3. Call custom attribute setters for persistent attributes.
+4. Fill non-persistent properties explicitly marked [`fillable="true"`](defining-an-entity/README.md#persistent).
+5. Throw an error if an attribute does not exist (if `ignoreNonExistentAttributes` is `false`, which is the default).
 
 ```javascript
 var user = getInstance( "User" );
@@ -43,6 +46,20 @@ user.fill( {
 } );
 user.save();
 ```
+
+On a new entity, relationship values can be supplied as related entities or structs. Structs are filled into new related entity instances.
+
+```javascript
+var user = getInstance( "User" ).fill( {
+    "username" : "JaneDoe",
+    "posts" : [
+        { "title" : "First post" },
+        getInstance( "Post" ).fill( { "title" : "Second post" } )
+    ]
+} );
+```
+
+This only assigns the in-memory relationship. Saving the parent does not automatically persist the related entities; use the relationship's persistence methods explicitly.
 
 ## populate
 
@@ -59,6 +76,7 @@ Populate is simply an alias for `fill`. Use whichever one suits you best.
 | --------------------------- | ------- | -------- | ------- | ------------------------------------------------------------------------------------------------------------------- |
 | attributes                  | struct  | `false`  | `{}`    | A struct of key / value pairs to fill in to the new entity.                                                         |
 | ignoreNonExistentAttributes | boolean | `false`  | `false` | If true, does not throw an exception if an attribute does not exist.  Instead, it skips the non-existent attribute. |
+| options                     | struct  | `false`  | `{}`    | Options passed to `queryExecute` when saving the entity.                                                            |
 
 Creates a new entity with the given attributes and then saves the entity.
 
@@ -71,6 +89,25 @@ var user = getInstance( "User" ).create( {
 ```
 
 There is no need to call `save` when using the `create` method.
+
+## createAll
+
+Creates and saves one entity for each struct in an array and returns the entities in the model's configured collection type.
+
+| Name                        | Type    | Required | Default | Description                                                                                                         |
+| --------------------------- | ------- | -------- | ------- | ------------------------------------------------------------------------------------------------------------------- |
+| attributes                  | array   | `false`  | `[]`    | An array of attribute structs to create.                                                                            |
+| ignoreNonExistentAttributes | boolean | `false`  | `false` | If true, skips attributes that do not exist.                                                                        |
+| options                     | struct  | `false`  | `{}`    | Options passed to `queryExecute` for each save.                                                                     |
+
+```javascript
+var users = getInstance( "User" ).createAll( [
+    { "username" : "JaneDoe", "email" : "jane@example.com" },
+    { "username" : "JohnDoe", "email" : "john@example.com" }
+] );
+```
+
+Each entity is saved independently, so casts, generated keys, automatic timestamps, and entity lifecycle events behave exactly as they do for `create()`.
 
 ## firstOrNew
 

@@ -1,5 +1,91 @@
 # What's New?
 
+## 13.0.0
+
+Quick 13 expands the entity lifecycle, relationship APIs, bulk persistence, and testing support while moving to qb 14.
+
+{% hint style="warning" %}
+Quick 13 contains behavior changes that may require application updates. Review the [Upgrade Guide](upgrade-guide.md#1300) before upgrading.
+{% endhint %}
+
+### Breaking Changes
+
+* Upgrade to [qb 14](https://qb.ortusbooks.com/migration-guide).
+* [Automatic timestamps](guide/getting-started/automatic-timestamps.md) are enabled by default for declared `createdDate` and `modifiedDate` attributes.
+* [`reset()`](guide/getting-started/working-with-entities.md#reset) now clears the cached query builder as well as entity and relationship state.
+* [`appendVirtualAttribute()`](guide/getting-started/query-scopes-and-subselects.md#appendvirtualattribute) now treats its second positional argument as `defaultValue`; `excludeFromMemento` is the third argument.
+* [Loaded primary keys are immutable](guide/getting-started/working-with-entities.md#loaded-primary-keys-are-immutable).
+* Duplicate entity property names now throw `QuickDuplicateProperty` during initialization.
+* [Custom casts](guide/getting-started/defining-an-entity/README.md#custom-casts) now receive null values, and `BooleanCast@quick` preserves null instead of converting it to `false`.
+* [Relationship getters on new entities](guide/relationships/retrieving-relationships.md) now return null/default values or empty collections without querying.
+
+### Entity Definition and Persistence
+
+* [Automatic timestamps](guide/getting-started/automatic-timestamps.md), including custom attribute names, `withoutAutomaticTimestamps()`, and `touch()`.
+* [Refresh database-generated attributes on save](guide/getting-started/defining-an-entity/README.md#refresh-on-save) using native returning rows or a configurable keyed fallback read.
+* Built-in [soft deletes](guide/getting-started/deleting-entities.md#soft-deletes) with `withTrashed()`, `onlyTrashed()`, `restore()`, `restoreAll()`, `forceDelete()`, and `forceDeleteAll()`.
+* [`upsert()`](guide/getting-started/updating-existing-entities.md#upsert) through Quick entity queries with aliases, SQL types, read-only guards, and automatic timestamps.
+* [`createAll()`](guide/getting-started/creating-new-entities.md#createall) creates multiple entities through the normal save lifecycle.
+* [`replicate()`](guide/getting-started/working-with-entities.md#replicate) creates a new unloaded copy without the primary key and fires a post-replication event.
+* [`isDirty( attribute )` and `isClean( attribute )`](guide/getting-started/working-with-entities.md#isdirty) inspect all state or one attribute.
+* [`chunk()`](guide/getting-started/retrieving-entities.md#chunk) now returns hydrated entities and preserves eager loads, custom collections, and transformations.
+* [`fill()`](guide/getting-started/creating-new-entities.md#fill) supports explicitly fillable non-persistent properties and in-memory relationships on new entities.
+* [Virtual attributes](guide/getting-started/query-scopes-and-subselects.md#appendvirtualattribute) can define default values.
+* [Query options and CFML engine query caching](guide/getting-started/retrieving-entities.md#query-options-and-caching) now flow through primary-key lookups such as `find()`.
+
+### Relationships
+
+* Rich [belongs-to-many pivot models](guide/relationships/relationship-types/belongstomany.md#pivot-models), including custom pivot entities, additional pivot attributes, pivot constraints and ordering, timestamps, default pivot values, and pivot row updates.
+* [`belongsToMany.create()`](guide/relationships/relationship-types/belongstomany.md#create) creates a related entity and attaches it in one call.
+* [`whereBelongsTo()` and `orWhereBelongsTo()`](guide/relationships/querying-relationships.md#wherebelongsto) constrain queries using related entities, including compound keys.
+* [`whereHasValue()`](guide/relationships/querying-relationships.md#wherehasvalue) provides a concise single-value relationship constraint.
+* [`without()` and `clearEagerLoads()`](guide/relationships/eager-loading.md#removing-eager-loads) selectively remove configured eager loads.
+* [Relationship-loaded hooks](guide/interception-points.md#quickrelationshiploaded) run for eagerly and lazily loaded entities.
+* [Custom entity events](guide/interception-points.md#custom-entity-events) map lifecycle events to application-specific interception points.
+
+### Testing
+
+* New [model factories](guide/model-factories.md) support definitions, named and inline states, sequences, counts, lazy attribute values, and `afterMaking`/`afterCreating` callbacks.
+
+### Bug Fixes
+
+#### Attributes, Casts, and Persistence
+
+* Correctly handle null values passed to `fill()` and preserve native nulls through custom casts.
+* Cast values assigned during `preSave` before persistence.
+* Prefer attribute aliases over matching column names and recognize primary-key columns mapped to aliases.
+* Exclude read-only attributes from insert and update statements.
+* Preserve uninitialized attributes on BoxLang without losing explicitly assigned null-equivalent values.
+* Keep non-persistent structs out of dirty-state hashes.
+* Synchronize database-generated values, casts, original attributes, and post-persistence events after saving.
+
+#### Queries and Entity State
+
+* Surface Quick and qb missing methods correctly inside query callbacks and provide clearer missing-scope errors.
+* Preserve scoped virtual projections and subselects when calling [`fresh()` or `refresh()`](guide/getting-started/updating-existing-entities.md#fresh).
+* Include entity keys when a custom select would otherwise make hydration incomplete.
+* Qualify aliased selected attributes correctly.
+* Qualify `whereIn` subqueries using the subquery's own table.
+* Keep query bindings intact while chunking scoped queries.
+* Support `QuickCollection` eager loading on BoxLang.
+
+#### Relationships
+
+* Correctly eager load `belongsToThrough`, `hasOneThrough`, and constrained `hasManyThrough` relationships.
+* Advance and compose nested `has`/`whereHas` relationship paths correctly.
+* Synchronize loaded has-many relationship data after creating or bulk deleting related entities.
+* Skip has-many queries when a compound foreign key contains null.
+* Transform default relationships correctly in mementos.
+* Preserve eager-load key types and case-sensitive key values.
+* Preserve relationship keys and omitted optional arguments with full null support enabled.
+* Correct relationship aliases for through subselects, compound-key aggregates, polymorphic eager loading, and default eager-loaded values.
+
+### Performance and Compatibility
+
+* Added a bounded, process-local entity definition registry and single-pass hydration attribute resolution to reduce repeated metadata and row-binding work.
+* Reduced allocations in attribute state tracking, refresh-query handling, qualified-column lookup, and deep runtime attribute overlays.
+* Expanded Lucee, Adobe ColdFusion, and BoxLang coverage, including full-null execution, CBORM-compatible eager loading, UUID/GUID keys, lifecycle data, relationship constraints, and concurrent registry access.
+
 ## 12.0.7
 
 **BooleanCast:** `booleanFormat` actually returns a string — use `!!` to correctly cast to a Boolean.

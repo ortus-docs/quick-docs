@@ -10,6 +10,8 @@ user.setPassword( "newpassword" );
 user.save();
 ```
 
+`save()` applies [automatic timestamps](automatic-timestamps.md), refreshes attributes marked [`refreshOnSave="true"`](defining-an-entity/README.md#refresh-on-save), and synchronizes the entity's original state. Use [`isDirty()` and `isClean()`](working-with-entities.md#isdirty) when you need to inspect changes before saving.
+
 ## update
 
 You can update multiple fields at once using the `update` method. This is similar to the `create` method for creating new entities.
@@ -66,8 +68,33 @@ getInstance( "User" )
     .where( "lastLoggedIn", ">", dateAdd( "m", 3, now() ) )
     .updateAll( {
         "active" = 0
-    } );
+} );
 ```
+
+When automatic timestamps are enabled, `updateAll()` also updates the configured modification timestamp. Use [`withoutAutomaticTimestamps()`](automatic-timestamps.md#disabling-automatic-timestamps) for a bulk update that must leave it unchanged.
+
+## upsert
+
+`upsert()` inserts rows that do not exist and updates rows matching the target columns. It exposes [qb 14's cross-database upsert support](https://qb.ortusbooks.com/query-builder/executing-queries/inserts-updates-deletes#upsert) while applying Quick attribute aliases, SQL types, read-only guards, and automatic timestamps.
+
+```javascript
+getInstance( "User" ).upsert(
+    values = [
+        { "email" : "jane@example.com", "username" : "Jane" },
+        { "email" : "john@example.com", "username" : "John" }
+    ],
+    target = [ "email" ],
+    update = [ "username" ]
+);
+```
+
+Like `updateAll()`, this is a bulk mutation. It does not hydrate entities or fire per-entity lifecycle events.
+
+The full signature also accepts qb's `source`, `deleteUnmatched`, `options`, `toSql`, and `matchNulls` arguments. Pass `force = true` as the final Quick-specific argument to skip read-only entity and attribute checks.
+
+## touch
+
+`touch()` updates an entity's configured timestamp fields without changing its in-memory state. See [Automatic Timestamps](automatic-timestamps.md#touch) for configuration and examples.
 
 ## fresh
 
@@ -76,6 +103,8 @@ getInstance( "User" )
 | No arguments |      | \`\`     |         |             |
 
 Retrieves a new entity from the database with the same key value as the current entity. Useful for seeing any changes made to the record in the database. This function executes a query.
+
+`fresh()` replays the query used to load the entity, preserving scoped virtual projections and subselects.
 
 ```javascript
 var user = getInstance( "User" ).findOrFail( rc.userID );
@@ -89,6 +118,8 @@ var sameUser = user.fresh();
 | No arguments |      | \`\`     |         |             |
 
 Refreshes the attributes data for the entity with data from the database. This differs from `fresh` in that it operates on the current entity instead of returning a new one. This function executes a query.
+
+Like `fresh()`, `refresh()` preserves scoped virtual projections from the original query.
 
 ```javascript
 var user = getInstance( "User" ).findOrFail( rc.userID );

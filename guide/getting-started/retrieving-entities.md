@@ -44,6 +44,35 @@ var users = getInstance( "User" )
 For more information on what is possible with qb, check out the [qb documentation](https://qb.ortusbooks.com).
 {% endhint %}
 
+## Query Options and Caching
+
+Retrieval methods pass their `options` struct to `queryExecute`. This includes primary-key lookups such as `find()` and collection queries such as `get()`.
+
+```javascript
+var users = getInstance( "User" ).get(
+    options = { cachedWithin : createTimeSpan( 0, 0, 5, 0 ) }
+);
+
+var user = getInstance( "User" ).find(
+    rc.id,
+    { cachedWithin : createTimeSpan( 0, 0, 5, 0 ) }
+);
+```
+
+Set `_queryOptions` on an entity to provide defaults for every query:
+
+```javascript
+component extends="quick.models.BaseEntity" accessors="true" {
+
+    variables._queryOptions = {
+        cachedWithin : createTimeSpan( 0, 0, 5, 0 )
+    };
+
+}
+```
+
+The CFML engine caches database results, not live Quick entities or loaded relationships. Keep cache lifetimes appropriate for data that Quick or another process may update.
+
 ## Quick Service
 
 A second way to retrieve results is to use a Quick Service. It is similar to a `VirtualEntityService` from cborm.
@@ -128,6 +157,29 @@ Executes the configured query, eager loads any relations, and returns the entiti
 var posts = getInstance( "Post" )
     .whereNotNull( "publishedDate" )
     .get();
+```
+
+### chunk
+
+| Name     | Type     | Required | Default | Description                                                        |
+| -------- | -------- | -------- | ------- | ------------------------------------------------------------------ |
+| max      | numeric  | `true`   |         | The maximum number of entities in each chunk.                      |
+| callback | function | `true`   |         | Called once for each hydrated entity collection.                   |
+| options  | struct   | `false`  | `{}`    | Options passed to `queryExecute` for each chunk query.             |
+
+Retrieves a large result set in smaller groups while preserving Quick hydration, custom collections, eager loads, and return transformations. Return `false` from the callback to stop early.
+
+```javascript
+getInstance( "User" )
+    .whereActive( true )
+    .orderBy( "id" )
+    .chunk( 100, function( users ) {
+        for ( var user in users ) {
+            processUser( user );
+        }
+
+        return true;
+    } );
 ```
 
 ### paginate
@@ -263,9 +315,10 @@ var user = getInstance( "User" )
 
 ### find
 
-| Name | Type | Required | Default | Description           |
-| ---- | ---- | -------- | ------- | --------------------- |
-| id   | any  | `true`   |         | The id value to find. |
+| Name    | Type   | Required | Default | Description                                    |
+| ------- | ------ | -------- | ------- | ---------------------------------------------- |
+| id      | any    | `true`   |         | The id value to find.                          |
+| options | struct | `false`  | `{}`    | Options passed to `queryExecute`.              |
 
 Returns the entity with the id value as the primary key. If no record is found, it returns null instead.
 
@@ -276,10 +329,11 @@ var user = getInstance( "User" )
 
 ### findOrFail
 
-| Name         | Type | Required | Default                                                | Description                                                                                                                                                    |
-| ------------ | ---- | -------- | ------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| id           | any  | `true`   |                                                        | The id value to find.                                                                                                                                          |
-| errorMessage | any  | `false`  | `"No [#entityName()#] found with id [#arguments.id#]"` | An optional string error message or callback to produce a string error message.  If a callback is used, it is passed the unloaded entity as the only argument. |
+| Name         | Type   | Required | Default                                                | Description                                                                                                                                                    |
+| ------------ | ------ | -------- | ------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| id           | any    | `true`   |                                                        | The id value to find.                                                                                                                                          |
+| errorMessage | any    | `false`  | `"No [#entityName()#] found with id [#arguments.id#]"` | An optional string error message or callback to produce a string error message. If a callback is used, it is passed the unloaded entity as the only argument.  |
+| options      | struct | `false`  | `{}`                                                   | Options passed to `queryExecute`.                                                                                                                              |
 
 Returns the entity with the id value as the primary key. If no record is found, it throws an `EntityNotFound` exception.
 

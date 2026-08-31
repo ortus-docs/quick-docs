@@ -71,6 +71,34 @@ SELECT * FROM `users` WHERE `id` IN (1, 2, 3, 4, 5, 6, ...)
 
 Quick will then stitch these relationships together so when you call `post.getAuthor()` it will use the fetched relationship value instead of going to the database.
 
+### Removing Eager Loads
+
+Use `without()` to remove one or more relationships from the eager-load list. This is especially useful for opting out of a relationship configured through the entity's default `_with` list.
+
+```javascript
+var posts = getInstance( "Post" )
+    .without( "comments" )
+    .get();
+```
+
+Pass an array to remove multiple relationships. Removing a parent path also removes its nested eager loads.
+
+```javascript
+getInstance( "Post" )
+    .without( [ "comments", "author.country" ] )
+    .get();
+```
+
+Use `clearEagerLoads()` when the query should have no eager loads at all.
+
+```javascript
+getInstance( "Post" )
+    .clearEagerLoads()
+    .get();
+```
+
+Calling `without()` with no argument leaves the eager-load list unchanged.
+
 ### Nested Relationships
 
 You can eager load nested relationships using dot notation. Each segment must be a valid relationship name.
