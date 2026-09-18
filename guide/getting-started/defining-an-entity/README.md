@@ -129,6 +129,10 @@ Now, only the `id`, `username`, and `email` attributes will be retrieved.
 Make sure to include the primary key (`id` by default) as a property.
 {% endhint %}
 
+{% hint style="warning" %}
+Property names must be unique on an entity. Quick throws a `QuickDuplicateProperty` exception during entity initialization when the same property name is declared more than once.
+{% endhint %}
+
 ### Persistent
 
 To prevent Quick from mapping a property to a database column add the `persistent="false"` attribute to the property. This is needed mostly when using dependency injection.
@@ -145,6 +149,14 @@ component extends="quick.models.BaseEntity" accessors="true" {
 
 }
 ```
+
+Non-persistent properties are not mass assignable by default. Add `fillable="true"` to opt a non-injected property into `fill`, `populate`, and the create helpers:
+
+```javascript
+property name="confirmation" persistent="false" fillable="true";
+```
+
+Injected properties are never mass assigned.
 
 ### Column
 
@@ -278,6 +290,8 @@ component implements="CastsAttribute" {
 
 Casted values are lazily loaded and cached for the lifecycle of the component. Only cast values that have been loaded will have `set` called on them when persisting to the database.
 
+Custom casts receive null database values in both `get` and `set`. A cast may return a transformed value for a null input or return `javacast( "null", "" )` to preserve the null. The built-in `BooleanCast@quick` preserves nulls instead of converting them to `false`.
+
 Casts can be composed of multiple fields as well. Take this `Address` value object, for example:
 
 ```javascript
@@ -403,6 +417,32 @@ component extends="quick.models.BaseEntity" accessors="true" {
 
 }
 ```
+
+### Refresh On Save
+
+Database defaults, triggers, and generated columns can change values during an insert or update. Add `refreshOnSave="true"` to populate those values on the entity before the post-persistence lifecycle events fire.
+
+```javascript
+component extends="quick.models.BaseEntity" accessors="true" {
+
+    property name="id";
+    property name="createdDate"
+        column="created_date"
+        update="false"
+        refreshOnSave="true";
+    property name="status"
+        insert="false"
+        update="false"
+        refreshOnSave="true";
+
+}
+```
+
+Quick prefers values returned directly from the write statement. If the grammar cannot return rows from that operation, Quick performs one keyed follow-up query by default. See [`refreshOnSaveFallback`](../../../configuration.md#refreshonsavefallback) for controlling that query.
+
+### Automatic Timestamps
+
+Quick 13 automatically maintains conventional `createdDate` and `modifiedDate` attributes. See [Automatic Timestamps](../automatic-timestamps.md) for configuration, custom names, bulk mutations, and `touch()`.
 
 ## Formula, Computed, or Subselect properties
 

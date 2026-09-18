@@ -1,6 +1,28 @@
 # Querying Relationships
 
-When querying an entity, you may want to restrict the query based on the existence or absence of a related entity.  You can do that using the following four methods:
+When querying an entity, you may want to restrict the query based on the existence, attributes, or identity of related entities.
+
+## whereBelongsTo
+
+`whereBelongsTo()` constrains a query using one or more loaded entities and a `belongsTo` relationship. Quick uses the relationship's configured foreign and local keys, including compound keys.
+
+```javascript
+var author = getInstance( "User" ).findOrFail( rc.authorId );
+
+var posts = getInstance( "Post" )
+    .whereBelongsTo( "author", author )
+    .get();
+```
+
+The related value can be one entity, an array of entities, or a collection. If the relationship follows the lower-camel-cased related entity name, omit the relationship name and let Quick infer it.
+
+```javascript
+var phoneNumbers = getInstance( "PhoneNumber" )
+    .whereBelongsTo( user )
+    .get();
+```
+
+Use `orWhereBelongsTo()` for an `OR` combinator.
 
 ## has
 
@@ -99,6 +121,24 @@ getInstance( "User" )
 	      q.where( "body", "like", "%great%" );
 	  }, ">", 2 )
 	  .get();
+```
+
+## whereHasValue
+
+`whereHasValue()` is a shortcut for a `whereHas()` callback containing one `where` clause.
+
+```javascript
+getInstance( "User" )
+    .whereHasValue( "posts", "status", "published" )
+    .get();
+```
+
+Pass an operator before the value when needed:
+
+```javascript
+getInstance( "User" )
+    .whereHasValue( "posts", "publishedDate", ">=", rc.startDate )
+    .get();
 ```
 
 ## whereDoesntHave

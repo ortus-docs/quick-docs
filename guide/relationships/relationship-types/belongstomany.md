@@ -103,6 +103,106 @@ component extends="quick.models.BaseEntity" accessors="true" {
 }
 ```
 
+## Pivot Models
+
+Quick hydrates the intermediate row for every related entity as a `Pivot@quick` model. Pivot key columns are always available; use `withPivot()` to include additional columns.
+
+```javascript
+function permissions() {
+    return belongsToMany( "Permission" )
+        .withPivot( [ "context", "active" ] );
+}
+```
+
+```javascript
+var permission = user.getPermissions()[ 1 ];
+var pivot = permission.getPivot();
+
+pivot.getUserId();
+pivot.getPermissionId();
+pivot.getContext();
+```
+
+The default pivot model is read-only. It also exposes `getPivotParent()` and `getPivotRelated()` for the two entities joined by that row.
+
+Use `as()` to change the relationship name used for the pivot:
+
+```javascript
+function permissions() {
+    return belongsToMany( "Permission" )
+        .withPivot( "context" )
+        .as( "assignment" );
+}
+
+var assignment = user.getPermissions()[ 1 ].getAssignment();
+```
+
+### Custom Pivot Models
+
+Use `using()` when the pivot row needs casts, custom behavior, or persistence. The custom model must extend `quick.models.Relationships.Pivot` and declare every selected pivot column.
+
+```javascript
+// UserPermission.cfc
+component
+    extends="quick.models.Relationships.Pivot"
+    accessors="true"
+    readonly="false"
+{
+
+    property name="userId" column="user_id";
+    property name="permissionId" column="permission_id";
+    property name="context";
+    property name="active" casts="BooleanCast@quick";
+
+}
+```
+
+```javascript
+function permissions() {
+    return belongsToMany( "Permission" )
+        .using( "UserPermission" )
+        .withPivot( [ "context", "active" ] );
+}
+```
+
+The hydrated custom pivot is a normal loaded Quick entity. Setting `readonly="false"` allows it to be updated and saved.
+
+### Querying Pivot Columns
+
+Pivot helpers qualify columns against the intermediate table for you:
+
+```javascript
+function activePermissions() {
+    return belongsToMany( "Permission" )
+        .withPivot( [ "context", "active" ] )
+        .wherePivot( "active", true )
+        .wherePivotNotNull( "context" )
+        .orderByPivot( "context" );
+}
+```
+
+The complete helper family includes:
+
+* `wherePivot()` and `orWherePivot()`
+* `wherePivotIn()` and `wherePivotNotIn()`
+* `wherePivotBetween()` and `wherePivotNotBetween()`
+* `wherePivotNull()` and `wherePivotNotNull()`
+* `orderByPivot()` and `orderByPivotDesc()`
+
+`withPivotValue()` both constrains the relationship and supplies a default value for future `attach()`, `sync()`, and `create()` writes.
+
+```javascript
+return belongsToMany( "Permission" )
+    .withPivotValue( "active", true );
+```
+
+Use `withTimestamps()` to select and maintain pivot timestamps. The default columns are `created_at` and `updated_at`, or pass custom names.
+
+```javascript
+return belongsToMany( "Permission" )
+    .withTimestamps( "created_date", "modified_date" );
+```
+
 ## attach
 
 Use the `attach` method to relate two `belongsToMany` entities together. `attach` can take a single id, a single entity, or an array of ids or entities (even mixed and matched) to associate.
@@ -116,6 +216,41 @@ post.tags().attach( tag.getId() );
 // or pass an entity
 post.tags().attach( tag );
 ```
+
+Pass a second struct to write additional pivot attributes:
+
+```javascript
+post.tags().attach( tag, {
+    "context" : "editorial",
+    "active" : true
+} );
+```
+
+## create
+
+`create()` creates a new related entity and attaches it to the parent through the pivot table.
+
+```javascript
+var tag = post.tags().create(
+    { "name" : "quick" },
+    { "context" : "created through relationship" }
+);
+```
+
+The optional arguments after the pivot attributes are `ignoreNonExistentAttributes` and query `options`, matching the related entity's normal `create()` lifecycle.
+
+## updateExistingPivot
+
+Update the intermediate row for one related entity without changing either side of the relationship:
+
+```javascript
+post.tags().updateExistingPivot( tag.getId(), {
+    "context" : "updated",
+    "active" : false
+} );
+```
+
+Pivot key columns cannot be overwritten.
 
 ## detach
 
@@ -142,6 +277,8 @@ post.tags().sync( [ 2, 3, 6 ] );
 ```
 
 Now, no matter what relationships existed before, this `Post` will only have three tags associated with it.
+
+Like `attach()`, `sync()` accepts an optional pivot attributes struct to apply to the inserted rows.
 
 ## Relationship Setter
 

@@ -8,6 +8,23 @@ The first is as a getter. Calling `user.getPosts()` will execute the relationshi
 var posts = user.getPosts();
 ```
 
+For new, unloaded entities, relationship getters do not execute a query. To-one relationships return `null` or their configured default entity, while collection relationships return an empty collection.
+
+```javascript
+var user = getInstance( "User" );
+
+user.getProfile(); // null
+user.getPosts(); // []
+```
+
+You can seed an unloaded relationship directly with `retrieveRelationship()`:
+
+```javascript
+user.retrieveRelationship( "posts", [ draftPost ] );
+```
+
+New entities can also [fill relationship structs and entities](../getting-started/creating-new-entities.md#fill) without persisting the aggregate.
+
 The second is as a relationship. Calling `user.posts()` returns a `Relationship` instance to retrieve the posts that can be further constrained. A `Relationship` is backed by qb as well, so feel free to call any qb method to further constrain the relationship.
 
 ```javascript
@@ -35,6 +52,8 @@ You can also get a new unloaded related entity by calling either the `newEntity`
 ```javascript
 var newPost = user.posts().fill( { "title": "My new post" } );
 ```
+
+After a relationship is lazily or eagerly loaded, Quick can call a relationship-specific method and announce an interception point for each related entity. See [`quickRelationshipLoaded`](../interception-points.md#quickrelationshiploaded).
 
 ### loadRelationship
 

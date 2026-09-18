@@ -41,6 +41,17 @@ Fired after loading an entity from the database.
 | ------ | ----------------- |
 | entity | The entity loaded |
 
+## quickPostReplicate
+
+Fired after `replicate()` creates a new, unloaded entity.
+
+`interceptData` structure
+
+| Key      | Description                    |
+| -------- | ------------------------------ |
+| entity   | The new replicated entity      |
+| original | The entity that was replicated |
+
 ## quickPreSave
 
 Fired before saving an entity to the database.
@@ -93,9 +104,11 @@ Fired before updating an entity in the database.
 
 `interceptData` structure
 
-| Key    | Description              |
-| ------ | ------------------------ |
-| entity | The entity to be updated |
+| Key                | Description                                                    |
+| ------------------ | -------------------------------------------------------------- |
+| entity             | The entity to be updated                                    |
+| newAttributes      | A struct of new attributes about to be updated              |
+| originalAttributes | A struct of attributes from when the entity was last loaded |
 
 ## quickPostUpdate
 
@@ -103,11 +116,9 @@ Fired after updating an entity in the database.
 
 `interceptData` structure
 
-| Key                | Description                                                    |
-| ------------------ | -------------------------------------------------------------- |
-| entity             | The entity that was updated                                    |
-| newAttributes      | A struct of new attributes about to be updated.                |
-| originalAttributes | A struct of attributes at the time the entity was last loaded. |
+| Key    | Description                 |
+| ------ | --------------------------- |
+| entity | The entity that was updated |
 
 ## quickPreDelete
 
@@ -128,3 +139,40 @@ Fired after deleting a entity from the database.
 | Key    | Description                 |
 | ------ | --------------------------- |
 | entity | The entity that was deleted |
+
+## quickRelationshipLoaded
+
+Fired once for each related entity after a relationship is eagerly or lazily loaded.
+
+`interceptData` structure
+
+| Key              | Description                                      |
+| ---------------- | ------------------------------------------------ |
+| entity           | The related entity that was loaded               |
+| parent           | The parent entity that loaded the relationship   |
+| relationshipName | The relationship method name                     |
+
+An entity can also define a relationship-specific method named `{relationshipName}Loaded`. It receives each related entity.
+
+```javascript
+function postsLoaded( entity ) {
+    arguments.entity.assignRelationship( "loadedByUser", this );
+}
+```
+
+## Custom Entity Events
+
+Map Quick lifecycle event names to application-specific interception points with `_dispatchesEvents`. A lifecycle event can dispatch one custom point or an array of points in addition to Quick's standard event.
+
+```javascript
+component extends="quick.models.BaseEntity" accessors="true" {
+
+    variables._dispatchesEvents = {
+        "postInsert" : "onUserCreated",
+        "postSave" : [ "onUserSaved", "onAccountChanged" ]
+    };
+
+}
+```
+
+The custom interception points receive the same `interceptData` as the lifecycle event they map from. Register custom point names with your ColdBox interceptor configuration before dispatching them.
